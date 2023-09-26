@@ -1,0 +1,31 @@
+.rear_head {
+    width: 100%;
+    display: flex;
+    text-transform: uppercase;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    /* margin: 2rem 4rem; */
+    /* background: #ffffff 0% 0% no-repeat padding-box; */
+    /* padding-bottom: 1rem; */
+    /* position: absolute; */
+    /* width: max-content; */
+}
+.rear_head > h2 {
+    font-size: 22px;
+    /* font-size: 30px; */
+}
+.dicussion_holder {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    overflow: auto;
+    height: 100vh;
+    scrollbar-width: none;
+    width: 100%;
+    margin-bottom: 1rem;
+    /* position: absolute; */
+}
+.dicussion_holder::-webkit-scrollbar {
+    display: none;
+}
+.avatar {
+    width: 130px;
+}

@@ -1,0 +1,16 @@
+@media screen and (max-width: 340px) {
+  .navbar-end {
+    width: auto;
+  }
+}
+
+
+.navbar-start {
+  height: 4rem;
+}
+
+.image-position {
+  width: 130px;
+  height: auto;
+  padding: 10px;
+}

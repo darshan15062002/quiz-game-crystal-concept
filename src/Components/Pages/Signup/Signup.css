@@ -1,0 +1,137 @@
+/* 
+.cross {
+	display: inline-block;
+	color: #ec5207;
+	text-align: right;
+	margin-left: auto;
+}
+
+.SignUP_container {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	place-items: center;
+	justify-content: center;
+	gap: 2vw;
+	padding-left: 6vw;
+}
+.form_section {
+	max-width: 480px;
+}
+.form_section h1 {
+	color: #ec5207;
+	font-size: 28px;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+.form_section h3 {
+	margin: 0.8rem 0;
+	font-size: 1rem;
+	text-transform: capitalize;
+}
+.input_field {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid #707070;
+	margin-bottom: 0.5rem;
+}
+.input_field:hover {
+	border-color: black;
+}
+.input_field label,
+.agreement label {
+	font-size: 14px;
+	padding: 0;
+}
+.input_field label:hover,
+.agreement label:hover {
+	background-color: transparent;
+	color: inherit;
+}
+.input_field input {
+	background-color: transparent;
+	outline: none;
+	color: #455a64;
+	padding: 0.2rem 0;
+	font-size: 12px;
+}
+.agreement {
+	display: flex;
+	align-items: center;
+}
+input[type="checkbox"] {
+	appearance: none;
+	background-color: #fff;
+	width: 1.15rem;
+	height: 1.15rem;
+	border: 0.1rem solid #707070;
+	border-radius: 0.15rem;
+	transition: all 0.2s ease-in-out;
+	margin-right: 0.25rem;
+}
+
+input[type="checkbox"]:checked {
+	background-color: #ed8430;
+}
+.register_t {
+	font-size: 13px;
+	background-color: #ec5207;
+	padding: 0.7rem 0;
+	width: 100%;
+	color: white;
+	border-radius: 6px;
+	margin-top: 1.5rem;
+	border: 1px solid #ec5207;
+	transition: all 0.2s ease-in-out;
+}
+
+.hero_section {
+	background: url(http://localhost:3000/static/media/login.44577791ce97d7245c58.png);
+	background-size: auto;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position-x: right;
+	background-position-y: center;
+	max-width: 500px;
+	place-self: normal;
+} */
+.button_t:hover {
+	font-weight: 500;
+	color: #ec5207;
+	background-color: transparent;
+	border-color: #ec5207;
+}
+.signup_login_main {
+
+	background-size: 50vw;
+}
+.alert_box {
+	position: absolute;
+	visibility: hidden;
+	top: 6%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 2px solid grey;
+	color: white;
+	font-weight: 700;
+	padding: 0.5rem 1rem;
+	border-radius: 20px;
+}
+@media (max-width: 1024px) {
+	.signup_login_main {
+		padding: 0;
+		flex-direction: row-reverse;
+	}
+	.hero_img {
+		width: 50%;
+	}
+}
+
+@media (max-width: 700px) {
+	.signup_login_main {
+		padding: 0;
+		flex-direction: column-reverse;
+	}
+	.hero_img {
+		width: 90%;
+	}
+}

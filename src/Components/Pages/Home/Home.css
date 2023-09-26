@@ -1,0 +1,209 @@
+
+/* .custom-img-size {
+  max-width: 50%;
+  height: auto;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(0, 0);
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(70%, 30%));
+}
+.custom-img2-size {
+  max-width: 50%;
+  height: auto;
+  width: 500px;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  height: 100vh;
+  overflow: hidden;
+}
+.right-8 {
+  right: 7rem;
+}
+.top-8 {
+  top: 10rem;
+}
+.width-changed {
+  width: 85%;
+  color: #4b4949;
+}
+.text-style {
+  font-family: "Pretzel", "regular";
+  color: #4b4949;
+}
+
+@media screen and (min-width: 1024px) {
+  .mx-24 {
+    margin-left: 10rem;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 100%;
+  }
+  .top-8 {
+    top: 8rem;
+  }
+  .right-8 {
+    right: 2rem;
+  }
+} 
+
+@media (max-width: 2560px) {
+  .container {
+    max-width: 100%;
+  }
+}
+@media (min-width: 1340px) {
+  .mx-24 {
+    margin-left: 14rem;
+  }
+}
+@media (max-width: 426px) {
+  .changing-flex {
+    width: 25rem !important;
+  }
+}
+@media (max-width: 320px) {
+  .changing-flex {
+    width: 20rem !important;
+  }
+}
+@media (max-width: 768px) {
+  .changing-flex {
+    width: 35rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+    margin: 0 auto;
+  }
+  .position-changed {
+    position: inherit;
+    margin: 0 auto;
+  }
+  .mx-24,
+  .my-24 {
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+}
+
+
+.rectangle-box-shadow {
+  box-shadow: inset 0px 3px 6px #00000029, 0px 3px 6px #00000029;
+} */
+
+
+/* slick arrow css */
+/* .slick-slider{
+  width: 90%;
+}
+.slick-next{
+  right: -55px;
+  z-index: 5;
+}
+.slick-next::before{
+  content: '>' !important;
+}
+
+.slick-prev{
+  left: -55px;
+  z-index: 5;
+}
+.slick-prev::before{
+  content: '<' !important;
+}
+.slick-prev:before, .slick-next:before {
+  color: #4B4949;
+  font-size: 25px;
+  
+}
+
+@media (max-width:768px){
+  .slick-prev{
+    left: -25px;
+  }
+  .slick-next{
+    right: -25px;
+  }
+} */
+
+
+/* Sponsors css */
+
+/* .container2 {
+    border: 2rem;
+    opacity: 100%;
+    gap: 50px;
+    padding-top: 40px;
+    border-width: 2rem;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.container3 {
+  border: 2rem;
+  opacity: 100%;
+  gap: 85px;
+  padding-top: 50px;
+  border-width: 2rem;
+  padding-left: 80px;
+  padding-right: 80px;
+} */
+/* 
+.text {
+  text-align: left;
+  letter-spacing: 0px;
+  color: #4b4949;
+  text-transform: uppercase;
+  opacity: 1;
+  font-weight: 600;
+  font-size: 28px;
+  font-family: "Times New Roman", Times, serif;
+} */
+
+
+/* .card1, .card2 {
+    width: 340px;
+    height: 170px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: inset 0px 3px 6px #00000029, 0px 3px 6px #00000029;
+    z-index: 10;
+} */
+
+/* @media (max-width:769px){
+  .container2{
+    gap: 20px;
+    padding: 20px 20px 0;
+  }
+  .container3{
+    gap: 20px;
+    padding: 20px;
+  }
+  .card1, .card2{
+    width: 70%;
+  }
+  
+} */
+/* @media (max-width:426px){
+  .card1, .card2{
+    width: 85%;
+  }
+  
+} */
+  
+
+/* Fading animation */
+/* .fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+} */

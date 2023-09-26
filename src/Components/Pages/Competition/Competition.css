@@ -1,0 +1,530 @@
+    .ide{
+        margin-top:-30px;
+        font-size:10px;
+        color:#707070;
+        font-family:Inter;
+    }
+    .competition{
+        font-size:18px;
+        color: #4B4949;
+        font-family:Pretzel;
+    }
+   
+
+    .select{
+        width:120px;
+        height:20px;
+        font-size:12px;
+        margin-bottom:12px;
+        color: #707070;
+
+    }
+    .search-bar{
+        width:200px;    
+        height:35px;
+        box-shadow: inset 0px 3px 6px #00000029, 0px 3px 6px #00000029;
+        border-radius: 38px;
+        display:flex;
+        align-items:center;
+        padding:0 14px;
+    }
+    .scroll-icon{
+        display:block;
+        cursor: pointer;
+    }
+
+    .search{
+        font-size:10px;
+    }
+
+    .text{
+        height:30px;
+    }
+
+    .container{
+        width:95vw;
+        height:260px;
+        margin-bottom:20px;
+    }
+    .component{
+        width:93vw;
+        height:120px;
+        margin-right:5vw;
+        margin-bottom:25px;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: inset 0px 3px 6px #00000029, 0px 3px 6px #00000029;
+    }
+    .heading{
+        font-size:18px;
+        font-family:Pretzel;
+    }
+    .content{
+        display:flex;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        box-shadow: 0px 3px 6px #00000029;
+        width:78vw;
+        margin:auto; 
+        margin-top:20px;
+        padding:20px 0;
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+    }
+    
+    .wraper{
+       display:flex;
+       padding:2.5vw;
+       gap:20px;
+       height:150px;
+       width:62.5vw;
+       overflow:hidden;
+       overflow-x: auto;
+       justify-content:space-between;
+       border:none;
+       margin:0;
+        padding:0;
+    }
+    .wraper::-webkit-scrollbar{
+        display:none;
+    }
+    .item{
+        min-width:62vw;
+        border: 1px solid #707070;
+        color:#464141;
+        height:150px;
+    }
+    .event-heading{
+        font-family:Pretzel;
+        width:16vw;
+        font-size:18px; 
+        border-bottom:1px solid #707070;
+    }
+    .event-paragraph{
+        margin-top:15px;
+        font-size:16px;
+        font-family:Inter;
+    }
+
+    .event-button{
+        font-size:8px;
+        width:60px;
+        padding-bottom:2.5px;
+        cursor: pointer;
+        border-bottom: 1px solid #6F6A67;
+        font-family:Pretzel;
+    }
+    
+@media (min-width:425px){
+    .container{
+        width:95vw;
+    }
+    .component{
+        width:93vw;
+    }
+    .content{
+        width:78vw;
+        padding:20px 2px;
+    }
+    .wraper{
+        width:64vw;
+        
+    }
+    .item{
+        min-width:63.5vw;
+    }
+}
+
+
+
+@media (min-width:768px){
+    .ide{
+        margin-top:-10px;
+        font-size:12px;
+        margin-left:4vw;
+    }
+    .competition{
+        font-size:21px;
+        margin-left:4vw;
+    }
+    .select{
+        width:150px;
+        height:20px;
+        font-size:14px;
+        margin-left:4vw;
+    }
+    .search-bar{
+        width:300px;    
+        height:40px;
+        padding:0 14px;
+    }
+
+    .search{
+        font-size:12px;
+    }
+    
+    .text{
+        height:35px;
+    }
+    .container{
+        height:350px;
+        margin-bottom:35px;
+    }
+    .component{
+        width:93vw;
+        height:150px;
+        margin-left:3vw;
+        margin-bottom:35px;
+    }
+    .heading{
+        font-size:21px;
+        padding:10px 1vw;
+    }
+    .content{
+        margin-top:10px;
+        padding:20px 2px;
+     }
+     .wraper{
+        width:70vw;
+        gap:20px;
+        height:200px;
+       
+     }
+     .item{
+         min-width:33.5vw;
+         padding:10px 20px;
+         height:170px;
+     }
+     .event-heading{
+        padding-bottom:10px;
+        width:8vw;
+        font-size:21px; 
+    }
+    .event-paragraph{
+        margin-top:20px;
+        font-size:18px;
+    }
+
+    .event-button{
+        font-size:8px;
+        width:60px;
+        padding-bottom:4.5px;
+        border-bottom: 1px solid #6F6A67;
+    }
+}
+
+
+@media (min-width:1024px){
+    .ide{
+        margin-top:0px;
+        font-size:14px;
+        margin-left:0;
+    }
+    .competition{
+        font-size:24px;
+        margin-left:0;
+    }
+    .select{
+        width:150px;
+        height:25px;
+        font-size:16px;
+        margin-left:0;
+    }
+    .search-bar{
+        width:400px;    
+        height:45px;
+        padding:0 16px;
+    }
+
+    .search{
+        font-size:16px;
+    }
+   
+    .text{
+        height:40px;
+    }
+    .container{
+        height:370px;
+        margin-bottom:45px;
+    }
+    .component{
+        width:95vw;
+        height:170px;
+        margin-left:2vw;
+        margin-bottom:35px;
+    }
+    .heading{
+        font-size:24px;
+        padding:15px 7vw;
+    }
+    .content{
+        margin-top:10px;
+        padding:20px 4px;
+     }
+    .wraper{
+        width:70vw;
+        gap:30px;
+        height:250px;
+    }
+    .item{
+        min-width:33.5vw;
+        padding:10px 20px;
+        height:200px;
+    }
+    .event-heading{
+        padding-bottom:12px;
+        width:8vw;
+        font-size:24px; 
+    }
+    .event-paragraph{
+        font-size:18px;
+    }
+
+    .event-button{
+        font-size:8px;
+        margin-top:10px;
+    }
+}
+
+
+@media (min-width:1440px){
+    .ide{
+        margin:39.6px 0 10px 40px;
+        font-size:16px;
+    }
+    .competition{
+        margin:0 0 18px 40px;
+        font-size:27px;
+    }
+
+    .selections{
+        margin-left:40px;
+    }
+   
+    .select{
+        width:155px;
+        height:30px;
+        font-size:18px;
+        margin-bottom:10px;
+    }
+    .search-bar{
+        width:480px;    
+        height:55px; 
+        padding:0 20px;
+    }
+    .search{
+        font-size:18px;
+    }
+    .container{
+        width:95vw;
+        height:501px;
+        margin-bottom:50px;
+    }
+    .component{
+        width:95vw;
+        height:200px;
+    }
+    .heading{
+        padding-top:20px;
+        padding-left:7vw;
+        font-size:27px
+    }
+    .content{
+        width:80vw;
+        height:380px;
+        margin:auto; 
+        margin-top:40px;
+    }
+    .wraper{
+        width:73vw;
+        height:359px;
+        gap:29px;
+    }
+    
+    .item{
+        min-width:23vw;
+        height:300px;
+    }
+   
+    .event-heading{
+        margin:10px 0 0 0;
+        padding-bottom:15px;
+        width:117px;
+        font-size:27px; 
+    }
+    .event-paragraph{
+        padding:10px 0 0 0;
+        font-size:20px;
+    }
+
+    .event-button{
+        margin:35px 0 0 0;
+        font-size:10px;
+        width:70px;
+        padding-bottom:4.5px;
+    }
+   
+}
+
+
+ @media (min-width:1920px){
+
+    .ide{
+        margin:59.6px 0 22px 80px;
+        font-size:20px;
+    }
+
+    .competition{
+        margin:0 0 22px 80px;
+        font-size:31px;
+    }
+
+    .selections{
+        margin-left:80px;
+    }
+    .select{
+        width:159px;
+        height:39px;
+        font-size:20px;
+        margin-bottom:12px;
+    }
+
+    .search-bar{
+        width:630px;    
+        height:75px;
+        border-radius: 38px;
+        padding:0 24px;
+    }
+    .search{
+        font-size:20px;
+    } 
+    .text{
+        height:70px;
+    }
+    .container{
+        width:95vw;
+        height:601px;
+        margin-bottom:95px;
+    }
+    .component{
+        width:95vw;
+        height:289px;
+    }
+    .heading{
+        padding-top:42px;
+        padding-left:7vw;
+        font-size:31px
+    }
+    .content{
+        width:80vw;
+        height:452px;
+        margin-top:70px;
+    }
+    .wraper{
+        width:73vw;
+        height:359px;
+        gap:53.25px;
+       
+    }
+    .item{
+     
+        min-width:22.5vw;
+        height:357px;
+    }
+
+    .event-heading{
+        margin:30px 0 0 39px;
+        padding-bottom:17.5px;
+        width:117px;
+        font-size:31px; 
+    }
+    .event-paragraph{
+        padding:12.5px 0 0 39px;
+        font-size:20px;
+    }
+    .event-button{
+        margin:71px 0 49.5px 39px;
+        font-size:10px;
+        width:70px;
+        padding-bottom:4.5px;
+    }
+}
+
+@media (min-width:2560px){
+    .ide{
+        margin:69.6px 0 28px 95px;
+        font-size:24px;
+    }
+    .competition{
+        margin:0 0 28px 95px;
+        font-size:35px;
+    }
+
+    .selections{
+        margin-left:95px;
+    }
+   
+    .select{
+        width:175px;
+        height:45px;
+        font-size:24px;
+        margin-bottom:15px;
+    }
+    .search-bar{
+        width:700px;    
+        height:80px; 
+        padding:0 30px;
+    }
+    .search{
+        font-size:24px;
+    }
+    .container{
+        width:95vw;
+        height:701px;
+        margin-bottom:75px;
+    }
+    .component{
+        width:95vw;
+        height:300px;
+    }
+    .heading{
+        padding-top:50px;
+        padding-left:7vw;
+        font-size:34px
+    }
+    .content{
+        width:80vw;
+        height:469px;
+        margin:auto; 
+        margin-top:75px;
+    }
+    .wraper{
+        width:73vw;
+        height:400px;
+        gap:60px;
+    }
+    
+    .item{
+        min-width:22.7vw;
+        height:398px;
+    }
+   
+    .event-heading{
+        margin:40px 0 0 49px;
+        padding-bottom:20px;
+        width:117px;
+        line-height:34px;
+        font-size:34px; 
+    }
+    .event-paragraph{
+        padding:15px 0 0 49px;
+        font-size:24px;
+    }
+
+    .event-button{
+        margin:80px 0 59px 49px;
+        font-size:14px;
+        width:100px;
+        padding-bottom:4.5px;
+    }
+   
+}
