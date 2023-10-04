@@ -2,17 +2,17 @@ import React, { useContext } from 'react';
 import { BsFillCaretLeftFill } from "react-icons/bs";
 import { FaPen } from "react-icons/fa";
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 const UserProfile = () => {
     const { currentUser } = useContext(AuthContext)
 
     return (
         <>
-            <div className="lg:px-24 pt-12 px-6">
+            <div className="lg:px-36 pt-24 px-6">
                 <div className='flex justify-start items-center text-gray-500 text-sm font-semibold underline'>
                     <BsFillCaretLeftFill></BsFillCaretLeftFill>
-                    <Link to='/discussion'>Back to Code Tikki</Link>
+                    <Link to='/'>Back</Link>
                 </div>
                 <h2 className='text-3xl font-semibold mb-5 text-gray-700'>User Profile</h2>
             </div>
@@ -20,13 +20,13 @@ const UserProfile = () => {
                 <form className='flex flex-col lg:flex-row items-start justify-center border-2 p-6'>
                     <div className="avatar mr-5 mb-5 lg:mb-0 flex">
                         <div className="w-24 rounded-full">
-                            <img src="https://placeimg.com/192/192/people" alt='' />
+                            <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt='' />
                         </div>
                         <FaPen className='text-gray-500'></FaPen>
                     </div>
                     <div>
-                        <input type="text" placeholder='Name' className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
-                        <input type="text" placeholder='User Name' className='w-full p-3 input input-bordered shadow-md mb-2 text-black' />
+                        <input type="text" placeholder='Name' value={currentUser.user.name} className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
+                        <input type="email" placeholder='Email' value={currentUser.user.email} className='w-full p-3 input input-bordered shadow-md mb-2 text-black' />
                         <select name="" id="" className='w-full p-3 shadow-md mb-2 text-gray-400 select select-accent'>
                             <option value="" >Country</option>
                             <option value="" >India</option>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import loginImg from "../../../assets/kindpng_814925.png";
+import loginImg from "../../assets/kindpng_814925.png";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { ImCross } from "react-icons/im";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../firebase";
+
+import { userLogin } from "../../api/authApi";
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -13,15 +13,14 @@ const Login = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			await signInWithEmailAndPassword(auth, email, password)
-			navigate('/')
-
-
-		} catch (err) {
-			alert("somthing went wrong")
-		}
-
+		userLogin({ email, password }).then((res) => {
+			if (res.success) {
+				alert('login successful')
+				navigate("/")
+			} else {
+				alert(res.message)
+			}
+		})
 	}
 
 	return (

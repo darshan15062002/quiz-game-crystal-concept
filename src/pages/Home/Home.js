@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import hero from "../../../assets/2312130-removebg-preview.png";
-import footerImg from "../../../assets/footer.png";
-import topImg from "../../../assets/top.png";
+import hero from "../../assets/2312130-removebg-preview.png";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
 import { BsYoutube } from 'react-icons/bs'
 import { FaNewspaper, FaPaperPlane } from 'react-icons/fa'
 import { GiNewspaper } from 'react-icons/gi'

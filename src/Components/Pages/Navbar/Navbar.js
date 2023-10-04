@@ -1,44 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Navbar.css';
-import { Link, useNavigate, useNavigation } from 'react-router-dom';
-import logo from '../../../assets/logo.png'
+import { Link } from 'react-router-dom';
+
 import { AuthContext } from '../../../context/AuthContext';
-import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from '../../../firebase';
+
 
 const Navbar = () => {
+
   const { currentUser } = useContext(AuthContext)
-  const [user, setUser] = useState({})
-  const navigate = useNavigate();
 
-  console.log(currentUser, "sh");
-  console.log(user, "darshan");
-  useEffect(() => {
-    let unsubscribe;
 
-    if (currentUser && currentUser.uid) {
-      const userDocRef = doc(db, "users", currentUser.uid);
-      unsubscribe = onSnapshot(userDocRef, (doc) => {
-        if (doc.exists()) {
-          const userData = doc.data();
-          console.log(userData, "User data");
-          if (userData?.isAdmin) {
-            navigate("/addquiz")
-          }
-        } else {
-          console.log("User document does not exist");
-        }
-      }, (error) => {
-        console.log("Error fetching user document:", error);
-      });
-    }
 
-    return () => {
-      if (unsubscribe) {
-        unsubscribe();
-      }
-    };
-  }, [currentUser]);
+
 
 
   const menuItem = (
@@ -46,10 +19,18 @@ const Navbar = () => {
       <li>
         <Link to="/">HOME</Link>
       </li>
-      {currentUser ? (<div>
+      {currentUser.isAuthenticated ? (<div className='flex lg:flex-row flex-col'>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile">PROFILE</Link>
         </li>
+        <li>
+          <Link to="/playquiz">PLAY QUIZ</Link>
+        </li>
+        {currentUser.user.role === 'admin' && (
+          <li>
+            <Link to="/addquiz">ADD QUIZ</Link>
+          </li>
+        )}
       </div>) : (<>
         <li>
           <Link to="/login">LOGIN</Link>
@@ -70,13 +51,10 @@ const Navbar = () => {
       <li>
         <Link to="/discussion">DISCUSSION</Link>
       </li>
-      <li>
-        <Link to="/profile">USER PROFILE</Link>
-      </li>
+     
       <li>
         <Link to="/collaboration">COLLABORATION</Link>
       </li> */}
-      {currentUser && (<li><Link to="/playquiz">PLAY QUIZ</Link></li>)}
 
 
     </>

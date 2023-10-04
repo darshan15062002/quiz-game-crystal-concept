@@ -1,60 +1,55 @@
-import { createBrowserRouter, RouterProvider, useNavigate } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Collaboration from "./Components/Pages/Collaboration/Collaboration";
 import Competition from "./Components/Pages/Competition/Competition";
 import Discussion from "./Components/Pages/Discussion/Discussion";
-import Home from "./Components/Pages/Home/Home";
+import Home from "./pages/Home/Home";
 import Ide from "./Components/Pages/Ide/Ide";
-import Login from "./Components/Pages/Login/Login";
+import Login from "./pages/Login/Login";
 import Problem from "./Components/Pages/Problem/Problem";
-import Signup from "./Components/Pages/Signup/Signup";
-import UserProfile from "./Components/Pages/UserProfile/UserProfile";
+import Signup from "./pages/Signup/Signup";
+import UserProfile from "./pages/UserProfile/UserProfile";
+import AddQuiz from "./pages/AddQuiz/AddQuiz";
+import PlayQuiz from "./pages/PlayQuiz/PlayQuiz";
 import ForgetPassword from "./Components/Pages/ForgetPassword/ForgetPassword";
-
 import Main from "./Layout/Main";
 import AdminRegistrationForm from "./Components/Pages/AdminRegistrationForm/AdminRegistrationForm";
-
-import { useContext, useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "./firebase";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
-import AddQuiz from "./Components/Pages/AddQuiz/AddQuiz";
-import PlayQuiz from "./Components/Pages/PlayQuiz/PlayQuiz";
+import { loadUser } from "./api/authApi";
+
+
+
+
+
+
 
 const ProtectedRoute = ({ children }) => {
-	const navigate = useNavigate();
 	const { currentUser } = useContext(AuthContext)
-
-
-	useEffect(() => {
-		if (currentUser && currentUser.uid) {
-			const fetchData = async () => {
-				try {
-					const res = await getDoc(doc(db, 'users', currentUser.uid));
-					const user = res.data();
-					console.log(user, 'darshan');
-					if (!user.isAdmin) {
-
-						navigate('/playquiz');
-					}
-				} catch (error) {
-					console.log(error);
-				}
-			};
-
-			fetchData();
-		}
-		else {
-			navigate("/")
-		}
-
-	}, []);
-
-
+	if (currentUser.user?.role === 'user') return
 	return children;
-
 }
 
+
+
+
+
 function App() {
+	const { setCurrentUser } = useContext(AuthContext);
+	const handleLoadUser = async () => {
+		loadUser().then((data) => {
+			if (data.success) {
+				setCurrentUser({ user: data.user, isAuthenticated: true })
+			}
+		})
+	}
+
+	useEffect(() => {
+		handleLoadUser()
+
+		return () => {
+			handleLoadUser()
+		}
+	}, []);
 	const router = createBrowserRouter([
 		{
 			path: "/",
@@ -92,7 +87,7 @@ function App() {
 
 				{
 					path: "/playquiz",
-					element: <ProtectedRoute><PlayQuiz></PlayQuiz></ProtectedRoute>,
+					element: <PlayQuiz />
 				},
 
 			],
@@ -115,7 +110,7 @@ function App() {
 		},
 		{
 			path: "/addquiz",
-			element: <ProtectedRoute><AddQuiz></AddQuiz></ProtectedRoute>,
+			element: <ProtectedRoute><AddQuiz /></ProtectedRoute>,
 		},
 	]);
 	return (

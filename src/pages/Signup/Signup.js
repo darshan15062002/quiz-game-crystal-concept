@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import loginImg from "../../../assets/kindpng_2417758.png";
+import loginImg from "../../assets/kindpng_2417758.png";
 // import footerImg from "../../../assets/footer.png";
 import { Link, useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import "./Signup.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../../../firebase";
+import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 const Signup = () => {
 
