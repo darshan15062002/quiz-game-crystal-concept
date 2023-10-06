@@ -12,10 +12,12 @@ const PlayQuiz = () => {
     const [point, setPoint] = useState(0)
     const [wrongAnswers, setWrongAnswers] = useState(0);
     const [resultShow, setResultShow] = useState(false)
-
+    const [showAns, setShowAns] = useState(false)
 
     const [open, setOpen] = useState(false)
     const currentDate = new Date()
+
+    console.log(selectedOptions);
     useEffect(() => {
         // Fetch all quiz
         handleGetAllQuiz().then((data) => {
@@ -67,7 +69,10 @@ const PlayQuiz = () => {
 
 
     const handlePrev = () => {
-        setCount((cur) => cur - 1)
+        if (count > 0) {
+            setCount((cur) => cur - 1)
+        }
+
     }
 
 
@@ -84,23 +89,23 @@ const PlayQuiz = () => {
 
 
 
-    return (<div className="flex flex-col gap-3 w-full h-screen justify-center items-center">
+    return (<div className="flex flex-col w-screen gap-3 pt-20 justify-center items-center">
         <h2 className=" rounded-lg p-3 text-gray-400 text-3xl  font-bold text-center">
             Daily Quiz
         </h2>
-        <div className=" flex justify-center items-center  flex-wrap ">
+        <div className=" flex justify-center items-center px-4 w-full   flex-wrap ">
             {resultShow === false && open === false && quizs?.map((item, index) => (
-                <div className="w-96 py-8 px-10 rounded-lg bg-slate-200 mx-2  flex flex-col justify-center gap-4 " key={item.quizTitle}>
+                <div className="sm:w-96 py-8 px-10 rounded-lg bg-slate-200 mx-2  flex flex-col justify-center gap-4 " key={item._id}>
 
                     <h2 className="text-black text-center pt-5  font-bold  ">
                         {item?.title}
                     </h2>
                     <p className="  text-gray-900 tracking-wide ">
-                        <b>Started At:</b> {new Date(item.startDate).toLocaleString()}
+                        <b>Started At:</b> {new Date(new Date(item.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)).toLocaleString()}
                     </p>
                     <p className="  text-gray-900 tracking-wide ">
 
-                        <b>End on:</b>  {new Date(new Date(item?.startDate).getTime() + 24 * 60 * 60 * 1000).toLocaleString()}
+                        <b>End on:</b>  {new Date(new Date(item?.startDate).getTime() + 24 * 60 * 60 * 1000 - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)).toLocaleString()}
                     </p>
 
                     <div className="flex justify-center gap-4 mb-6  text-xs font-medium">
@@ -114,7 +119,7 @@ const PlayQuiz = () => {
                 </div>
             ))}
             {
-                resultShow === false && open === true && (<div className='w-96 h-full  p-6 border-2 mx-2 rounded-lg rounded-t-none flex gap-5 flex-col justify-center   bg-white' key={count}>
+                resultShow === false && open === true && questions && (<div className='sm:w-96 w-full h-full  p-6 border-2 mx-2 rounded-lg rounded-t-none flex gap-5 flex-col justify-center   bg-white' key={count}>
                     <h1 className='text-black text-left'><b>{count + 1}{")  "}{questions[count]?.text}</b></h1>
                     <div className="answer">
 
@@ -138,17 +143,51 @@ const PlayQuiz = () => {
                 </div>)
             }
             {
-                resultShow === true && (<div className='w-96 relative h-80  border-2 mx-2 rounded-lg flex flex-col gap-3 items-center justify-center rounded-t-none text-center  bg-white'>
+                resultShow === true && (<div className='flex flex-col gap-3 sm:w-96  w-full  '><div className='sm:w-96  w-full relative h-80  border-2 mx-2 rounded-lg flex flex-col gap-3 items-center justify-center rounded-t-none text-center  bg-white'>
                     <h1 className='text-black'>Quiz  submitted successfully 👏👏
                     </h1>
                     <h3>Total Points : {point}</h3>
                     <h3>Total Wrong Answer : {wrongAnswers}</h3>
-                    <button className='bg-black text-white p-2 absolute bottom-5' onClick={() => {
-                        setResultShow(false)
-                        setWrongAnswers(0)
-                        setPoint(0)
-                        setOpen(false)
-                    }}> Go Back</button>
+                    <div className="flex  gap-3 absolute bottom-5 ">
+                        <button className='bg-black text-white p-2 ' onClick={() => {
+                            setResultShow(false)
+                            setWrongAnswers(0)
+                            setPoint(0)
+                            setOpen(false)
+                            setSelectedOptions([])
+                            setShowAns(false)
+                        }}> Go Back</button>
+                        {/* <button className='bg-green-400 w-fit text-white p-2 ' onClick={() => { setShowAns(prev => !prev) }}> Show Answer</button> */}
+                    </div>
+                </div>
+
+                    {/* {showAns &&
+                        <div className='sm:w-96  w-full  h-80  border-2 mx-2 rounded-lg flex flex-col gap-3  rounded-t-none text-center  bg-white'>
+                            {questions?.map((question) => (
+                                <div className="w-full p-10">
+                                    <h1 className='text-black text-left'><b>{count + 1}{")  "}{question?.text}</b></h1>
+                                    <div className="answer">
+
+                                        {
+                                            question?.answers?.map((item, index) => (
+                                                <div className='text-black flex gap-4'>
+                                                    <input type="radio" name="answer" id={"answer"} value={item} checked={selectedOptions[count] === index} onChange={(e) => handleOptionChange(index, item)} />
+                                                    <div key={index}>{item}</div>
+                                                </div>
+                                            ))
+                                        }
+
+
+
+                                    </div>
+                                </div>
+                            ))}
+
+
+                        </div>
+
+                    } */}
+
                 </div>)
             }
         </div>

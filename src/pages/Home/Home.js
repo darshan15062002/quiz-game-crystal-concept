@@ -44,24 +44,24 @@ const Home = () => {
 	};
 	return (
 		<>
-			<div className=" sm:px-20 pt-10 px-8 flex flex-col gap-5  relative">
+			<div className=" sm:px-16 pt-16 px-8 flex flex-col gap-6 justify-between items-center  ">
 
-				<div className=" flex justify-center items-center sm:flex-row flex-col-reverse  gap-2  ">
-					<div className="flex justify-center items-start flex-col gap-2 sm:mx-16  z-20 ">
+				<div className="flex justify-center items-center sm:flex-row flex-col-reverse  gap-2  ">
+					<div className="flex justify-center sm:w-1/2 w-full items-start flex-col gap-2 sm:mx-16   ">
 						<h1 className="text-start lg:text-3xl text-2xl text-black font-bold text-style   ">
 							Unlock the Power of Learning
 						</h1>
 						<p className="text-start width-changed">
 							Your Path to Knowledge, Anytime, Anywhere
 						</p>
-						<Link to="">
-							<button className="btn btn-outline btn-success">Join US</button>
+						<Link to="playquiz">
+							<button className="btn btn-outline btn-success">Play Quiz</button>
 						</Link>
 					</div>
 
 					<img
 						src={hero}
-						className="  right-8   "
+						className='sm:w-1/2 w-full'
 						alt="hero"
 					/>
 

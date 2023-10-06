@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 
 import { AuthContext } from '../../../context/AuthContext';
+
 
 
 const Navbar = () => {
@@ -19,18 +20,20 @@ const Navbar = () => {
       <li>
         <Link to="/">HOME</Link>
       </li>
-      {currentUser.isAuthenticated ? (<div className='flex lg:flex-row flex-col'>
+      <li>
+        <Link to="/playquiz">PLAY QUIZ</Link>
+      </li>
+      {currentUser?.isAuthenticated ? (<div className='flex lg:flex-row flex-col'>
         <li>
           <Link to="/profile">PROFILE</Link>
         </li>
-        <li>
-          <Link to="/playquiz">PLAY QUIZ</Link>
-        </li>
-        {currentUser.user.role === 'admin' && (
+
+        {currentUser?.user?.role === 'admin' && (
           <li>
             <Link to="/addquiz">ADD QUIZ</Link>
           </li>
         )}
+
       </div>) : (<>
         <li>
           <Link to="/login">LOGIN</Link>

@@ -38,13 +38,13 @@ export const updateProfile = async () => {
 
 export const userLogout = async () => {
     try {
-        const res = await axios.post(`${server}/user/logout`, {
+        const res = await axios.get(`${server}/user/logout`, {
             "withCredentials": true
         })
 
-
+        return res.data
     } catch (error) {
-        console.log(error.response.data);
+        return error.response.data
     }
 }
 

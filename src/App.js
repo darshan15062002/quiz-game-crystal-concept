@@ -16,6 +16,7 @@ import AdminRegistrationForm from "./Components/Pages/AdminRegistrationForm/Admi
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { loadUser } from "./api/authApi";
+import Nopage from "./pages/NoPage/Nopage";
 
 
 
@@ -25,7 +26,7 @@ import { loadUser } from "./api/authApi";
 
 const ProtectedRoute = ({ children }) => {
 	const { currentUser } = useContext(AuthContext)
-	if (currentUser.user?.role === 'user') return
+	if (currentUser && currentUser?.user?.role === 'user') return
 	return children;
 }
 
@@ -35,11 +36,12 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
 	const { setCurrentUser } = useContext(AuthContext);
-	const handleLoadUser = async () => {
+	const handleLoadUser = () => {
 		loadUser().then((data) => {
 			if (data.success) {
 				setCurrentUser({ user: data.user, isAuthenticated: true })
 			}
+
 		})
 	}
 
@@ -54,6 +56,7 @@ function App() {
 		{
 			path: "/",
 			element: <Main></Main>,
+			errorElement: <Nopage />,
 			children: [
 				{
 					path: "/",
