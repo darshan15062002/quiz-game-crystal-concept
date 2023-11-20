@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import hero from "../../assets/2312130-removebg-preview.png";
+import React from 'react';
+import hero from "../../assets/hero1.png";
 import { Link } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,64 +10,50 @@ import { GiNewspaper } from 'react-icons/gi'
 import "./Home.css";
 
 const Home = () => {
-	const [index, setIndex] = useState(0);
 
-	const handleNext = () => {
-		setIndex(index + 3);
-	};
-
-	const handlePrev = () => {
-		setIndex(index - 3);
-	};
-
-	var settings = {
-		infinite: true,
-		speed: 500,
-		slidesToShow: 3,
-		slidesToScroll: 1,
-		responsive: [
-			{
-				breakpoint: 769,
-				settings: {
-					slidesToShow: 2,
-				},
-			},
-			{
-				breakpoint: 426,
-				settings: {
-					slidesToShow: 1,
-
-				}
-			}
-
-		]
-	};
 	return (
 		<>
-			<div className=" sm:px-16 pt-16 px-8 flex flex-col gap-6 justify-between items-center  ">
+			<div className="sm:px-28 pt-16 px-8 flex flex-col gap-6 justify-between items-center  ">
 
-				<div className="flex justify-center items-center sm:flex-row flex-col-reverse  gap-2  ">
-					<div className="flex justify-center sm:w-1/2 w-full items-start flex-col gap-2 sm:mx-16   ">
-						<h1 className="text-start lg:text-3xl text-2xl text-black font-bold text-style   ">
+
+
+				<div className="flex justify-between items-center sm:flex-row flex-col-reverse    ">
+					<div className="flex justify-center w-full items-start flex-col gap-2  ">
+						<h1 className="text-start lg:text-5xl sm:font-extrabold text-2xl text-black font-sans   ">
 							Unlock the Power of Learning
 						</h1>
 						<p className="text-start width-changed">
 							Your Path to Knowledge, Anytime, Anywhere
 						</p>
 						<Link to="playquiz">
-							<button className="btn btn-outline btn-success">Play Quiz</button>
+							<button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+								<span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+									Play Quiz
+								</span>
+							</button>
+
 						</Link>
 					</div>
 
 					<img
 						src={hero}
-						className='sm:w-1/2 w-full'
-						alt="hero"
+						className='sm:h-[90vh] h-full'
+						alt="h/ero"
 					/>
 
 				</div>
 
-				<div className='flex mb-10 flex-wrap justify-between  items-center gap-5 rounded-lg'>
+
+
+
+
+
+
+
+
+
+
+				<div className='flex mb-10 w-full flex-wrap gap-y-5 justify-between  items-center  rounded-lg'>
 
 					<a className="h-24 w-32 sm:w-52 rounded-lg bg-[#F9C2DD] shadow-lg p-2"
 						href='https://www.youtube.com/channel/UC3_NJf886Au6pj59s2I1Bvg' >
@@ -98,6 +84,15 @@ const Home = () => {
 
 			</div>
 
+
+
+
+
+			<footer className="footer footer-center p-4 bg-base-300 text-base-content">
+				<aside>
+					<p>Copyright © 2023 - All right reserved by CC </p>
+				</aside>
+			</footer>
 
 			{/* event */}
 
@@ -149,7 +144,7 @@ const Home = () => {
 										</p>
 									</div>
 									<div className="avatar w-20  rounded-full h-fit overflow-hidden ">
-										<img src="https://placeimg.com/192/192/people" alt="avatar" />
+										<img src="https://placeimg.com/192/192/people" alt="a/vatar" />
 									</div>
 								</div>
 							)}

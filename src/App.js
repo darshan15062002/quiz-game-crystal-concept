@@ -17,6 +17,8 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { loadUser } from "./api/authApi";
 import Nopage from "./pages/NoPage/Nopage";
+import Summarizer from "./pages/Summerizer/Summerizer";
+import { Search } from "./pages/Search/Search";
 
 
 
@@ -42,7 +44,7 @@ function App() {
 				setCurrentUser({ user: data.user, isAuthenticated: true })
 			}
 
-		})
+		}).catch((error) => console.log(error))
 	}
 
 	useEffect(() => {
@@ -91,6 +93,15 @@ function App() {
 				{
 					path: "/playquiz",
 					element: <PlayQuiz />
+				},
+
+				{
+					path: "/summarizer",
+					element: <Summarizer />
+				},
+				{
+					path: "/search",
+					element: <Search />
 				},
 
 			],
