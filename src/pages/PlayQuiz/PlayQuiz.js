@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './PlayQuiz.css'
 
 import { Link } from 'react-router-dom'
+import image from '../../assets/hero2.png'
 import { getSingleQuiz, handleGetAllQuiz } from '../../api/quizApi'
 const PlayQuiz = () => {
 
@@ -81,8 +82,7 @@ const PlayQuiz = () => {
             <h2 className=" rounded-lg p-3 text-gray-400 text-3xl  font-bold text-center">
                 Daily Quiz
             </h2>
-            <h1 className='absolute text-black font-bold text-3xl opacity-80'>NO Live Quiz</h1>
-            <img className='rounded-md h-3/5' src="https://i.giphy.com/media/FRxHnTUBxQysLAV2eA/giphy.webp" alt="" />
+            <img className='rounded-md h-3/5' src={image} alt="" />
         </div>)
     }
 
@@ -90,12 +90,12 @@ const PlayQuiz = () => {
 
 
     return (<div className="flex flex-col w-screen gap-3 pt-20 justify-center items-center">
-        <h2 className=" rounded-lg p-3 text-gray-400 text-3xl  font-bold text-center">
+        <h2 className=" rounded-lg p-3 text-black text-3xl  font-bold text-center">
             Daily Quiz
         </h2>
         <div className=" flex justify-center items-center px-4 w-full   flex-wrap ">
-            {resultShow === false && open === false && quizs?.map((item, index) => (
-                <div className="sm:w-96 py-8 px-10 rounded-lg bg-slate-200 mx-2  flex flex-col justify-center gap-4 " key={item._id}>
+            {resultShow === false && open === false && quizs?.map((item) => (
+                <div className="sm:w-96 py-8 px-10 rounded-lg bg-slate-300 mx-2  flex flex-col justify-center gap-4 " key={item._id}>
 
                     <h2 className="text-black text-center pt-5  font-bold  ">
                         {item?.title}

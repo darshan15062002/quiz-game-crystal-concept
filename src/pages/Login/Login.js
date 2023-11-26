@@ -18,7 +18,7 @@ const Login = () => {
 				alert('login successful')
 				navigate("/")
 			} else {
-				alert(res.message)
+				alert("Wrong username or password")
 			}
 		})
 	}
@@ -81,6 +81,7 @@ const Login = () => {
 						>
 							Login
 						</button>
+
 					</div>
 				</form>
 

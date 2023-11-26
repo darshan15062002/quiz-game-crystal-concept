@@ -7,6 +7,7 @@ import "./Signup.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { userRegister } from "../../api/authApi";
 const Signup = () => {
 
 	const navigate = useNavigate();
@@ -28,31 +29,15 @@ const Signup = () => {
 		else if (checked === false) { alert("please check terms and privacy policy") }
 		else {
 
-			try {
-				//Create user
-				const res = await createUserWithEmailAndPassword(auth, email, password);
-
-				//Update profile
-				await updateProfile(res.user, {
-					displayName: name,
-
-				});
-
-				//create user on firestore
-				await setDoc(doc(db, "users", res.user.uid), {
-					uid: res.user.uid,
-					displayName: name,
-					email,
-				});
-
-
-				navigate("/");
-
-			} catch (err) {
-				console.log(err);
-			}
+			await userRegister({ name, email, password }).then((res) => {
+				if (res.success) {
+					alert('Registered successfully')
+					navigate("/")
+				} else {
+					alert(res.message)
+				}
+			})
 		}
-
 
 	}
 

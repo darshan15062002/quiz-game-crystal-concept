@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, redirect, RouterProvider } from "react-router-dom";
 import Collaboration from "./Components/Pages/Collaboration/Collaboration";
 import Competition from "./Components/Pages/Competition/Competition";
 import Discussion from "./Components/Pages/Discussion/Discussion";
@@ -28,8 +28,11 @@ import { Search } from "./pages/Search/Search";
 
 const ProtectedRoute = ({ children }) => {
 	const { currentUser } = useContext(AuthContext)
-	if (currentUser && currentUser?.user?.role === 'user') return
-	return children;
+	console.log(currentUser);
+	if (currentUser.isAuthenticated) return children
+
+	return <Navigate to='/' />
+
 }
 
 
@@ -49,11 +52,7 @@ function App() {
 
 	useEffect(() => {
 		handleLoadUser()
-
-		return () => {
-			handleLoadUser()
-		}
-	}, []);
+	});
 	const router = createBrowserRouter([
 		{
 			path: "/",

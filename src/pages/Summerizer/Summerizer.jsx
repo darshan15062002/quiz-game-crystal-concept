@@ -4,7 +4,7 @@ import { getSummary } from '../../api/summeryApi';
 const Summarizer = () => {
     const [text, setText] = useState('');
     const [summary, setSummary] = useState('');
-    const [rows, setRows] = useState(5);
+    // const [rows, setRows] = useState(5);
     const [loading, setLoading] = useState(false);
 
     const handleGenerate = async (e) => {
@@ -17,7 +17,7 @@ const Summarizer = () => {
             alert("Please enter text")
         }
 
-        text && await getSummary(text, rows)
+        text && await getSummary(text)
 
 
 
@@ -48,8 +48,8 @@ const Summarizer = () => {
                 cols="50"
             />
 
-            <label htmlFor="rows">Enter No Rows:</label>
-            <input value={rows} onChange={(e) => setRows(e.target.value)} className='block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md' type="number" name="rows" />
+            {/* <label htmlFor="rows">Enter No Rows:</label>
+            <input value={rows} onChange={(e) => setRows(e.target.value)} className='block p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md' type="number" name="rows" /> */}
 
 
             <button onClick={handleGenerate} className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">

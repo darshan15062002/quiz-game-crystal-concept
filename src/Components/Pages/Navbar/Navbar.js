@@ -23,31 +23,32 @@ const Navbar = () => {
       <li>
         <Link className='text-black' to="/search">SEARCH</Link>
       </li>
-      <li>
-        <Link className='text-black' to="/playquiz">PLAY QUIZ</Link>
-      </li>
-      <li>
-        <Link className='text-black' to="/summarizer">SUMMARIZER</Link>
-      </li>
-      {/* {currentUser?.isAuthenticated ? (<div className='flex lg:flex-row flex-col'>
-        <li>
-          <Link to="/profile">PROFILE</Link>
-        </li>
 
-        {currentUser?.user?.role === 'admin' && (
+
+      {currentUser?.isAuthenticated ?
+        (<div className='flex lg:flex-row flex-col'>
           <li>
-            <Link to="/addquiz">ADD QUIZ</Link>
+            <Link className='text-black' to="/profile">PROFILE</Link>
           </li>
-        )}
+          <li>
+            <Link className='text-black' to="/playquiz">PLAY QUIZ</Link>
+          </li>
 
-      </div>) : (<>
-        <li>
-          <Link to="/login">LOGIN</Link>
-        </li>
-        <li>
-          <Link to="/signup">SIGNUP</Link>
-        </li>
-      </>)} */}
+          <li>
+            <Link className='text-black' to="/summarizer">SUMMARIZER</Link>
+          </li>
+
+          {currentUser?.user?.role === "admin" && <li>
+            <Link className='text-black' to="/addquiz">ADD QUIZ</Link>
+          </li>}
+        </div>) : (<>
+          <li>
+            <Link className='text-black' to="/login">LOGIN</Link>
+          </li>
+          <li>
+            <Link className='text-black' to="/signup">SIGNUP</Link>
+          </li>
+        </>)}
       {/* <li>
         <Link to="/problems">PROBLEMS</Link>
       </li>
