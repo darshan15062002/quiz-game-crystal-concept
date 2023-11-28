@@ -7,34 +7,44 @@ import "./Signup.css";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { userRegister } from "../../api/authApi";
+import { loadUser, userRegister } from "../../api/authApi";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 const Signup = () => {
 
 	const navigate = useNavigate();
 
 
 	const [name, setName] = useState("")
-	const [email, setEmail] = useState("")
+	const [phone, setPhone] = useState("")
 	const [password, setPassword] = useState("")
 	const [compassword, setComPassword] = useState("")
 	const [checked, setChecked] = useState(false)
 
-
+	const { setCurrentUser } = useContext(AuthContext)
 	const handleSubmit = async (e) => {
 
 		e.preventDefault()
 
-		console.log(name, email, password, compassword, checked);
 		if (password !== compassword) { alert("Both password must be same") }
 		else if (checked === false) { alert("please check terms and privacy policy") }
 		else {
 
-			await userRegister({ name, email, password }).then((res) => {
-				if (res.success) {
-					alert('Registered successfully')
+			await userRegister({ name, phone, password }).then((res) => {
+				if (res?.data?.success) {
+					alert('Successfully registered')
+					loadUser().then((data) => {
+						if (data.success) {
+							setCurrentUser({ user: data.user, isAuthenticated: true })
+						}
+						else {
+							setCurrentUser({ isAuthenticated: false })
+						}
+
+					}).catch((error) => console.log(error))
 					navigate("/")
 				} else {
-					alert(res.message)
+					alert(res?.response?.data?.message)
 				}
 			})
 		}
@@ -47,7 +57,7 @@ const Signup = () => {
 			<Link to="/" className="cross">
 				<ImCross className="absolute top-8 lg:flex right-8 text-orange-600"></ImCross>
 			</Link>
-			<div>
+			<div className="sm:w-1/2 w-full px-10">
 				<form onSubmit={handleSubmit}>
 					<div className="mb-5">
 						<h1 className="text-2xl lg:text-3xl font-medium ">
@@ -69,13 +79,15 @@ const Signup = () => {
 						/>
 					</div>
 					<div className="form-control">
+
 						<input
-							type="email"
-							placeholder="E-mail"
-							name="Email"
+							type="tel" maxlength="10" required
+
+							placeholder="Phone No"
+							name="phone"
 							className="border-b-2 p-3 outline-none"
-							onChange={(e) => setEmail(e.target.value)}
-							value={email}
+							onChange={(e) => setPhone(e.target.value)}
+							value={phone}
 							autoComplete="off"
 						/>
 					</div>
@@ -129,8 +141,8 @@ const Signup = () => {
 					</Link>
 				</p>
 			</div>
-			<div className="text-center lg:text-left hero_img">
-				<img className="w-full" src={loginImg} alt="" />
+			<div className="w-full flex justify-center items-center">
+				<img className="w-[75%]" src={loginImg} alt="" />
 			</div>
 		</div>
 		/* <img

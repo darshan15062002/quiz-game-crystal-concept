@@ -10,6 +10,16 @@ export const handleGetAllQuiz = async () => {
     }
 }
 
+
+export const handleGetAllVisibleQuiz = async () => {
+    try {
+        const { data } = await axios.get(`${server}/quiz/visible/all`)
+        return data.quizs
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export const createQuiz = async (quiz) => {
     try {
         const res = await axios.post(`${server}/quiz/new`, quiz, {

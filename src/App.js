@@ -28,12 +28,20 @@ import { Search } from "./pages/Search/Search";
 
 const ProtectedRoute = ({ children }) => {
 	const { currentUser } = useContext(AuthContext)
-	console.log(currentUser);
+
 	if (currentUser.isAuthenticated) return children
 
 	return <Navigate to='/' />
 
 }
+const AdminProtectedRoute = ({ children }) => {
+	const { currentUser } = useContext(AuthContext)
+	if (currentUser?.user?.role === 'admin') return children
+
+	return <Navigate to='/' />
+
+}
+
 
 
 
@@ -52,7 +60,7 @@ function App() {
 
 	useEffect(() => {
 		handleLoadUser()
-	});
+	}, []);
 	const router = createBrowserRouter([
 		{
 			path: "/",
@@ -65,7 +73,7 @@ function App() {
 				},
 				{
 					path: "/profile",
-					element: <UserProfile></UserProfile>,
+					element: <ProtectedRoute><UserProfile></UserProfile></ProtectedRoute>,
 				},
 				{
 					path: "/collaboration",
@@ -91,12 +99,14 @@ function App() {
 
 				{
 					path: "/playquiz",
-					element: <PlayQuiz />
+					element: <ProtectedRoute>
+						<PlayQuiz />
+					</ProtectedRoute>
 				},
 
 				{
 					path: "/summarizer",
-					element: <Summarizer />
+					element: <ProtectedRoute> <Summarizer /></ProtectedRoute>
 				},
 				{
 					path: "/search",
@@ -123,7 +133,7 @@ function App() {
 		},
 		{
 			path: "/addquiz",
-			element: <ProtectedRoute><AddQuiz /></ProtectedRoute>,
+			element: <AdminProtectedRoute><AddQuiz /></AdminProtectedRoute>,
 		},
 	]);
 	return (

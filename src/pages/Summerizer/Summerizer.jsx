@@ -22,7 +22,7 @@ const Summarizer = () => {
 
 
             .then((response) => {
-                console.log(response);
+
                 setSummary(response);
 
                 setLoading(false);

@@ -1,22 +1,78 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { BsFillCaretLeftFill } from "react-icons/bs";
 import { FaPen } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { userLogout } from '../../api/authApi';
+import { loadUser, userLogout } from '../../api/authApi';
+import { getMyAllSubmitedQuiz } from '../../api/submissionApi';
+import { getSingleQuiz } from '../../api/quizApi';
+import QuizModal from '../../Components/Pages/QuizModal/QuizModal';
 
 const UserProfile = () => {
     const navigate = useNavigate()
-    const { currentUser } = useContext(AuthContext)
+    const { currentUser, setCurrentUser } = useContext(AuthContext)
+    const [myQuizSubmission, setMyQuizSubmission] = useState([])
+    const [show, setShow] = useState(false)
+    const [currentQuiz, setCurrentQuiz] = useState({})
+
+
+
     const handleLogout = () => {
         userLogout().then((data) => {
-            if (data.success) {
-                alert(data.message)
+            if (data?.success) {
+                alert(data?.message)
                 navigate("/")
-            }
 
+                loadUser().then((data) => {
+                    if (data?.success) {
+                        setCurrentUser({ user: data?.user, isAuthenticated: true })
+                    }
+                    else {
+                        setCurrentUser({ isAuthenticated: false })
+                    }
+
+                }).catch((error) => console.log(error))
+            }
         })
+
     }
+
+    const handleShowQuiz = (id) => {
+        setShow(true)
+        setCurrentQuiz(myQuizSubmission.find(q => q[0]._id === id))
+
+    }
+
+
+    useEffect(() => {
+        const unsub = async () => {
+            try {
+                const data = await getMyAllSubmitedQuiz();
+
+                // Check if data is an array before mapping
+                if (Array.isArray(data)) {
+                    // Use Promise.all to wait for all asynchronous operations to complete
+                    const quizPromises = data.map(async (item) => {
+                        const quiz = await getSingleQuiz(item?.quizId);
+                        return [quiz?.data?.quiz, item?.points, item?.answers];
+                    });
+
+                    const quizzes = await Promise.all(quizPromises);
+
+                    setMyQuizSubmission(quizzes);
+                } else {
+                    console.error('Data is not an array:', data);
+                }
+            } catch (error) {
+                console.error('Error fetching quiz data:', error);
+            }
+        };
+
+        unsub();
+    }, []);
+
+
+
     return (
         <>
             <div className="lg:px-36 pt-24 px-6 ">
@@ -60,48 +116,45 @@ const UserProfile = () => {
                         </select>
                         <input type="text" placeholder='Division' className='w-full p-3 input input-bordered shadow-md mb-2 text-black' /> */}
                     </div>
-                </form>
-                <button onClick={handleLogout} className="bg-black p-3 font-serif ">Logout</button>
-                {/* <div className='text-gray-500 border-2 p-6'>
-                    <h4 className='text-sm uppercase text-center'>Ratings</h4>
-                    <div className="mb-2">
-                        <p>October</p>
-                        <p className='text-sm'>Contests Participated</p>
-                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
-                            <p className='text-sm'>Contests-1</p>
-                            <p className='text-sm'>Contests-2</p>
-                            <p className='text-sm'>Contests-3</p>
-                            <p className='text-sm'>Contests-4</p>
-                        </div>
-                    </div>
-                    <div className="mb-6">
-                        <p>November</p>
-                        <p className='text-sm'>Contests Participated</p>
-                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-                            <p className='text-sm'>Contests-1</p>
-                            <p className='text-sm'>Contests-2</p>
-                            <p className='text-sm'>Contests-3</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="text-center">
-                            <>
-                                <p className='text-xl'>Institute Rank</p>
-                                <span className="text-xs">2500</span>
-                            </>
-                            <>
-                                <p className='text-xl'>Country Rank</p>
-                                <span className="text-xs">2500</span>
-                            </>
-                            <>
-                                <p className='text-xl'>Global Rank</p>
-                                <span className="text-xs">2500</span>
-                            </>
-                        </div>
-                    </div>
-                </div> */}
-            </div>
 
+                </form>
+
+
+                <div className='text-black border-2 p-6'>
+                    <h4 className='text-sm uppercase text-center'>Submissions</h4>
+
+
+
+                    {
+                        myQuizSubmission.map((quiz) => (
+                            <div className="border-2 flex justify-between items-center px-4 py-3 m-1 text-gray-400">
+                                <h3>{quiz[0]?.title}</h3>
+                                <div className="flex justify-center items-center gap-4">
+                                    <h2>{quiz[1]}/{quiz[0].questions.length}</h2>
+                                    <button onClick={() => handleShowQuiz(quiz[0]?._id)} className=" inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                        <span className=" px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                            view
+                                        </span>
+                                    </button>
+
+                                    {show && <QuizModal currentQuiz={currentQuiz} setShow={setShow} />}
+
+                                </div>
+
+
+                            </div>
+                        ))
+                    }
+
+
+
+
+
+                </div>
+            </div>
+            <div className="border-2 px-6 m-6 text-gray-400">
+                <button onClick={handleLogout} className="bg-black p-2 font-serif ">Logout</button>
+            </div>
             {/* Badges start here */}
             {/* <div className="border-2 px-6 m-6 text-gray-400">
                 <p className='text-lg uppercase'>Badges</p>
@@ -133,7 +186,7 @@ const UserProfile = () => {
                     <p className='text-xs'>Partially</p>
                     <p className='bg-yellow-400 w-6 h-3'></p>
                 </div>
-                <div class="w-32 h-32 rounded-full border-2 bg-green-500 flex justify-center items-center mx-auto">
+                <div className="w-32 h-32 rounded-full border-2 bg-green-500 flex justify-center items-center mx-auto">
 
                 </div>
             </div> */}

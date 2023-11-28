@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './PlayQuiz.css'
-
-import { Link } from 'react-router-dom'
 import image from '../../assets/hero2.png'
-import { getSingleQuiz, handleGetAllQuiz } from '../../api/quizApi'
+import { getSingleQuiz, handleGetAllVisibleQuiz } from '../../api/quizApi'
+import { QuizCard } from '../../Components/Pages/QuizCard/QuizCard'
+import { Quiz } from '../../Components/Pages/Quiz/Quiz'
+import { getMySingleSubmitedQuiz, submitQuiz } from '../../api/submissionApi'
 const PlayQuiz = () => {
 
     const [quizs, setQuizs] = useState([]);
@@ -13,29 +14,38 @@ const PlayQuiz = () => {
     const [point, setPoint] = useState(0)
     const [wrongAnswers, setWrongAnswers] = useState(0);
     const [resultShow, setResultShow] = useState(false)
+    const [currentQuizId, setCurrentQuizId] = useState('')
     const [showAns, setShowAns] = useState(false)
-
+    const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
-    const currentDate = new Date()
+    // const currentDate = new Date()
 
-    console.log(selectedOptions);
     useEffect(() => {
         // Fetch all quiz
-        handleGetAllQuiz().then((data) => {
-            const newData = data.filter((item) => currentDate.getTime() >= new Date(item?.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)
-                && currentDate.getTime() <= new Date(item?.startDate).getTime() + 24 * 60 * 60 * 1000 - (5 * 60 * 60 * 1000 + 30 * 60 * 1000))
-            setQuizs(newData)
+        handleGetAllVisibleQuiz().then((data) => {
+            // const newData = data.filter((item) => currentDate.getTime() >= new Date(item?.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)
+            //     && currentDate.getTime() <= new Date(item?.startDate).getTime() + 24 * 60 * 60 * 1000 - (5 * 60 * 60 * 1000 + 30 * 60 * 1000))
+            setQuizs(data)
         }).catch((err) => console.log(err))
     }, [])
 
 
-    const handlePlay = (id) => {
-        getSingleQuiz(id).then((res) => {
+    const handlePlay = async (id) => {
+        setCurrentQuizId(id)
+        const res = await getMySingleSubmitedQuiz(id)
+        console.log(res);
+        if (!res) {
+            getSingleQuiz(id).then((res) => {
 
-            setQuestions(res.data.quiz.questions)
-        });
+                setQuestions(res.data.quiz.questions)
+            });
 
-        setOpen(true)
+            setOpen(true)
+        }
+        else {
+            alert('quiz already submitted')
+        }
+
     }
 
 
@@ -47,19 +57,37 @@ const PlayQuiz = () => {
     };
 
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (count === questions.length - 1) {
+
+            let computedPoints = 0;
             questions.forEach((question, index) => {
-                if (question.correctAnswer === String(selectedOptions[index] + 1)) {
-                    setPoint((prev) => prev + 1)
+                if (question.correctAnswer === String(selectedOptions[index])) {
+                    computedPoints++;
+                }
+            });
+
+            setPoint(computedPoints);
+            setWrongAnswers(questions.length - computedPoints);
+            setLoading(true);
+            await submitQuiz(currentQuizId, selectedOptions, computedPoints).then((res) => {
+                if (res?.data?.success) {
+                    alert('Quiz submitted successfully')
+                    setResultShow(true)
                 }
                 else {
-                    setWrongAnswers((prev) => prev + 1)
+                    setResultShow(false)
+                    setWrongAnswers(0)
+                    setPoint(0)
+                    setOpen(false)
+                    setSelectedOptions([])
+                    setShowAns(false)
+                    alert('something went wrong')
+
                 }
-
-
             })
-            setResultShow(true)
+
+
             setCount(0)
         } else {
             setCount((prevCount) => prevCount + 1);
@@ -95,52 +123,12 @@ const PlayQuiz = () => {
         </h2>
         <div className=" flex justify-center items-center px-4 w-full   flex-wrap ">
             {resultShow === false && open === false && quizs?.map((item) => (
-                <div className="sm:w-96 py-8 px-10 rounded-lg bg-slate-300 mx-2  flex flex-col justify-center gap-4 " key={item._id}>
-
-                    <h2 className="text-black text-center pt-5  font-bold  ">
-                        {item?.title}
-                    </h2>
-                    <p className="  text-gray-900 tracking-wide ">
-                        <b>Started At:</b> {new Date(new Date(item.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)).toLocaleString()}
-                    </p>
-                    <p className="  text-gray-900 tracking-wide ">
-
-                        <b>End on:</b>  {new Date(new Date(item?.startDate).getTime() + 24 * 60 * 60 * 1000 - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)).toLocaleString()}
-                    </p>
-
-                    <div className="flex justify-center gap-4 mb-6  text-xs font-medium">
-                        <Link className="text-gray-500 bg-slate-50 shadow-md  px-6 py-3">
-                            Live
-                        </Link>
-                        <Link className="bg-[#09BD81] shadow-md text-white px-6 py-3" onClick={() => handlePlay(item._id)}>
-                            Play
-                        </Link>
-                    </div>
-                </div>
+                <QuizCard item={item} handlePlay={handlePlay} />
             ))}
             {
-                resultShow === false && open === true && questions && (<div className='sm:w-96 w-full h-full  p-6 border-2 mx-2 rounded-lg rounded-t-none flex gap-5 flex-col justify-center   bg-white' key={count}>
-                    <h1 className='text-black text-left'><b>{count + 1}{")  "}{questions[count]?.text}</b></h1>
-                    <div className="answer">
-
-                        {
-                            questions[count]?.answers?.map((item, index) => (
-                                <div className='text-black flex gap-4'>
-                                    <input type="radio" name="answer" id={"answer"} value={item} checked={selectedOptions[count] === index} onChange={(e) => handleOptionChange(index, item)} />
-                                    <div key={index}>{item}</div>
-                                </div>
-                            ))
-                        }
-
-
-
-                    </div>
-                    <div className=" flex justify-between items-center">
-                        <button className='bg-[#000000] shadow-md text-white px-2 py-1' onClick={() => handlePrev()}>{"Previous"}</button>
-                        <button className='bg-[#09BD81] shadow-md text-white px-2 py-1' onClick={() => handleNext()}>{count === questions.length - 1 ? "Submit" : "Next"}</button>
-
-                    </div>
-                </div>)
+                resultShow === false && open === true && questions && (
+                    <Quiz loading={loading} questions={questions} count={count} handleNext={handleNext} handlePrev={handlePrev} selectedOptions={selectedOptions} handleOptionChange={handleOptionChange} />
+                )
             }
             {
                 resultShow === true && (<div className='flex flex-col gap-3 sm:w-96  w-full  '><div className='sm:w-96  w-full relative h-80  border-2 mx-2 rounded-lg flex flex-col gap-3 items-center justify-center rounded-t-none text-center  bg-white'>

@@ -1,15 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { auth } from '../../firebase';
 import "./AddQuiz.scss"
 import { AiFillDelete } from 'react-icons/ai'
 import { BsFillCaretLeftFill } from 'react-icons/bs';
-
-
-
-
-
-
-import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { createQuiz, deleteQuiz, handleGetAllQuiz, updateQuiz } from '../../api/quizApi';
 
@@ -32,26 +24,25 @@ const AddQuiz = () => {
     const handleUpdate = (quiz) => {
 
         setButton("update Quiz")
-        setUpdateId(quiz._id)
-        console.log(updateId);
-        setTitle(quiz.title)
-        setStartDate(quiz.startDate.slice(0, -8))
-        setQuestions(quiz.questions)
+        setUpdateId(quiz?._id)
+
+        setTitle(quiz?.title)
+        setStartDate(quiz?.startDate?.slice(0, -8))
+        setQuestions(quiz?.questions)
 
     }
 
 
-    const handleDeleteQuiz = async (id) => {
-        deleteQuiz(id).then((res) => {
-            alert(res.message);
-        });
-    }
+    // const handleDeleteQuiz = async (id) => {
+    //     deleteQuiz(id).then((res) => {
+    //         alert(res.message);
+    //     });
+    // }
 
 
 
     const handleCreateQuiz = async (e) => {
         e.preventDefault();
-        console.log(startDate);
         if (updateId) {
             await updateQuiz(updateId, {
                 title: title,
@@ -132,12 +123,27 @@ const AddQuiz = () => {
     const handleSignOut = () => {
 
         try {
-            signOut(auth);
             navigator("/")
         }
         catch (err) {
             console.log(err, "err");
         }
+    }
+
+    const handleVisibility = async (id, x) => {
+        await updateQuiz(id, {
+            visibility: x
+        }).then((res) => {
+            if (x) {
+                alert("Now Quiz is visible on website")
+            }
+            else {
+                alert("Now Quiz is not visible on website")
+            }
+
+        })
+
+
     }
 
     useEffect(() => {
@@ -175,7 +181,6 @@ const AddQuiz = () => {
                             placeholder="Date Of Start"
                             value={startDate}  // Format as 'YYYY-MM-DDTHH:mm'
                             onChange={(e) => {
-                                console.log(e.target.value);
                                 setStartDate(e.target.value)
                             }}
                             required
@@ -246,23 +251,22 @@ const AddQuiz = () => {
                                         <div className="flex justify-between text-xs sm:text-lg items-center w-full">
                                             <h1 className='font-bold'>{item?.title}</h1>
 
-                                            <span>{item?.startDate.slice(0, -8)}</span>
+                                            <span>{item?.startDate?.slice(0, -8)}</span>
 
                                             <div className="flex items-center gap-1">
 
-                                                {currentDate.getTime() >= new Date(item?.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)
-                                                    && currentDate.getTime() <= new Date(item?.startDate).getTime() + 24 * 60 * 60 * 1000 - (5 * 60 * 60 * 1000 + 30 * 60 * 1000) ?
+                                                {item?.visibility ?
                                                     (
-                                                        <span className="bg-green-400 px-2 py-1 text-white">Live</span>
+                                                        <button onClick={() => handleVisibility(item?._id, false)} className="bg-green-400 px-2 py-1 text-white">Visible</button>
                                                     ) : (
-                                                        <span className="bg-red-400 px-2 py-1 text-white">Offline</span>
+                                                        <button onClick={() => handleVisibility(item?._id, true)} className="bg-red-400 px-2 py-1 text-white">Hide</button>
                                                     )}
                                                 <button className='bg-black px-1 py-1 text-white ' onClick={() => handleUpdate(item)}>
                                                     UPDATE
                                                 </button>
-                                                <button className='bg-black px-1 py-1 text-white ' onClick={() => handleDeleteQuiz(item._id)}>
+                                                {/* <button className='bg-black px-1 py-1 text-white ' onClick={() => handleDeleteQuiz(item._id)}>
                                                     DELETE
-                                                </button>
+                                                </button> */}
                                             </div>
                                         </div>
 

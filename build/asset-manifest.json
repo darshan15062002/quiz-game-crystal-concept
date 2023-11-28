@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.d5cfeefb.css",
-    "main.js": "/static/js/main.4896d6eb.js",
+    "main.css": "/static/css/main.5acad354.css",
+    "main.js": "/static/js/main.a1537229.js",
     "static/media/kindpng_2417758.png": "/static/media/kindpng_2417758.7efcbda9f5c97439eb23.png",
     "static/media/cute-boy-explorer-using-a-magnifying-glass-free-vector-removebg-preview.png": "/static/media/cute-boy-explorer-using-a-magnifying-glass-free-vector-removebg-preview.7f610ec5309b87ec7716.png",
     "static/media/hero1.png": "/static/media/hero1.d5b05510520e0efe63cb.png",
@@ -14,11 +14,11 @@
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/index.html",
-    "main.d5cfeefb.css.map": "/static/css/main.d5cfeefb.css.map",
-    "main.4896d6eb.js.map": "/static/js/main.4896d6eb.js.map"
+    "main.5acad354.css.map": "/static/css/main.5acad354.css.map",
+    "main.a1537229.js.map": "/static/js/main.a1537229.js.map"
   },
   "entrypoints": [
-    "static/css/main.d5cfeefb.css",
-    "static/js/main.4896d6eb.js"
+    "static/css/main.5acad354.css",
+    "static/js/main.a1537229.js"
   ]
 }

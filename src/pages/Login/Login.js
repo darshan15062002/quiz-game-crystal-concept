@@ -4,18 +4,29 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { ImCross } from "react-icons/im";
 
-import { userLogin } from "../../api/authApi";
+import { loadUser, userLogin } from "../../api/authApi";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
 	const navigate = useNavigate()
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
-
+	const { setCurrentUser } = useContext(AuthContext)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		userLogin({ email, password }).then((res) => {
 			if (res.success) {
 				alert('login successful')
+				loadUser().then((data) => {
+					if (data.success) {
+						setCurrentUser({ user: data.user, isAuthenticated: true })
+					}
+					else {
+						setCurrentUser({ isAuthenticated: false })
+					}
+
+				}).catch((error) => console.log(error))
 				navigate("/")
 			} else {
 				alert("Wrong username or password")
@@ -41,11 +52,10 @@ const Login = () => {
 					</div>
 					<div className="form-control">
 						<input
-							type="email"
-							placeholder="E-mail"
-							name="Email"
+							type="text"
+							placeholder="Username OR mobile no."
 							className="border-b-2 p-3 outline-none"
-							autoComplete="off"
+							autoComplete="on"
 							onChange={(e) => setEmail(e.target.value)}
 							value={email}
 						/>
