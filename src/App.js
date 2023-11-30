@@ -19,6 +19,7 @@ import { loadUser } from "./api/authApi";
 import Nopage from "./pages/NoPage/Nopage";
 import Summarizer from "./pages/Summerizer/Summerizer";
 import { Search } from "./pages/Search/Search";
+import { Quizs } from "./pages/Quizs/Quizs";
 
 
 
@@ -102,6 +103,12 @@ function App() {
 					element: <ProtectedRoute>
 						<PlayQuiz />
 					</ProtectedRoute>
+				},
+				{
+					path: "/quiz/:id",
+					element:
+						<Quizs />
+
 				},
 
 				{

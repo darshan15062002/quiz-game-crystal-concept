@@ -50,6 +50,7 @@ const AddQuiz = () => {
                 startDate,
             }).then((res) => {
                 alert("quiz updated successfully")
+                handleAllQuiz()
             })
 
         }
@@ -63,6 +64,7 @@ const AddQuiz = () => {
                 setStartDate("")
                 setQuestions([{ text: '', answers: [], correctAnswer: '' }])
                 alert(data.data.message)
+                handleAllQuiz()
             })
 
         }
@@ -134,6 +136,7 @@ const AddQuiz = () => {
         await updateQuiz(id, {
             visibility: x
         }).then((res) => {
+            handleAllQuiz()
             if (x) {
                 alert("Now Quiz is visible on website")
             }
@@ -144,15 +147,41 @@ const AddQuiz = () => {
         })
 
 
-    }
 
-    useEffect(() => {
-        // Fetch all quiz
+    }
+    const handleCopy = async (id) => {
+        const shareableLink = `https://crystal-concept-a928f.web.app/quiz/${id}`;
+
+
+        if (navigator.clipboard) {
+            await navigator.clipboard.writeText(shareableLink);
+            console.log('Link copied to clipboard:', shareableLink);
+        } else {
+            // Fallback for browsers that don't support Clipboard API
+            const tempInput = document.createElement('input');
+            tempInput.value = shareableLink;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            console.log('Link copied to clipboard (fallback):', shareableLink);
+        }
+
+    };
+
+    const handleAllQuiz = () => {
         handleGetAllQuiz().then((data) => {
             console.log(data);
             setQuizs(data)
         }).catch((err) => console.log(err))
-    }, [navigator])
+    }
+
+    useEffect(() => {
+        // Fetch all quiz
+
+        handleAllQuiz()
+
+    }, [])
 
     return (
         <>
@@ -264,9 +293,9 @@ const AddQuiz = () => {
                                                 <button className='bg-black px-1 py-1 text-white ' onClick={() => handleUpdate(item)}>
                                                     UPDATE
                                                 </button>
-                                                {/* <button className='bg-black px-1 py-1 text-white ' onClick={() => handleDeleteQuiz(item._id)}>
-                                                    DELETE
-                                                </button> */}
+                                                <button className="bg-black px-1 py-1 text-white" onClick={() => handleCopy(item?._id)}>
+                                                    Copy
+                                                </button>
                                             </div>
                                         </div>
 

@@ -5,7 +5,12 @@ import { getSingleQuiz, handleGetAllVisibleQuiz } from '../../api/quizApi'
 import { QuizCard } from '../../Components/Pages/QuizCard/QuizCard'
 import { Quiz } from '../../Components/Pages/Quiz/Quiz'
 import { getMySingleSubmitedQuiz, submitQuiz } from '../../api/submissionApi'
+
 const PlayQuiz = () => {
+
+
+
+
 
     const [quizs, setQuizs] = useState([]);
     const [questions, setQuestions] = useState([]);

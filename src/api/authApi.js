@@ -25,10 +25,12 @@ export const userRegister = async ({ name, phone, password }) => {
             },
             withCredentials: true
         })
+
         return res
 
     } catch (error) {
-        return error.response.data.message
+        return error
+
     }
 }
 

@@ -4,9 +4,7 @@ import loginImg from "../../assets/kindpng_2417758.png";
 import { Link, useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
 import "./Signup.css";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
+
 import { loadUser, userRegister } from "../../api/authApi";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -30,23 +28,24 @@ const Signup = () => {
 		else if (checked === false) { alert("please check terms and privacy policy") }
 		else {
 
-			await userRegister({ name, phone, password }).then((res) => {
-				if (res?.data?.success) {
-					alert('Successfully registered')
-					loadUser().then((data) => {
-						if (data.success) {
-							setCurrentUser({ user: data.user, isAuthenticated: true })
-						}
-						else {
-							setCurrentUser({ isAuthenticated: false })
-						}
+			const res = await userRegister({ name, phone, password })
+			if (res?.data?.success) {
+				alert('Successfully registered')
+				loadUser().then((data) => {
+					if (data.success) {
+						setCurrentUser({ user: data.user, isAuthenticated: true })
+					}
+					else {
+						setCurrentUser({ isAuthenticated: false })
+					}
 
-					}).catch((error) => console.log(error))
-					navigate("/")
-				} else {
-					alert(res?.response?.data?.message)
-				}
-			})
+				})
+				navigate("/")
+			} else {
+				console.log(res);
+				alert(res?.response?.data?.message)
+			}
+
 		}
 
 	}
