@@ -39,7 +39,7 @@ const Navbar = () => {
           </li>
 
           {currentUser?.user?.role === "admin" && <li>
-            <Link className='text-black' to="/addquiz">ADD QUIZ</Link>
+            <Link className='text-black' to="/admin">ADMIN</Link>
           </li>}
         </div>) : (<>
           <li>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getSummary } from '../../api/summeryApi';
-
+import ideabg5 from '../../assets/ideabg5.png'
 const Summarizer = () => {
     const [text, setText] = useState('');
     const [summary, setSummary] = useState('');
@@ -34,12 +34,20 @@ const Summarizer = () => {
     };
 
     return (
-        <div className="sm:px-16 text-black pt-28 px-8 flex gap-6 justify-between items-center flex-col">
-            <h1 className='font-bold text-2xl font-sans '>PDF Summarizer</h1>
+        <div className="sm:px-16 text-black pt-28 px-8 flex lg:gap-10 gap-5 justify-between items-center flex-col">
+            <div className="flex-col-reverse flex justify-between w-full gap-10 items-center">
+                <div className="w-full h-40 shadow-lg">
+                    <img className='w-full rounded-lg h-full object-cover' src={ideabg5} alt="" />
+                </div>
+                <div className="w-full">
+                    <h1 className='font-bold text-2xl font-sans '>Answer Summarizer</h1>
+                    <p>Explore our answer summarizer feature designed to provide concise and clear summaries for your text or documents. Whether you're reviewing notes, analyzing articles, or preparing for exams, our tool can help you quickly grasp key information. By leveraging advanced algorithms, it identifies and distills the most important details, making your reading and comprehension more efficient. Take advantage of our answer summarizer today to streamline your learning process and enhance your understanding of complex content!</p>
 
-            <label htmlFor="pdf_text">Enter PDF Text:</label>
+                </div>
+            </div>
+            <label className=' text-xl font-bold '>Enter Text Here:</label>
             <textarea
-                className='block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300'
+                className='block p-2.5  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300'
                 id="pdf_text"
                 value={text}
                 onChange={(e) => setText(e.target.value)}

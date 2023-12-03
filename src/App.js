@@ -134,12 +134,12 @@ function App() {
 			path: "/forgetpassword",
 			element: <ForgetPassword></ForgetPassword>,
 		},
+		// {
+		// 	path: "/admin",
+		// 	element: <AdminRegistrationForm></AdminRegistrationForm>,
+		// },
 		{
 			path: "/admin",
-			element: <AdminRegistrationForm></AdminRegistrationForm>,
-		},
-		{
-			path: "/addquiz",
 			element: <AdminProtectedRoute><AddQuiz /></AdminProtectedRoute>,
 		},
 	]);

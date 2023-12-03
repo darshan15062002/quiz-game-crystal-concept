@@ -59,6 +59,7 @@ export const deleteQuiz = async (id) => {
 export const getSingleQuiz = async (id) => {
     try {
         const res = await axios.get(`${server}/quiz/single/${id}`)
+
         return res
     } catch (error) {
         console.log(error.response.data.message);

@@ -1,6 +1,8 @@
 import React from 'react';
 import hero from "../../assets/hero1.png";
-import { Link } from "react-router-dom";
+import ideabg2 from '../../assets/ideabg2.png'
+import ideabg3 from '../../assets/ideabg3.png'
+import ideabg4 from '../../assets/ideabg4.png'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { BsYoutube } from 'react-icons/bs'
@@ -8,16 +10,17 @@ import { FaNewspaper, FaPaperPlane } from 'react-icons/fa'
 import { GiNewspaper } from 'react-icons/gi'
 
 import "./Home.css";
+import { Feature } from '../../Components/Pages/Feature/Feature';
 
 const Home = () => {
 
 	return (
 		<>
-			<div className="sm:px-28 pt-16 px-8 flex flex-col gap-6 justify-between items-center  ">
+			<div className="pt-16  flex flex-col gap-6 justify-between items-center  ">
 
 
 
-				<div className="flex justify-between items-center sm:flex-row flex-col-reverse    ">
+				<div className="sm:px-28 px-8  flex justify-between items-center sm:flex-row flex-col-reverse    ">
 					<div className="flex justify-center w-full items-start flex-col gap-2  ">
 						<h1 className="text-start lg:text-5xl sm:font-extrabold text-2xl text-black font-sans   ">
 							Unlock the Power of Learning
@@ -44,16 +47,7 @@ const Home = () => {
 				</div>
 
 
-
-
-
-
-
-
-
-
-
-				<div className='flex mb-10 w-full flex-wrap gap-y-5 justify-between  items-center  rounded-lg'>
+				<div className=' sm:px-28 px-8 flex mb-10 w-full flex-wrap gap-y-5 justify-between  items-center  rounded-lg'>
 
 					<a className="h-24 w-32 sm:w-52 rounded-lg bg-[#F9C2DD] shadow-lg p-2"
 						href='https://www.youtube.com/channel/UC3_NJf886Au6pj59s2I1Bvg' >
@@ -83,6 +77,44 @@ const Home = () => {
 				</div>
 
 			</div>
+
+
+			<section className=" sm:px-28 px-8 py-5 h-full flex-col gap-y-10     flex  w-full justify-between items-center">
+
+				<Feature
+					ideabg={ideabg2}
+					linkto={'/playquiz'}
+					title="Quizzes"
+					description="Explore our collection of quizzes designed to reinforce your understanding of various subjects.
+						Whether you're studying for exams or just want to challenge yourself"
+					buttonText="Get started"
+				/>
+
+				<Feature
+					ideabg={ideabg3}
+					linkto={'/summarizer'}
+					reversed="true"
+					title="Answer Summarizer"
+					description="Explore our answer summarizer feature designed to provide concise and clear summaries for your text or documents. Whether you're reviewing notes or analyzing articles, our tool can help you quickly grasp key information."
+					buttonText="Try Summarizer"
+				/>
+				<Feature
+					ideabg={ideabg4}
+					linkto={'/search'}
+					title="YouTube Search"
+					description="Discover educational content on our platform with our YouTube search feature. Easily find videos related to your study topics or explore new subjects. Learning has never been this accessible and convenient."
+					buttonText="Search YouTube"
+				/>
+			</section>
+
+
+
+
+
+
+
+
+
 
 
 

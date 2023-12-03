@@ -76,11 +76,11 @@ const UserProfile = () => {
     return (
         <>
             <div className="lg:px-36 pt-24 px-6 ">
-                <div className='flex justify-start items-center text-gray-500 text-sm font-semibold underline'>
+                {/* <div className='flex justify-start items-center text-gray-500 text-sm font-semibold underline'>
                     <BsFillCaretLeftFill></BsFillCaretLeftFill>
                     <Link to='/'>Back</Link>
                 </div>
-                <h2 className='text-3xl font-semibold mb-5 text-gray-700'>User Profile</h2>
+                <h2 className='text-3xl font-semibold mb-5 text-gray-700'>User Profile</h2> */}
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 sm:p-6 sm:m-6 p-2 m-4'>
                 <form className='flex flex-col lg:flex-row items-start justify-center border-2 p-6'>
@@ -92,8 +92,19 @@ const UserProfile = () => {
                     </div>
                     <div>
                         <input type="text" placeholder='Name' value={currentUser.user.name} className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
-                        <input type="email" placeholder='Email' value={currentUser.user.email} className='w-full p-3 input input-bordered shadow-md mb-2 text-black' />
-                        <input type="number" placeholder='Phone no.' value={currentUser.user.phone} className='w-full p-3 input input-bordered shadow-md mb-2 text-black' />
+
+                        <input
+                            type="tel" maxlength="10" required
+
+                            placeholder="Phone No"
+                            name="phone"
+                            className='w-full p-3 input input-bordered shadow-md mb-2 text-black'
+
+                            value={currentUser.user.phone}
+                            autoComplete="off"
+                        />
+
+
 
 
                         <select name="" id="" className='w-full p-3 shadow-md mb-2 text-gray-400 select select-accent'>
@@ -121,7 +132,7 @@ const UserProfile = () => {
 
 
                 <div className='text-black border-2 p-6'>
-                    <h4 className='text-sm uppercase text-center'>Submissions</h4>
+                    <h4 className='text-sm uppercase text-center scroll-m-3 scroll-auto'>Submissions</h4>
 
 
 

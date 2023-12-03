@@ -122,11 +122,11 @@ const PlayQuiz = () => {
 
 
 
-    return (<div className="flex flex-col w-screen gap-3 pt-20 justify-center items-center">
+    return (<div className="flex flex-col  w-screen gap-3 pt-20 justify-center items-center">
         <h2 className=" rounded-lg p-3 text-black text-3xl  font-bold text-center">
             Daily Quiz
         </h2>
-        <div className=" flex justify-center items-center px-4 w-full   flex-wrap ">
+        <div className=" flex justify-center gap-y-4 items-center px-4 w-full   flex-wrap ">
             {resultShow === false && open === false && quizs?.map((item) => (
                 <QuizCard item={item} handlePlay={handlePlay} />
             ))}

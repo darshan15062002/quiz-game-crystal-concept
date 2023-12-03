@@ -9,7 +9,7 @@ export const Quiz = ({ questions, count, handlePrev, handleNext, selectedOptions
 
                 {
                     questions[count]?.answers?.map((item, index) => (
-                        <div className='text-black flex gap-4'>
+                        <div className='text-black border px-2 rounded-md border-black flex gap-4 '>
                             <input type="radio" name="answer" id={"answer"} value={item} checked={selectedOptions[count] === index + 1} onChange={(e) => handleOptionChange(index + 1, item)} />
                             <div key={index}>{item}</div>
                         </div>
