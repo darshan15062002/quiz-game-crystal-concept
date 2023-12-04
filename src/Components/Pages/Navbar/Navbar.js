@@ -72,17 +72,17 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar h-20 w-screen  shadow-md text-sm  bg-white  fixed  z-20 top-0 start-0 border-b border-gray-200 ">
+    <div className="navbar h-16 w-screen  shadow-md text-sm   bg-slate-100/60  fixed  z-20 top-0 start-0 border-b border-gray-200 ">
       <div className="flex sm:mx-24 mx-5  w-full h-full justify-between items-center ">
 
-        <Link to='/' className=' font-serif  mt-4 sm:text-2xl text-xl mb-5   font-extrabold' style={{ fontFamily: 'Poppins', color: '#2D80F6' }}>Crystal <span className='text-[#09BD81]'>Concept</span></Link>
+        <Link to='/' className=' font-serif  mt-4 sm:text-2xl text-xl mb-5   font-extrabold' style={{ fontFamily: 'Poppins', color: '#2D80F6' }}>   Crystal <span className='text-[#09BD81]'>Concept</span></Link>
 
         <div className=" hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItem}</ul>
         </div>
 
-        <div className="dropdown block sm:hidden dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-outline  lg:hidden">
+        <div className="dropdown block sm:hidden dropdown-end ">
+          <label tabIndex={0} className="btn btn-ghost btn-outline  border-2 border-black  lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"

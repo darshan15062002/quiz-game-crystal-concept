@@ -23,9 +23,9 @@ export const Search = () => {
     };
 
     return (
-        <div className="mt-24 w-full sm:px-20 px-10 ">
+        <div className="mt-28 w-full sm:px-20 px-10 ">
             <div className=" w-full  ">
-                <form className=' mb-14 w-full mx-2 flex justify-center items-center   '>
+                <form className=' mb-10  w-full mx-2 flex justify-center items-center   '>
 
                     <div className="relative sm:w-[50%] w-full ">
                         <input type="search" onChange={(e) => setSearch(e.target.value)} value={search} id=" default-search" className=" relative  block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50" placeholder="Search here....." required />
@@ -38,21 +38,24 @@ export const Search = () => {
                         </button>
                     </div>
                 </form>
-                <div className="flex mb-10 flex-wrap justify-between gap-y-8">
+                <div className="flex mb-10 flex-wrap sm:justify-between justify-center gap-y-8">
                     {result.length !== 0 ? result.map((item) => (
                         <div
                             key={item.etag}
 
+                            className='cursor-pointer '
                         >
-                            <div
-                                className='cursor-pointer '
-                            >
 
-                                <iframe
-                                    onClick={() => handleVideoClick(item.id.videoId)} className='rounded-lg h-auto max-w-full shadow-sm hover:scale-105 sm:w-[250px] w-full transition-all duration-500' width="250" height="150" src={`https://www.youtube.com/embed/${item.id.videoId}?si=s0iF-vG4Wli1-kcK`} title='vd' />
-                            </div>
+
+                            <iframe
+                                onClick={() => handleVideoClick(item.id.videoId)} className='rounded-lg h-auto max-w-full shadow-sm hover:scale-105 sm:w-[250px] w-full transition-all duration-500' height="150" src={`https://www.youtube.com/embed/${item.id.videoId}?si=s0iF-vG4Wli1-kcK`} title='vd' />
+
                         </div>
-                    )) : (<div className="flex w-full justify-center items-center">
+                    )) : (<div className="flex flex-col w-full justify-center items-center">
+                        <div className="w-full">
+                            <h1 className='font-bold text-black text-3xl font-sans mb-2 '>Youtube Search</h1>
+                            <p className='text-gray-600'>Unleash the Power of Curated Learning! 🚀 Our YouTube Search feature puts a world of knowledge at your fingertips. Enter your topic of interest, hit search, and discover educational videos tailored just for you. Enhance your learning experience with instant access to diverse content on a wide range of subjects. Learning made easy, right here on our platform. Start exploring now!</p>
+                        </div>
                         <img className='h-[300px]' src={boy} alt="boy" />
                     </div>
                     )}

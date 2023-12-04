@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children }) => {
 
 	if (currentUser.isAuthenticated) return children
 
-	return <Navigate to='/' />
+	return <Navigate to='/login' />
 
 }
 const AdminProtectedRoute = ({ children }) => {
