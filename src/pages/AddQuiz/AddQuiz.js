@@ -196,7 +196,7 @@ const AddQuiz = () => {
 
 
 
-                <form onSubmit={handleCreateQuiz} className='flex flex-col gap-5 items-start justify-center border-2 p-6'>
+                <form onSubmit={handleCreateQuiz} className='flex border-r-4 p-6 flex-col gap-5 items-start justify-center '>
                     <div className="flex justify-between text-center gap-5 pr-5  w-full">
                         <input
                             type="text"
@@ -217,7 +217,7 @@ const AddQuiz = () => {
                         />
                     </div>
 
-                    <div className=" overflow-y-scroll scroll-smooth h-80 scrollbar" >
+                    <div className=" overflow-y-scroll no-scrollbar pr-4 scroll-smooth h-80 scrollbar" >
                         {questions?.map((question, index) => (
                             <div key={index} className='' >
                                 <div className="flex gap-3 items-center my-2 justify-between px-5">
@@ -265,12 +265,12 @@ const AddQuiz = () => {
                 </form>
 
 
-                <div className='text-gray-500 h-[90vh] border-2 p-6'>
+                <div className='text-gray-500 h-80 p-6 '>
                     <h2 className='text-sm uppercase text-center'>Previously added Quiz</h2>
-                    <div className="flex flex-col h-full overflow-y-scroll gap-2">
+                    <div className="flex flex-col h-full overflow-y-scroll no-scrollbar gap-2">
                         {quizs ? (
                             quizs?.map((item, index) => {
-                                console.log(new Date(new Date(item?.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)), currentDate.getTime());
+
                                 return (
                                     <div key={item?._id}
                                         className="flex justify-between items-center border-2 p-2"
@@ -278,7 +278,7 @@ const AddQuiz = () => {
                                     >
 
                                         <div className="flex justify-between text-xs sm:text-lg items-center w-full">
-                                            <h1 className='font-bold'>{item?.title}</h1>
+                                            <h1 className='font-sans font-semibold'>{item?.title}</h1>
 
                                             <span>{item?.startDate?.slice(0, -8)}</span>
 
@@ -295,6 +295,9 @@ const AddQuiz = () => {
                                                 </button>
                                                 <button className="bg-black px-1 py-1 text-white" onClick={() => handleCopy(item?._id)}>
                                                     Copy
+                                                </button>
+                                                <button className="bg-black px-1 py-1 text-white" onClick={() => handleRemove(item?._id)}>
+                                                    DELETE
                                                 </button>
                                             </div>
                                         </div>

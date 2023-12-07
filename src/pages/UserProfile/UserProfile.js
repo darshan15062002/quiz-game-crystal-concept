@@ -48,21 +48,10 @@ const UserProfile = () => {
         const unsub = async () => {
             try {
                 const data = await getMyAllSubmitedQuiz();
+                console.log(data[0], 'done');
 
-                // Check if data is an array before mapping
-                if (Array.isArray(data)) {
-                    // Use Promise.all to wait for all asynchronous operations to complete
-                    const quizPromises = data.map(async (item) => {
-                        const quiz = await getSingleQuiz(item?.quizId);
-                        return [quiz?.data?.quiz, item?.points, item?.answers];
-                    });
+                setMyQuizSubmission(data);
 
-                    const quizzes = await Promise.all(quizPromises);
-
-                    setMyQuizSubmission(quizzes);
-                } else {
-                    console.error('Data is not an array:', data);
-                }
             } catch (error) {
                 console.error('Error fetching quiz data:', error);
             }
@@ -84,12 +73,12 @@ const UserProfile = () => {
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 sm:p-6 sm:m-6 p-2 m-4'>
                 <form className='flex flex-col lg:flex-row items-start justify-center border-2 p-6'>
-                    <div className="avatar mr-5 mb-5 lg:mb-0 flex">
+                    {/* <div className="avatar mr-5 mb-5 lg:mb-0 flex">
                         <div className="w-24 rounded-full">
                             <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt='' />
                         </div>
                         <FaPen className='text-gray-500'></FaPen>
-                    </div>
+                    </div> */}
                     <div>
                         <input type="text" placeholder='Name' value={currentUser.user.name} className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
 
@@ -107,48 +96,32 @@ const UserProfile = () => {
 
 
 
-                        <select name="" id="" className='w-full p-3 shadow-md mb-2 text-gray-400 select select-accent'>
-                            <option value="" >Standerd</option>
-                            <option value="" >7th</option>
-                            <option value="" >8th</option>
-                            <option value="" >9th</option>
-                            <option value="" >10th</option>
-                        </select>
 
-                        {/* <select name="" id="" className='w-full p-3 shadow-md mb-2 text-gray-400 select select-accent'>
-                            <option value="" >Profession</option>
-                            <option value="" >Developer</option>
-                            <option value="" >Engineer</option>
-                        </select>
-                        <select name="" id="" className='w-full p-3 shadow-md mb-2 text-gray-400 select select-accent'>
-                            <option value="" >Institute</option>
-                            <option value="" >School</option>
-                            <option value="" >College</option>
-                        </select>
-                        <input type="text" placeholder='Division' className='w-full p-3 input input-bordered shadow-md mb-2 text-black' /> */}
                     </div>
 
                 </form>
 
 
-                <div className='text-black border-2 p-6'>
-                    <h4 className='text-sm uppercase text-center scroll-m-3 scroll-auto'>Submissions</h4>
+                <div className='text-black h-[50vh] border-2 md:p-6 px-2 py-3 overflow-y-scroll'>
+                    <h4 className='text-sm uppercase text-center scroll-m-3 mb-3 '>Submissions</h4>
 
 
 
                     {
                         myQuizSubmission.map((quiz) => (
-                            <div className="border-2 flex justify-between items-center px-4 py-3 m-1 text-gray-400">
-                                <h3>{quiz[0]?.title}</h3>
-                                <div className="flex justify-center items-center gap-4">
-                                    <h2>{quiz[1]}/{quiz[0].questions.length}</h2>
-                                    <button onClick={() => handleShowQuiz(quiz[0]?._id)} className=" inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                            <div className="border-2 flex text-sm justify-between items-center  px-4 py-3 gap-x-3 text-gray-700">
+                                <span className='w-1/2'>{quiz?.quizTitle}</span>
+                                <div className="flex   justify-center items-center gap-4">
+
+                                    <p>{quiz?.timestamp?.slice(0, -14)}</p>
+                                    <h2>{quiz?.points}/{quiz?.answers?.length}</h2>
+                                    {/* <button onClick={() => handleShowQuiz(quiz[0]?._id)} className=" inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
                                         <span className=" px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                                             view
                                         </span>
-                                    </button>
+                                    </button> */}
 
-                                    {show && <QuizModal currentQuiz={currentQuiz} setShow={setShow} />}
+                                    {/* {show && <QuizModal currentQuiz={currentQuiz} setShow={setShow} />} */}
 
                                 </div>
 

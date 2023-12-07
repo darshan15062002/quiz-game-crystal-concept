@@ -1,11 +1,12 @@
 import axios from "axios"
 import { server } from "./quizApi"
 
-export const submitQuiz = async (currentQuizId, selectedOptions, computedPoints) => {
+export const submitQuiz = async (currentQuizId, title, selectedOptions, computedPoints) => {
     try {
         const res = await axios.post(`${server}/quiz/submission`, {
 
             quizId: currentQuizId,
+            quizTitle: title,
             answers: selectedOptions,
             points: computedPoints
         }, {

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './PlayQuiz.css'
 import image from '../../assets/hero2.png'
+import ideabg7 from '../../assets/ideabg7.png'
 import { getSingleQuiz, handleGetAllVisibleQuiz } from '../../api/quizApi'
 import { QuizCard } from '../../Components/Pages/QuizCard/QuizCard'
 import { Quiz } from '../../Components/Pages/Quiz/Quiz'
 import { getMySingleSubmitedQuiz, submitQuiz } from '../../api/submissionApi'
+import QuizModal from '../../Components/Pages/QuizModal/QuizModal'
 
 const PlayQuiz = () => {
 
@@ -13,7 +15,8 @@ const PlayQuiz = () => {
 
 
     const [quizs, setQuizs] = useState([]);
-    const [questions, setQuestions] = useState([]);
+    const [questions, setQuestions] = useState({});
+    const [title, setTitle] = useState('')
     const [count, setCount] = useState(0)
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [point, setPoint] = useState(0)
@@ -23,13 +26,11 @@ const PlayQuiz = () => {
     const [showAns, setShowAns] = useState(false)
     const [loading, setLoading] = useState(false)
     const [open, setOpen] = useState(false)
-    // const currentDate = new Date()
+
 
     useEffect(() => {
         // Fetch all quiz
         handleGetAllVisibleQuiz().then((data) => {
-            // const newData = data.filter((item) => currentDate.getTime() >= new Date(item?.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)
-            //     && currentDate.getTime() <= new Date(item?.startDate).getTime() + 24 * 60 * 60 * 1000 - (5 * 60 * 60 * 1000 + 30 * 60 * 1000))
             setQuizs(data)
         }).catch((err) => console.log(err))
     }, [])
@@ -41,8 +42,8 @@ const PlayQuiz = () => {
         console.log(res);
         if (!res) {
             getSingleQuiz(id).then((res) => {
-
-                setQuestions(res.data.quiz.questions)
+                setTitle(res?.data?.quiz?.title)
+                setQuestions(res?.data?.quiz?.questions)
             });
 
             setOpen(true)
@@ -75,7 +76,7 @@ const PlayQuiz = () => {
             setPoint(computedPoints);
             setWrongAnswers(questions.length - computedPoints);
             setLoading(true);
-            await submitQuiz(currentQuizId, selectedOptions, computedPoints).then((res) => {
+            await submitQuiz(currentQuizId, title, selectedOptions, computedPoints).then((res) => {
                 if (res?.data?.success) {
                     alert('Quiz submitted successfully')
                     setResultShow(true)
@@ -122,21 +123,33 @@ const PlayQuiz = () => {
 
 
 
-    return (<div className="flex flex-col  w-screen gap-3 pt-20 justify-center items-center">
+    return (<div className="mt-16   flex flex-col  w-screen gap-3 justify-center items-center">
         <h2 className=" rounded-lg p-3 text-black text-3xl  font-bold text-center">
             Daily Quiz
         </h2>
-        <div className=" flex justify-center gap-y-4 items-center px-4 w-full   flex-wrap ">
+
+        <div className=" flex justify-center    gap-y-4 overflow-y-scroll items-center px-4 w-full   flex-wrap ">
+
             {resultShow === false && open === false && quizs?.map((item) => (
+
+
                 <QuizCard item={item} handlePlay={handlePlay} />
             ))}
             {
                 resultShow === false && open === true && questions && (
-                    <Quiz loading={loading} questions={questions} count={count} handleNext={handleNext} handlePrev={handlePrev} selectedOptions={selectedOptions} handleOptionChange={handleOptionChange} />
+                    <Quiz loading={loading} questions={questions} title={title} count={count} handelClose={() => {
+                        setResultShow(false)
+                        setWrongAnswers(0)
+                        setPoint(0)
+                        setOpen(false)
+                        setSelectedOptions([])
+                        setShowAns(false)
+                        setQuestions([])
+                    }} handleNext={handleNext} handlePrev={handlePrev} selectedOptions={selectedOptions} handleOptionChange={handleOptionChange} />
                 )
             }
             {
-                resultShow === true && (<div className='flex flex-col gap-3 sm:w-96  w-full  '><div className='sm:w-96  w-full relative h-80  border-2 mx-2 rounded-lg flex flex-col gap-3 items-center justify-center rounded-t-none text-center  bg-white'>
+                resultShow === true && showAns === false && (<div className='flex flex-col gap-3 sm:w-96  w-full  '><div className='sm:w-96  w-full relative h-80  border-2 mx-2 rounded-lg flex flex-col gap-3 items-center justify-center rounded-t-none text-center  bg-white'>
                     <h1 className='text-black'>Quiz  submitted successfully 👏👏
                     </h1>
                     <h3>Total Points : {point}</h3>
@@ -150,39 +163,24 @@ const PlayQuiz = () => {
                             setSelectedOptions([])
                             setShowAns(false)
                         }}> Go Back</button>
-                        {/* <button className='bg-green-400 w-fit text-white p-2 ' onClick={() => { setShowAns(prev => !prev) }}> Show Answer</button> */}
+                        <button className='bg-green-400 w-fit text-white p-2 ' onClick={() => { setShowAns(prev => !prev) }}> Show Answer</button>
                     </div>
                 </div>
 
-                    {/* {showAns &&
-                        <div className='sm:w-96  w-full  h-80  border-2 mx-2 rounded-lg flex flex-col gap-3  rounded-t-none text-center  bg-white'>
-                            {questions?.map((question) => (
-                                <div className="w-full p-10">
-                                    <h1 className='text-black text-left'><b>{count + 1}{")  "}{question?.text}</b></h1>
-                                    <div className="answer">
 
-                                        {
-                                            question?.answers?.map((item, index) => (
-                                                <div className='text-black flex gap-4'>
-                                                    <input type="radio" name="answer" id={"answer"} value={item} checked={selectedOptions[count] === index} onChange={(e) => handleOptionChange(index, item)} />
-                                                    <div key={index}>{item}</div>
-                                                </div>
-                                            ))
-                                        }
-
-
-
-                                    </div>
-                                </div>
-                            ))}
-
-
-                        </div>
-
-                    } */}
 
                 </div>)
             }
+
+            {showAns &&
+                (
+                    <QuizModal title={title} questions={questions} setShowAns={setShowAns} setResultShow={setResultShow} count={count} selectedOptions={selectedOptions} handleNext={handleNext} handlePrev={handlePrev} />
+
+                )
+            }
+
+
+
         </div>
     </div>
 

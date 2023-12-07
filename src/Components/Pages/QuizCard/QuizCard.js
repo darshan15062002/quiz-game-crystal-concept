@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 export const QuizCard = ({ item, handlePlay }) => {
     return (
-        <div className="sm:w-96 py-8 px-10 rounded-lg bg-slate-300 mx-2  flex flex-col justify-center gap-4 " key={item._id}>
+        <div className="sm:w-96 md:py-8 md:px-10 px-6 py-5  rounded-lg bg-slate-300 mx-2  flex flex-col justify-center gap-2 " key={item._id}>
 
-            <h2 className="text-black text-center pt-5  font-bold  ">
+            <h2 className="text-black text-center pt-1  font-bold  ">
                 {item?.title}
             </h2>
             <p className="  text-gray-900 tracking-wide ">
@@ -21,7 +21,7 @@ export const QuizCard = ({ item, handlePlay }) => {
                 </p>
             </p>
 
-            <div className="flex justify-center gap-4 mb-6  text-xs font-medium">
+            <div className="flex justify-center gap-4   text-xs font-medium">
                 <Link className="text-gray-500 bg-slate-50 shadow-md  px-6 py-3">
                     Live
                 </Link>
