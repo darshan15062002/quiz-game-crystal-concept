@@ -1,19 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { BsFillCaretLeftFill } from "react-icons/bs";
-import { FaPen } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { loadUser, userLogout } from '../../api/authApi';
+import { loadUser, updateProfile, userLogout } from '../../api/authApi';
 import { getMyAllSubmitedQuiz } from '../../api/submissionApi';
-import { getSingleQuiz } from '../../api/quizApi';
-import QuizModal from '../../Components/Pages/QuizModal/QuizModal';
+
 
 const UserProfile = () => {
     const navigate = useNavigate()
     const { currentUser, setCurrentUser } = useContext(AuthContext)
     const [myQuizSubmission, setMyQuizSubmission] = useState([])
-    const [show, setShow] = useState(false)
-    const [currentQuiz, setCurrentQuiz] = useState({})
+    const [formModified, setFormModified] = useState(false);
+    const [formValues, setFormValues] = useState({
+        name: currentUser?.user?.name,
+        phone: currentUser?.user?.phone,
+        location: currentUser?.user?.location || "",
+        std: currentUser?.user?.std || "",
+    });
+
+
 
 
 
@@ -36,12 +40,56 @@ const UserProfile = () => {
         })
 
     }
+    const debounce = (func, delay) => {
+        let timeoutId;
+        return (...args) => {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => func(...args), delay);
+        };
+    };
 
-    const handleShowQuiz = (id) => {
-        setShow(true)
-        setCurrentQuiz(myQuizSubmission.find(q => q[0]._id === id))
+    const handleFieldChange = (fieldName, value) => {
+        setFormValues((prevValues) => ({
+            ...prevValues,
+            [fieldName]: value,
+        }));
 
-    }
+        // Set the form modification state after a delay (e.g., 300 milliseconds)
+        debounce(() => {
+            setFormModified(true);
+        }, 300)();
+    };
+
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        updateProfile(formValues.name, formValues.phone, formValues.std, formValues.location).then((res) => {
+            alert(res.message);
+            loadUser().then((data) => {
+                if (data?.success) {
+                    setCurrentUser({ user: data?.user, isAuthenticated: true })
+                }
+                else {
+                    setCurrentUser({ isAuthenticated: false })
+                }
+                setFormModified(false)
+            })
+        }).catch((err) => { console.log(err); })
+
+    };
+
+    const handleCancel = (e) => {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        // Reset the form values and modification state
+        setFormValues({
+            name: currentUser?.user?.name,
+            phone: currentUser?.user?.phone,
+            location: currentUser?.user?.location || "",
+            std: currentUser?.user?.std || "",
+        });
+        setFormModified(false);
+    };
 
 
     useEffect(() => {
@@ -65,14 +113,11 @@ const UserProfile = () => {
     return (
         <>
             <div className="lg:px-36 pt-24 px-6 ">
-                {/* <div className='flex justify-start items-center text-gray-500 text-sm font-semibold underline'>
-                    <BsFillCaretLeftFill></BsFillCaretLeftFill>
-                    <Link to='/'>Back</Link>
-                </div>
-                <h2 className='text-3xl font-semibold mb-5 text-gray-700'>User Profile</h2> */}
+
+                <h2 className='text-3xl font-semibold mb-5 text-gray-700'>User Profile</h2>
             </div>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 sm:p-6 sm:m-6 p-2 m-4'>
-                <form className='flex flex-col lg:flex-row items-start justify-center border-2 p-6'>
+                <form className='flex flex-col md:flex lg:flex-row items-start justify-center border-2 p-6'>
                     {/* <div className="avatar mr-5 mb-5 lg:mb-0 flex">
                         <div className="w-24 rounded-full">
                             <img src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" alt='' />
@@ -80,7 +125,10 @@ const UserProfile = () => {
                         <FaPen className='text-gray-500'></FaPen>
                     </div> */}
                     <div>
-                        <input type="text" placeholder='Name' value={currentUser.user.name} className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
+                        <input type="text" placeholder='Name'
+                            onChange={(e) => handleFieldChange('name', e.target.value)}
+                            value={formValues.name}
+                            className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
 
                         <input
                             type="tel" maxlength="10" required
@@ -88,16 +136,48 @@ const UserProfile = () => {
                             placeholder="Phone No"
                             name="phone"
                             className='w-full p-3 input input-bordered shadow-md mb-2 text-black'
-
-                            value={currentUser.user.phone}
+                            onChange={(e) => handleFieldChange('phone', e.target.value)}
+                            value={formValues.phone}
                             autoComplete="off"
+                        />
+
+                        <input
+                            type="Number"
+                            placeholder="standard"
+                            maxlength="2"
+                            name="standard"
+                            className="w-full p-3 input input-bordered shadow-md mb-2 text-black"
+                            onChange={(e) => handleFieldChange('std', e.target.value)}
+                            value={formValues.std}
+                        />
+
+
+                        <input
+                            type="text"
+                            placeholder="city"
+                            name="location"
+                            className="w-full p-3 input input-bordered shadow-md mb-2 text-black"
+                            onChange={(e) => handleFieldChange('location', e.target.value)}
+                            value={formValues.location}
                         />
 
 
 
 
 
+
+
                     </div>
+
+                    {formModified && (
+                        <div className="flex justify-center items-center w-full mt-2 gap-4">
+                            <button onClick={handleCancel} className="border-1 border-black  text-black font-bold py-2 px-4 border  rounded">
+                                Cancel
+                            </button><button onClick={handleUpdate} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                                Update
+                            </button>
+                        </div>
+                    )}
 
                 </form>
 

@@ -17,9 +17,9 @@ export const userLogin = async ({ email, password }) => {
     }
 }
 
-export const userRegister = async ({ name, phone, password }) => {
+export const userRegister = async ({ name, phone, std, location, password }) => {
     try {
-        const res = await axios.post(`${server}/user/new`, { name, phone, password }, {
+        const res = await axios.post(`${server}/user/new`, { name, phone, std, location, password }, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -34,8 +34,24 @@ export const userRegister = async ({ name, phone, password }) => {
     }
 }
 
-export const updateProfile = async () => {
+export const updateProfile = async (name, phone, std, location) => {
+    try {
+        const res = await axios.put(`${server}/user/updateprofile`, {
+            name: name,
+            phone: phone,
+            std: std,
+            location: location
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        })
 
+        return res.data
+    } catch (error) {
+        return error.response.data
+    }
 }
 
 export const userLogout = async () => {
