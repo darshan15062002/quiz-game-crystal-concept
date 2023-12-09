@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1cabc0ce.css",
+    "main.js": "/static/js/main.d52b127d.js",
+    "static/media/ideabg7.png": "/static/media/ideabg7.f70c667058b316207c80.png",
+    "static/media/kindpng_2417758.png": "/static/media/kindpng_2417758.7efcbda9f5c97439eb23.png",
+    "static/media/ideabbg6.png": "/static/media/ideabbg6.6ecf63b76e2dd71c14b5.png",
+    "static/media/ideabg8.png": "/static/media/ideabg8.ae18c86924762137c712.png",
+    "static/media/ideabg4.png": "/static/media/ideabg4.99ac01571ccadf62f3a3.png",
+    "static/media/ideabg3.png": "/static/media/ideabg3.b8355f8f7f20d4744d96.png",
+    "static/media/ideabg2.png": "/static/media/ideabg2.dcaf64f2a62098dc8f93.png",
+    "static/media/cute-boy-explorer-using-a-magnifying-glass-free-vector-removebg-preview.png": "/static/media/cute-boy-explorer-using-a-magnifying-glass-free-vector-removebg-preview.f720d6dd1275d46038a7.png",
+    "static/media/ideabg5.png": "/static/media/ideabg5.29307f59bb4a7520b674.png",
+    "static/media/hero1.png": "/static/media/hero1.dd82fa56e6e09a579cf8.png",
+    "static/media/hero2.png": "/static/media/hero2.74b4d4e234d7519c1c86.png",
+    "static/media/kindpng_814925.png": "/static/media/kindpng_814925.bf82ec7d2ada3e5356eb.png",
+    "static/media/slick.svg": "/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/index.html",
+    "main.1cabc0ce.css.map": "/static/css/main.1cabc0ce.css.map",
+    "main.d52b127d.js.map": "/static/js/main.d52b127d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1cabc0ce.css",
+    "static/js/main.d52b127d.js"
+  ]
+}

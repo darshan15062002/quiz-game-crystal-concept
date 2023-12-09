@@ -80,3 +80,18 @@ export const loadUser = async () => {
         return error.response.data
     }
 }
+
+export const getAllUsers = async (page, query, search) => {
+    try {
+        let url = `${server}/user/all?page=${page}`;
+
+        if (query && search) {
+            url += `&${query}=${search}`;
+        }
+
+        const res = await axios.get(url, { withCredentials: true });
+        return res.data;
+    } catch (error) {
+        return error.response.data
+    }
+}

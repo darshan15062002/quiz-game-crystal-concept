@@ -1,18 +1,11 @@
-import { createBrowserRouter, Navigate, redirect, RouterProvider } from "react-router-dom";
-import Collaboration from "./Components/Pages/Collaboration/Collaboration";
-import Competition from "./Components/Pages/Competition/Competition";
-import Discussion from "./Components/Pages/Discussion/Discussion";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home/Home";
-import Ide from "./Components/Pages/Ide/Ide";
 import Login from "./pages/Login/Login";
-import Problem from "./Components/Pages/Problem/Problem";
 import Signup from "./pages/Signup/Signup";
 import UserProfile from "./pages/UserProfile/UserProfile";
-import AddQuiz from "./pages/AddQuiz/AddQuiz";
+
 import PlayQuiz from "./pages/PlayQuiz/PlayQuiz";
-import ForgetPassword from "./Components/Pages/ForgetPassword/ForgetPassword";
 import Main from "./Layout/Main";
-import AdminRegistrationForm from "./Components/Pages/AdminRegistrationForm/AdminRegistrationForm";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { loadUser } from "./api/authApi";
@@ -20,6 +13,7 @@ import Nopage from "./pages/NoPage/Nopage";
 import Summarizer from "./pages/Summerizer/Summerizer";
 import { Search } from "./pages/Search/Search";
 import { Quizs } from "./pages/Quizs/Quizs";
+import Admin from "./pages/Admin/Admin";
 
 
 
@@ -77,28 +71,6 @@ function App() {
 					element: <ProtectedRoute><UserProfile></UserProfile></ProtectedRoute>,
 				},
 				{
-					path: "/collaboration",
-					element: <Collaboration></Collaboration>,
-				},
-				{
-					path: "/competition",
-					element: <Competition></Competition>,
-				},
-				{
-					path: "/discussion",
-					element: <Discussion></Discussion>,
-				},
-				{
-					path: "/ide",
-					element: <Ide></Ide>,
-				},
-
-				{
-					path: "/problems",
-					element: <Problem></Problem>,
-				},
-
-				{
 					path: "/playquiz",
 					element: <ProtectedRoute>
 						<PlayQuiz />
@@ -130,17 +102,10 @@ function App() {
 			path: "/signup",
 			element: <Signup></Signup>,
 		},
-		{
-			path: "/forgetpassword",
-			element: <ForgetPassword></ForgetPassword>,
-		},
-		// {
-		// 	path: "/admin",
-		// 	element: <AdminRegistrationForm></AdminRegistrationForm>,
-		// },
+
 		{
 			path: "/admin",
-			element: <AdminProtectedRoute><AddQuiz /></AdminProtectedRoute>,
+			element: <AdminProtectedRoute><Admin /></AdminProtectedRoute>,
 		},
 	]);
 	return (
