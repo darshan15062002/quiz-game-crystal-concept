@@ -4,7 +4,7 @@ export const Table = ({ users }) => {
 
     return (
 
-        <div className="overflow-y-scroll ">
+        <div className="overflow-y-scroll bg-white  no-scrollbar p-5 rounded-lg shadow-lg ">
             <table className=' w-full  border '>
                 <tr className='text-black  '>
                     <th className='border-r-2 px-3 py-2  border-b '>No.</th>

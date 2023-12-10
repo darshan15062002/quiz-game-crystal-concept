@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { createQuiz, handleGetAllQuiz, updateQuiz } from '../../../api/quizApi'
+import { createQuiz, deleteQuiz, handleGetAllQuiz, updateQuiz } from '../../../api/quizApi'
 import { useNavigate } from 'react-router-dom'
 import { AiFillDelete } from 'react-icons/ai'
 
@@ -8,10 +8,11 @@ export const AddQuiz = () => {
     const navigator = useNavigate()
     const [title, setTitle] = useState('')
     const [updateId, setUpdateId] = useState('')
-    const [startDate, setStartDate] = useState("")
+
+    const [std, setStd] = useState()
     const [button, setButton] = useState('Create Quiz')
     const [questions, setQuestions] = useState([{ text: '', answers: [], correctAnswer: '' }])
-
+    const [submissions, setSubmissions] = useState([])
 
 
 
@@ -22,17 +23,18 @@ export const AddQuiz = () => {
         setUpdateId(quiz?._id)
 
         setTitle(quiz?.title)
-        setStartDate(quiz?.startDate?.slice(0, -8))
+        setStd(quiz?.std)
         setQuestions(quiz?.questions)
 
     }
 
 
-    // const handleDeleteQuiz = async (id) => {
-    //     deleteQuiz(id).then((res) => {
-    //         alert(res.message);
-    //     });
-    // }
+    const handleDeleteQuiz = async (id) => {
+        deleteQuiz(id).then((res) => {
+            alert(res.message);
+            handleAllQuiz()
+        });
+    }
 
 
 
@@ -42,7 +44,7 @@ export const AddQuiz = () => {
             await updateQuiz(updateId, {
                 title: title,
                 questions,
-                startDate,
+                std: std,
             }).then((res) => {
                 alert("quiz updated successfully")
                 handleAllQuiz()
@@ -53,10 +55,10 @@ export const AddQuiz = () => {
             createQuiz({
                 title: title,
                 questions,
-                startDate,
+                std,
             }).then((data) => {
                 setTitle("")
-                setStartDate("")
+                setStd()
                 setQuestions([{ text: '', answers: [], correctAnswer: '' }])
                 alert(data.data.message)
                 handleAllQuiz()
@@ -93,7 +95,7 @@ export const AddQuiz = () => {
     const handleReset = () => {
         setTitle("")
         setButton('Create Quiz')
-        setStartDate()
+        setStd()
         setUpdateId('')
         setQuestions([{ text: '', answers: [], correctAnswer: '' }])
 
@@ -157,9 +159,10 @@ export const AddQuiz = () => {
     };
 
     const handleAllQuiz = () => {
-        handleGetAllQuiz().then((data) => {
-            console.log(data);
-            setQuizs(data)
+        handleGetAllQuiz().then((res) => {
+            setQuizs(res.quizs)
+            setSubmissions(res.docs)
+
         }).catch((err) => console.log(err))
     }
 
@@ -172,7 +175,7 @@ export const AddQuiz = () => {
 
     return (
 
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 border-2 sm:p-6 sm:m-6 p-1'>
+        <div className='grid rounded-lg shadow-lg mx-4   bg-white  grid-cols-1 lg:grid-cols-2 gap-4 border-2 sm:p-6 sm:m-6 p-1'>
 
 
 
@@ -184,16 +187,16 @@ export const AddQuiz = () => {
                         placeholder="Quiz Title"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)} required
-                        className='w-full p-3 input input-bordered border-black  mb-2 text-black ' />
+                        className='w-full p-3  bg-slate-50 input input-bordered border-black  mb-2 text-black ' />
                     <input
-                        type="datetime-local"
-                        placeholder="Date Of Start"
-                        value={startDate}  // Format as 'YYYY-MM-DDTHH:mm'
+                        type="text"
+                        placeholder="Std..."
+                        value={std}  // Format as 'YYYY-MM-DDTHH:mm'
                         onChange={(e) => {
-                            setStartDate(e.target.value)
+                            setStd(e.target.value)
                         }}
                         required
-                        className='w-full p-3 input input-bordered border-black mb-2 text-black'
+                        className='w-full bg-slate-50 p-3 input input-bordered border-black mb-2 text-black'
                     />
                 </div>
 
@@ -210,7 +213,7 @@ export const AddQuiz = () => {
                                 value={question.text}
                                 onChange={(e) => handleQuestionChange(e, index)}
                                 required
-                                className='w-full p-3 input input-bordered border-black  mb-2 text-black '
+                                className='w-full bg-slate-50 p-3 input input-bordered border-black  mb-2 text-black '
 
                             />
                             <textarea
@@ -220,7 +223,7 @@ export const AddQuiz = () => {
                                 value={question.answers?.join(',')}
                                 onChange={(e) => handleOptionsChange(e, index)}
                                 required
-                                className='w-full p-3 h-36 input input-bordered border-black  mb-2 text-black'
+                                className='w-full  bg-slate-50 p-3 h-36 input input-bordered border-black  mb-2 text-black'
                                 style={{ overflow: 'hidden', resize: 'none' }}
                             />
                             <input
@@ -230,7 +233,7 @@ export const AddQuiz = () => {
                                 value={question.correctAnswer}
                                 onChange={(e) => handleCorrectAnswerChange(e, index)}
                                 required
-                                className='w-full p-3 input input-bordered border-black  mb-2 text-black'
+                                className='w-full bg-slate-50 p-3 input input-bordered border-black  mb-2 text-black'
                             />
                         </div>))}
                 </div>
@@ -253,24 +256,26 @@ export const AddQuiz = () => {
 
                             return (
                                 <div key={item?._id}
-                                    className=" group/item flex justify-between items-center border-2 p-2"
+                                    className=" group/item rounded-lg bg-slate-50 flex justify-between items-center border-2 p-2"
 
                                 >
 
                                     <div className="flex justify-between text-xs sm:text-lg relative items-center w-full">
-                                        <h1 className='font-sans font-semibold'>{item?.title}</h1>
 
-                                        <span>{item?.startDate?.slice(0, -8)}</span>
+                                        <h1 className='font-sans w-1/2 text-sm'>{item?.title}</h1>
 
-                                        <div className="flex items-center  gap-1">
 
+
+                                        <div className="flex items-center  gap-5">
+                                            <span className='text-sm'>{submissions[index]}</span>
+                                            <span className='text-sm'>{item?.std} std</span>
                                             <button className="text-black p-2  " id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button">
                                                 <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                                                 </svg>
                                             </button>
 
-                                            <div id="dropdown" className=" group/item group-hover/item:visible invisible block right-0 top-10 absolute  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                            <div id="dropdown" className=" z-50 group/item group-hover/item:visible invisible block right-0 top-9 absolute  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                                 <ul class=" cursor-pointer py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                                     <li>
                                                         {item?.visibility ?
@@ -289,7 +294,7 @@ export const AddQuiz = () => {
                                                             Copy
                                                         </span>                                                         </li>
                                                     <li>
-                                                        <span className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' onClick={() => handleRemove(item?._id)}>
+                                                        <span className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' onClick={() => handleDeleteQuiz(item?._id)}>
                                                             DELETE
                                                         </span>                                                          </li>
                                                 </ul>

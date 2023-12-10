@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Quiz = ({ questions, title, count, handlePrev, handleNext, handelClose, selectedOptions, handleOptionChange, loading }) => {
     return (
-        <div className=" overflow-y-auto overflow-x-hidden bg-slate-50 bg-transparent/10 fixed flex top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div className=" overflow-y-auto overflow-x-hidden h-screen bg-slate-50 bg-transparent/10 fixed flex top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0">
             <div className="relative p-4 w-full max-w-2xl max-h-full">
 
                 <div className="relative bg-slate-300 rounded-lg shadow ">
@@ -21,12 +21,14 @@ export const Quiz = ({ questions, title, count, handlePrev, handleNext, handelCl
 
                     <div className='p-6 md:p-5 space-y-4' >
                         <h1 className='text-black text-left'><b>{count + 1}{")  "}{questions[count]?.text}</b></h1>
-                        <div className="answer">
+                        <div className="answer space-y-1">
 
                             {
                                 questions[count]?.answers?.map((item, index) => (
-                                    <div className='text-black border px-2 rounded-md border-black flex gap-4 '>
-                                        <input type="radio" name="answer" id={"answer"} value={item} checked={selectedOptions[count] === index + 1} onChange={(e) => handleOptionChange(index + 1, item)} />
+                                    <div
+                                        onClick={() => handleOptionChange(index + 1, item)}
+                                        className='text-black border cursor-pointer px-2 rounded-md border-black flex gap-4 '>
+                                        <input type="radio" name="answer" id={"answer"} value={item} checked={selectedOptions[count] === index + 1} />
                                         <div key={index}>{item}</div>
                                     </div>
                                 ))

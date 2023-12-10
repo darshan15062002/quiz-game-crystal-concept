@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 
 export const QuizCard = ({ item, handlePlay }) => {
     return (
-        <div className="sm:w-96 md:py-8 md:px-10 px-6 py-5  rounded-lg bg-slate-300 mx-2  flex flex-col justify-center gap-2 " key={item._id}>
+        <div className="md:w-96 w-full md:py-8 md:px-10 px-6 py-5  rounded-lg bg-slate-300 mx-2  flex flex-col justify-center gap-2 " key={item._id}>
 
             <h2 className="text-black text-center pt-1  font-bold  ">
                 {item?.title}
             </h2>
             <p className="  text-gray-900 tracking-wide ">
-                <b>Started At:</b> {new Date(new Date(item.startDate).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)).toLocaleString()}
+                <b>Started At:</b> {new Date(new Date(item?.createdAt).getTime() - (5 * 60 * 60 * 1000 + 30 * 60 * 1000)).toLocaleString()}
             </p>
             <p className="  text-gray-900 tracking-wide ">
 

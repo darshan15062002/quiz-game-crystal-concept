@@ -123,7 +123,7 @@ const PlayQuiz = () => {
 
 
 
-    return (<div className="mt-16   flex flex-col  w-screen gap-3 justify-center items-center">
+    return (<div className="mt-16   flex flex-col h-full  w-screen gap-3 justify-center items-center">
         <h2 className=" rounded-lg p-3 text-black text-3xl  font-bold text-center">
             Daily Quiz
         </h2>

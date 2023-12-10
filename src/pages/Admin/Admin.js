@@ -44,7 +44,7 @@ const Admin = () => {
 
 
     return (
-        <div>
+        <div className='bg-slate-200 h-full pb-6'>
             <div className="lg:px-24 pt-12 px-6  ">
                 <div className='flex justify-start items-center text-gray-500 text-sm font-semibold underline'>
                     <BsFillCaretLeftFill></BsFillCaretLeftFill>
@@ -54,7 +54,7 @@ const Admin = () => {
             </div>
             <div className="w-full mt-10 px-6 h-52 flex md:flex-row justify-between flex-col gap-10">
                 <div className="bg-blue-400 w-full shadow-lg p-4  rounded-lg h-full ">
-                    <h1 className='font-sans font-bold text-white text-2xl  '>No Of Student</h1>
+                    <h1 className='font-sans font-bold text-white text-2xl  '>Number Of Student</h1>
                     <span className='text-5xl text-white font-extrabold '>{noOfUsers}</span>
                 </div>
 
@@ -97,7 +97,7 @@ const Admin = () => {
                     </div>
                 </form>
                 {loading ? (
-                    <div className="flex flex-col gap-3  justify-center items-center ">
+                    <div className="flex flex-col gap-3 h-[90vh]  justify-center items-center ">
                         <div role="status">
                             <svg aria-hidden="true" class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-yellow-400" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor" />
