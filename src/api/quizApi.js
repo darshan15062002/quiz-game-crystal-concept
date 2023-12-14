@@ -76,4 +76,20 @@ export const getSingleQuiz = async (id) => {
     }
 }
 
+export const getGeneratedQuiz = async (text) => {
+    try {
+        const res = await axios.post(`${server}/quiz/generate`, { pdf_text: text }, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            'withCredentials': true
+        })
+
+        return res.data
+
+    } catch (error) {
+        console.log(error.response.data.message);
+    }
+}
+
 

@@ -132,6 +132,8 @@ const Admin = () => {
             </div>
             <AddQuiz className='bg-white' />
 
+
+
         </div>
     );
 };
