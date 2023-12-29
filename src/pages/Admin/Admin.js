@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
-import ideabg8 from '../../assets/ideabg8.png'
 import { BsFillCaretLeftFill } from 'react-icons/bs';
 import './AddQuiz.scss'
 import { useNavigate } from 'react-router-dom';
@@ -45,14 +43,8 @@ const Admin = () => {
 
     return (
         <div className='bg-slate-200 h-full pb-6'>
-            <div className="lg:px-24 pt-12 px-6  ">
-                <div className='flex justify-start items-center text-gray-500 text-sm font-semibold underline'>
-                    <BsFillCaretLeftFill></BsFillCaretLeftFill>
-                    <div className='text-lg cursor-pointer font-mono mb-5 text-gray-700' onClick={() => { navigate('/') }}>Back</div>
-                </div>
 
-            </div>
-            <div className="w-full mt-10 px-6 h-52 flex md:flex-row justify-between flex-col gap-10">
+            <div className="w-full pt-20 px-6 h-52 flex md:flex-row justify-between flex-col gap-10">
                 <div className="bg-blue-400 w-full shadow-lg p-4  rounded-lg h-full ">
                     <h1 className='font-sans font-bold text-white text-2xl  '>Number Of Student</h1>
                     <span className='text-5xl text-white font-extrabold '>{noOfUsers}</span>

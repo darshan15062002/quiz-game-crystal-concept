@@ -91,6 +91,10 @@ function App() {
 					path: "/search",
 					element: <Search />
 				},
+				{
+					path: "/admin",
+					element: <AdminProtectedRoute><Admin /></AdminProtectedRoute>,
+				},
 
 			],
 		},
@@ -103,10 +107,7 @@ function App() {
 			element: <Signup></Signup>,
 		},
 
-		{
-			path: "/admin",
-			element: <AdminProtectedRoute><Admin /></AdminProtectedRoute>,
-		},
+
 	]);
 	return (
 		<div>

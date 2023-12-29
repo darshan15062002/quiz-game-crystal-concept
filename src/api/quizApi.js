@@ -76,9 +76,9 @@ export const getSingleQuiz = async (id) => {
     }
 }
 
-export const getGeneratedQuiz = async (text) => {
+export const getGeneratedQuiz = async (text, noQuiz) => {
     try {
-        const res = await axios.post(`${server}/quiz/generate`, { pdf_text: text }, {
+        const res = await axios.post(`${server}/quiz/generate`, { pdf_text: text, noQue: noQuiz }, {
             headers: {
                 'Content-Type': 'application/json'
             },

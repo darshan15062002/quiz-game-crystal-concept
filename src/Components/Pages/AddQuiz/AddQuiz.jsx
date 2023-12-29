@@ -14,7 +14,7 @@ export const AddQuiz = () => {
     const [questions, setQuestions] = useState([{ text: '', answers: [], correctAnswer: '' }])
     const [submissions, setSubmissions] = useState([])
     const [loading, setLoading] = useState(false)
-
+    const [noQuiz, setNoQuiz] = useState(5)
 
 
     const handleUpdate = (quiz) => {
@@ -170,10 +170,13 @@ export const AddQuiz = () => {
 
 
     const handleGenerateQuiz = () => {
+
         setLoading(true)
-        getGeneratedQuiz(text).then((res) => {
+        getGeneratedQuiz(text, noQuiz).then((res) => {
+
             if (res.array) {
-                setQuestions(res?.array)
+
+                setQuestions((prev) => [...prev, ...res?.array])
             }
             else {
                 alert(res?.message)
@@ -269,9 +272,20 @@ export const AddQuiz = () => {
             </form>
 
 
-            <div className='text-gray-500 md:h-80   p-6 '>
+            <div className='text-gray-500 md:h-90    p-6 '>
                 <div className="flex justify-center items-center flex-col gap-y-3">
-
+                    <input
+                        type="number"
+                        id="noque"
+                        placeholder="No Of Quiz"
+                        value={noQuiz}
+                        onChange={(e) => {
+                            // setTextLength(e.target.value * 500);
+                            setNoQuiz(e.target.value);
+                        }}
+                        required
+                        className="w-full p-3  bg-slate-50 input input-bordered border-black  mb-2 text-black "
+                    />
                     <textarea
                         className='block p-2.5  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300'
                         id="pdf_text"
@@ -303,23 +317,23 @@ export const AddQuiz = () => {
 
                 </div>
                 <h2 className='text-sm uppercase text-center'>Previously added Quiz</h2>
-                <div className="flex flex-col overflow-y-scroll no-scrollbar gap-2">
+                <div className="flex flex-col overflow-y-scroll  no-scrollbar gap-2">
                     {quizs ? (
                         quizs?.map((item, index) => {
 
                             return (
                                 <div key={item?._id}
-                                    className=" group/item rounded-lg bg-slate-50 flex justify-between items-center border-2 p-2"
+                                    className=" relative   rounded-lg bg-slate-50 flex justify-between items-center border-2 p-2"
 
                                 >
 
-                                    <div className="flex justify-between text-xs sm:text-lg relative items-center w-full">
+                                    <div className="flex justify-between text-xs sm:text-lg  items-center w-full">
 
                                         <h1 className='font-sans w-1/2 text-sm'>{item?.title}</h1>
 
 
 
-                                        <div className="flex items-center  gap-5">
+                                        <div className="flex group/item items-center  gap-5">
                                             <span className='text-sm'>{submissions[index]}</span>
                                             <span className='text-sm'>{item?.std} std</span>
                                             <button className="text-black p-2  " id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button">
@@ -328,7 +342,7 @@ export const AddQuiz = () => {
                                                 </svg>
                                             </button>
 
-                                            <div id="dropdown" className=" z-50 group/item group-hover/item:visible invisible block right-0 top-9 absolute  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                            <div id="dropdown" className=" z-[99999]  group/item group-hover/item:visible invisible block right-0 top-9 absolute  bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                                                 <ul class=" cursor-pointer py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                                                     <li>
                                                         {item?.visibility ?
