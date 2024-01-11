@@ -224,7 +224,7 @@ export const AddQuiz = () => {
                     />
                 </div>
 
-                <div className=" overflow-y-scroll no-scrollbar  scroll-smooth h-80 scrollbar" >
+                <div className=" overflow-y-scroll   scroll-smooth h-80 scrollbar" >
                     {questions?.map((question, index) => (
                         <div key={index} className='' >
                             <div className="flex gap-3 items-center my-2 justify-between px-5">
@@ -272,7 +272,7 @@ export const AddQuiz = () => {
             </form>
 
 
-            <div className='text-gray-500 md:h-90    p-6 '>
+            <div className='text-gray-500 sm:h-80    p-6 '>
                 <div className="flex justify-center items-center flex-col gap-y-3">
                     <input
                         type="number"
@@ -317,7 +317,7 @@ export const AddQuiz = () => {
 
                 </div>
                 <h2 className='text-sm uppercase text-center'>Previously added Quiz</h2>
-                <div className="flex flex-col overflow-y-scroll  no-scrollbar gap-2">
+                <div className="flex flex-col overflow-y-scroll h-40   no-scrollbar gap-2">
                     {quizs ? (
                         quizs?.map((item, index) => {
 
