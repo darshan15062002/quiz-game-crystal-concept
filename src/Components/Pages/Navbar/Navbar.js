@@ -15,6 +15,7 @@ const Navbar = () => {
 
 
 
+
   const menuItem = (
     <>
       <li>
@@ -49,22 +50,6 @@ const Navbar = () => {
             <Link className='text-black' to="/signup">SIGNUP</Link>
           </li>
         </>)}
-      {/* <li>
-        <Link to="/problems">PROBLEMS</Link>
-      </li>
-      <li>
-        <Link to="/ide">IDE</Link>
-      </li>
-      <li>
-        <Link to="/competition">COMPETITION</Link>
-      </li>
-      <li>
-        <Link to="/discussion">DISCUSSION</Link>
-      </li>
-     
-      <li>
-        <Link to="/collaboration">COLLABORATION</Link>
-      </li> */}
 
 
     </>

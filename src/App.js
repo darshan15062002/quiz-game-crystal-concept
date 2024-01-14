@@ -43,19 +43,33 @@ const AdminProtectedRoute = ({ children }) => {
 
 
 function App() {
-	const { setCurrentUser } = useContext(AuthContext);
+	const { setCurrentUser, currentUser } = useContext(AuthContext);
 	const handleLoadUser = () => {
+		setCurrentUser({ isAuthenticated: false, loading: true })
 		loadUser().then((data) => {
+
 			if (data.success) {
-				setCurrentUser({ user: data.user, isAuthenticated: true })
+				setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
+			} else {
+				setCurrentUser({ isAuthenticated: false, loading: false })
+				alert(data.message)
 			}
 
-		}).catch((error) => console.log(error))
+		}).catch((error) => {
+
+			setCurrentUser({ isAuthenticated: false, loading: false })
+			alert("You are not authenticated")
+		})
 	}
+
+	console.log(currentUser);
+
 
 	useEffect(() => {
 		handleLoadUser()
 	}, []);
+
+
 	const router = createBrowserRouter([
 		{
 			path: "/",
@@ -109,6 +123,8 @@ function App() {
 
 
 	]);
+
+	if (currentUser.loading === true) return <div className="h-screen bg-black flex justify-center items-center">Loading....</div>
 	return (
 		<div>
 			<RouterProvider router={router}></RouterProvider>

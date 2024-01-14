@@ -33,15 +33,15 @@ const Signup = () => {
 			const res = await userRegister({ name, phone, std, location, password })
 			if (res?.data?.success) {
 				alert('Successfully registered')
+				setCurrentUser({ isAuthenticated: false, loading: true })
 				loadUser().then((data) => {
+
 					if (data.success) {
-						setCurrentUser({ user: data.user, isAuthenticated: true })
-					}
-					else {
-						setCurrentUser({ isAuthenticated: false })
+						setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
 					}
 
-				})
+				}).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }))
+
 				navigate("/")
 			} else {
 				console.log(res);

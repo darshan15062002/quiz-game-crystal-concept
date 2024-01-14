@@ -18,15 +18,16 @@ const Login = () => {
 		userLogin({ email, password }).then((res) => {
 			if (res.success) {
 				alert('login successful')
+				setCurrentUser({ isAuthenticated: false, loading: true })
 				loadUser().then((data) => {
+
 					if (data.success) {
-						setCurrentUser({ user: data.user, isAuthenticated: true })
-					}
-					else {
-						setCurrentUser({ isAuthenticated: false })
+						setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
 					}
 
-				}).catch((error) => console.log(error))
+				}).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }))
+
+
 				navigate("/")
 			} else {
 				alert("Wrong username or password")

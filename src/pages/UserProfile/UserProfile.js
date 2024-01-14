@@ -32,15 +32,15 @@ const UserProfile = () => {
                 alert(data?.message)
                 navigate("/")
 
+                setCurrentUser({ isAuthenticated: false, loading: true })
                 loadUser().then((data) => {
-                    if (data?.success) {
-                        setCurrentUser({ user: data?.user, isAuthenticated: true })
-                    }
-                    else {
-                        setCurrentUser({ isAuthenticated: false })
+
+                    if (data.success) {
+                        setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
                     }
 
-                }).catch((error) => console.log(error))
+                }).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }))
+
             }
         })
 
