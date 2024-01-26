@@ -45,7 +45,7 @@ const Signup = () => {
 				navigate("/")
 			} else {
 				console.log(res);
-				alert(res?.response?.data?.message)
+				// alert(res?.response?.data?.message)
 			}
 
 		}

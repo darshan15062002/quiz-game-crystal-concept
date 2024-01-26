@@ -11,7 +11,7 @@ const Navbar = () => {
   const { currentUser } = useContext(AuthContext)
 
 
-
+  if (currentUser.loading === true) return <div className=" bg-black flex justify-center items-center">Loading....</div>
 
 
 
@@ -43,12 +43,14 @@ const Navbar = () => {
             <Link className='text-black' to="/admin">ADMIN</Link>
           </li>}
         </div>) : (<>
+
           <li>
             <Link className='text-black' to="/login">LOGIN</Link>
           </li>
           <li>
             <Link className='text-black' to="/signup">SIGNUP</Link>
           </li>
+
         </>)}
 
 

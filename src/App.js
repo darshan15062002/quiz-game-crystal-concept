@@ -22,11 +22,14 @@ import Admin from "./pages/Admin/Admin";
 
 
 const ProtectedRoute = ({ children }) => {
+
 	const { currentUser } = useContext(AuthContext)
 
 	if (currentUser.isAuthenticated) return children
 
-	return
+
+	return <Login />
+
 
 }
 const AdminProtectedRoute = ({ children }) => {
@@ -44,21 +47,22 @@ const AdminProtectedRoute = ({ children }) => {
 
 function App() {
 	const { setCurrentUser, currentUser } = useContext(AuthContext);
+
 	const handleLoadUser = () => {
-		setCurrentUser({ isAuthenticated: false, loading: true })
+
 		loadUser().then((data) => {
 
 			if (data.success) {
 				setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
 			} else {
 				setCurrentUser({ isAuthenticated: false, loading: false })
-				alert(data.message)
+				// alert(data.message)
 			}
 
 		}).catch((error) => {
 
 			setCurrentUser({ isAuthenticated: false, loading: false })
-			alert("You are not authenticated")
+
 		})
 	}
 
@@ -124,7 +128,7 @@ function App() {
 
 	]);
 
-	if (currentUser.loading === true) return <div className="h-screen bg-black flex justify-center items-center">Loading....</div>
+
 	return (
 		<div>
 			<RouterProvider router={router}></RouterProvider>
