@@ -62,7 +62,7 @@ const Navbar = () => {
     <div className="navbar h-16 w-screen  shadow-md text-sm   bg-slate-100/60  fixed  z-20 top-0 start-0 border-b border-gray-200 ">
       <div className="flex sm:mx-24 mx-5  w-full h-full justify-between items-center ">
 
-        <Link to='/' className=' font-serif  mt-4 sm:text-2xl text-xl mb-5   font-extrabold' style={{ fontFamily: 'Poppins', color: '#2D80F6' }}>   Crystal <span className='text-[#09BD81]'>Concept</span></Link>
+        <Link to='/' className=' font-serif  mt-4 sm:text-2xl text-xl mb-5   font-extrabold' style={{ fontFamily: 'Poppins', color: '#262D4D' }}>   Crystal <span className='text-[#EB676A]'>Concept</span></Link>
 
         <div className=" hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{menuItem}</ul>
@@ -73,9 +73,9 @@ const Navbar = () => {
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
-              fill="#09BD81"
+              fill="#262D4D"
               viewBox="0 0 24 24"
-              stroke="#09BD81"
+              stroke="#262D4D"
             >
               <path
                 strokeLinecap="round"

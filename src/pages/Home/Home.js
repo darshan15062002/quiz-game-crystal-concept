@@ -20,10 +20,10 @@ const Home = () => {
 
 
 				<div
-					className="sm:px-28 px-8 relative h-[60vh] md:h-full  flex md:justify-between justify-start items-center sm:flex-row flex-col-reverse"
+					className="sm:px-28 px-8 relative h-[60vh] md:h-full  flex md:justify-between justify-center items-center sm:flex-row flex-col-reverse"
 					style={{ backgroundImage: `url(${ideabg6})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', }}
 				>
-					<div className="flex z-10 mb-5  bg-slate-100/60 p-4  rounded-md justify-center w-full items-start flex-col gap-y-0.5 ">
+					<div className="flex z-10 mb-5   p-4  rounded-md justify-center w-full sm:w-1/2 items-start flex-col gap-y-2 ">
 						<h1 className="text-start lg:text-5xl sm:font-extrabold text-xl font-bold text-black font-sans">
 							Empower Your Mind with Knowledge
 						</h1>
@@ -31,23 +31,27 @@ const Home = () => {
 							Embark on a Journey to Learning Excellence, Unleashing Possibilities Anytime, Anywhere.
 						</p>
 
-						<button className="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+						{/* <button className="relative inline-flex  items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
 							<span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
 								Learn more
 							</span>
-						</button>
+						</button> */}
+						<a href="#_" class="relative items-center justify-start inline-block px-5 py-2 overflow-hidden font-medium transition-all bg-[#EB676A] rounded-full hover:bg-white group">
+							<span class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
+							<span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#EB676A]">Learn more</span>
+						</a>
 
 
 					</div>
 
 					<img
 						src={hero}
-						className='sm:h-[90vh] h-full  absolute md:relative '
+						className='sm:h-[90vh] h-full hidden sm:block  absolute md:relative '
 						alt="h/ero"
 					/>
 
 				</div>
-				<h1 className="text-start lg:text-4xl  border-blue-500 border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans">
+				<h1 className="text-start lg:text-4xl  border-[#212b60] border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans">
 					Join Us
 				</h1>
 
@@ -84,10 +88,10 @@ const Home = () => {
 
 
 
-				<h1 className="text-start lg:text-4xl  border-blue-500 border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans">
+				<h1 className="text-start lg:text-4xl  border-[#212b60] border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans">
 					Features
 				</h1>
-				<section className=" bg-slate-100 sm:px-28 px-8 py-5 h-full flex-col gap-y-20     flex  w-full justify-between items-center">
+				<section className="  sm:px-28 px-8 py-5 h-full flex-col gap-y-20     flex  w-full justify-between items-center">
 
 					<Feature
 						ideabg={ideabg2}
@@ -128,7 +132,7 @@ const Home = () => {
 
 
 
-				<footer className="footer footer-center p-4 bg-base-300 text-base-content">
+				<footer className="footer footer-center p-4 bg-[#20284c] text-base-content">
 					<aside>
 						<p>Copyright © 2023 - All right reserved by CC </p>
 					</aside>
