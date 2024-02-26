@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import loginImg from "../../assets/kindpng_2417758.png";
+import loginImg from "../../assets/kindpng_814925.png";
 // import footerImg from "../../../assets/footer.png";
 import { Link, useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
@@ -54,15 +54,15 @@ const Signup = () => {
 
 	return (
 		<div className="flex flex-row items-center justify-center pb-32 pl-32 min-h-screen  pt-16 signup_login_main">
-			{/* <div className="alert_box">{alertMsg}</div> */}
+
 			<Link to="/" className="cross">
 				<ImCross className="absolute top-8 lg:flex right-8 text-orange-600"></ImCross>
 			</Link>
-			<div className="sm:w-1/2 w-full px-10">
+			<div className="md:w-1/2  w-full px-20">
 				<form onSubmit={handleSubmit}>
 					<div className="mb-5">
 						<h1 className="text-2xl lg:text-3xl font-medium ">
-							Welcome To <Link to='/' className='text-white font-serif  mt-4 sm:text-2xl text-2xl mb-5   font-extrabold' style={{ fontFamily: 'Poppins', color: '#2D80F6' }}>Crystal <span className='text-[#09BD81]'>Concept</span></Link>
+							Welcome To <Link to='/' className=' font-serif  mt-4 sm:text-3xl text-2xl mb-5   font-extrabold' style={{ fontFamily: 'Poppins', color: '#262D4D' }}>   Crystal <span className='text-[#EB676A]'>Concept</span></Link>
 						</h1>
 						<p className="text-gray-500 font-semibold">
 							Create your account
@@ -148,7 +148,7 @@ const Signup = () => {
 					</div>
 					<div className="form-control mt-6">
 						<button
-							className="button_t btn btn-success text-white text-center"
+							className="btn bg-[#EB676A] text-white button_t"
 							type="submit"
 						>
 							Register
@@ -164,8 +164,8 @@ const Signup = () => {
 					</Link>
 				</p>
 			</div>
-			<div className="w-full flex justify-center items-center">
-				<img className="w-[75%]" src={loginImg} alt="" />
+			<div className="md:w-1/2 w-full  flex">
+				<img className="" src={loginImg} alt="" />
 			</div>
 		</div>
 		/* <img
