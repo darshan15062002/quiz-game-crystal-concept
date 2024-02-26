@@ -14,6 +14,7 @@ import Summarizer from "./pages/Summerizer/Summerizer";
 import { Search } from "./pages/Search/Search";
 import { Quizs } from "./pages/Quizs/Quizs";
 import Admin from "./pages/Admin/Admin";
+import RequestTutor from "./pages/RequestTotor/RequestTutor";
 
 
 
@@ -83,6 +84,10 @@ function App() {
 				{
 					path: "/",
 					element: <Home></Home>,
+				},
+				{
+					path: "/requesttutor",
+					element: <RequestTutor />
 				},
 				{
 					path: "/profile",

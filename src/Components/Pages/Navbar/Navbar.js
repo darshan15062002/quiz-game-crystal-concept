@@ -18,26 +18,28 @@ const Navbar = () => {
 
   const menuItem = (
     <>
-      <li>
+      {/* <li>
         <Link className='text-black' to="/">HOME</Link>
-      </li>
-      <li>
-        <Link className='text-black' to="/search">SEARCH</Link>
-      </li>
+      </li> */}
+
 
 
       {currentUser?.isAuthenticated ?
         (<div className='flex lg:flex-row flex-col'>
           <li>
-            <Link className='text-black' to="/profile">PROFILE</Link>
+            <Link className='text-black' to="/playquiz">PLAY QUIZ</Link>
           </li>
           <li>
-            <Link className='text-black' to="/playquiz">PLAY QUIZ</Link>
+            <Link className='text-black' to="/search">SEARCH</Link>
           </li>
 
           <li>
             <Link className='text-black' to="/summarizer">SUMMARIZER</Link>
           </li>
+          <li>
+            <Link className='text-black' to="/profile">PROFILE</Link>
+          </li>
+
 
           {currentUser?.user?.role === "admin" && <li>
             <Link className='text-black' to="/admin">ADMIN</Link>
@@ -45,11 +47,15 @@ const Navbar = () => {
         </div>) : (<>
 
           <li>
-            <Link className='text-black' to="/login">LOGIN</Link>
+            <Link className='text-black  ' to="/login">LOGIN / SIGNUP</Link>
           </li>
-          <li>
-            <Link className='text-black' to="/signup">SIGNUP</Link>
-          </li>
+          <a href="/requesttutor" class="relative items-center justify-center flex  px-5 py-2 overflow-hidden font-medium transition-all bg-[#EB676A] rounded-full hover:bg-white group">
+            <span class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
+            <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#EB676A]">REQUEST A TUTOR</span>
+          </a>
+
+
+
 
         </>)}
 

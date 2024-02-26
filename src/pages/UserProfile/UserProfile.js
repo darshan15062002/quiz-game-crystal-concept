@@ -38,6 +38,10 @@ const UserProfile = () => {
                     if (data.success) {
                         setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
                     }
+                    else {
+                        setCurrentUser({ isAuthenticated: false, loading: false })
+
+                    }
 
                 }).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }))
 
@@ -237,7 +241,7 @@ const UserProfile = () => {
 
 
                     {
-                        myQuizSubmission.map((quiz) => (
+                        myQuizSubmission?.map((quiz) => (
                             <div className="border-2 flex text-sm justify-between items-center  px-4 py-3 gap-x-3 text-gray-700">
                                 <span className='w-1/2'>{quiz?.quizTitle}</span>
                                 <div className="flex   justify-center items-center gap-4">
