@@ -95,3 +95,30 @@ export const getAllUsers = async (page, query, search) => {
         return error.response.data
     }
 }
+
+export const sendOTP = async (phone) => {
+    try {
+        const res = await axios.post(`${server}/user/forgetpassword`, { phone }, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+        return res.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+export const resetPassword = async (otp, password) => {
+    try {
+
+        const res = await axios.put(`${server}/user/forgetpassword`, { otp, password }, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        return res.data;
+    } catch (error) {
+        return error.response.data;
+    }
+};

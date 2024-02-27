@@ -15,6 +15,7 @@ import { Search } from "./pages/Search/Search";
 import { Quizs } from "./pages/Quizs/Quizs";
 import Admin from "./pages/Admin/Admin";
 import RequestTutor from "./pages/RequestTotor/RequestTutor";
+import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 
 
 
@@ -128,6 +129,10 @@ function App() {
 		{
 			path: "/signup",
 			element: <Signup></Signup>,
+		},
+		{
+			path: "/forgetpassword",
+			element: <ForgetPassword />,
 		},
 
 

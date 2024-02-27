@@ -128,7 +128,8 @@ input[type="checkbox"]:checked {
 
 @media (max-width: 700px) {
 	.signup_login_main {
-		padding: 0;
+		padding: 30px;
+		row-gap: 40px;
 		flex-direction: column-reverse;
 	}
 	.hero_img {
