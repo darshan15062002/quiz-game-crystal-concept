@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { getAllUsers } from '../../api/authApi';
 import { AddQuiz } from '../../Components/Pages/AddQuiz/AddQuiz';
 import { Table } from '../../Components/Pages/Table/Table';
+import Sidebar from '../../Components/Pages/Sidebar/Sidebar';
+import AdminMain from '../../Layout/AdminMain';
 
 
 const Admin = () => {
@@ -42,16 +44,12 @@ const Admin = () => {
 
 
     return (
-        <div className='bg-slate-200 h-full pb-6'>
+        <div className='bg-slate-200 flex h-full pb-6'>
 
-            <div className="w-full pt-20 px-6 h-52 flex md:flex-row justify-between flex-col gap-10">
-                <div className="bg-blue-400 w-full shadow-lg p-4  rounded-lg h-full ">
-                    <h1 className='font-sans font-bold text-white text-2xl  '>Number Of Student</h1>
-                    <span className='text-5xl text-white font-extrabold '>{noOfUsers}</span>
-                </div>
-
-            </div>
-            <div className='w-full px-6 py-10 h-full '>
+            <Sidebar/>
+            <div className='flex-6'>
+<AdminMain/>
+<div className='w-full px-6 py-10 h-full '>
                 <form className='  mb-10  w-full mx-2 flex justify-center items-center   '>
                     <div className=" relative group/item ">
                         <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex gap-3  z-10  items-center py-4 rounded-l-md px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border  rounded-s-lg  " type="button">{query}
@@ -127,6 +125,8 @@ const Admin = () => {
 
 
         </div>
+            </div>
+
     );
 };
 

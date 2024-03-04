@@ -115,10 +115,7 @@ function App() {
 					path: "/search",
 					element: <Search />
 				},
-				{
-					path: "/admin",
-					element: <AdminProtectedRoute><Admin /></AdminProtectedRoute>,
-				},
+				
 
 			],
 		},
@@ -133,6 +130,10 @@ function App() {
 		{
 			path: "/forgetpassword",
 			element: <ForgetPassword />,
+		},
+		{
+			path: "/admin",
+			element: <AdminProtectedRoute><Admin /></AdminProtectedRoute>,
 		},
 
 
