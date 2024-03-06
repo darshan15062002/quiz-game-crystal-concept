@@ -199,11 +199,14 @@ export const AddQuiz = () => {
 
     return (
 
-        <div className='grid rounded-lg shadow-lg mx-4   bg-white  grid-cols-1 lg:grid-cols-2 gap-4 border-2 sm:p-6 sm:m-6 p-1'>
-
+        <div className='grid rounded-lg shadow-lg mx-4 mt-20   bg-white  grid-cols-1 lg:grid-cols-2 gap-4 border-2 sm:p-6 sm:m-6 p-1'>
 
 
             <form onSubmit={handleCreateQuiz} className='flex md:border-r-4 md:border-b-0 border-b-4  p-6 flex-col gap-5 items-start justify-center '>
+                <div className="lg:px-24 px-6  ">
+                    <h2 className='text-3xl font-semibold mb-5 text-gray-700'>Create Quiz</h2>
+                </div>
+
                 <div className="flex justify-between items-center text-center gap-5  w-full">
                     <input
                         type="text"

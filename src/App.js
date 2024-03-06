@@ -16,6 +16,12 @@ import { Quizs } from "./pages/Quizs/Quizs";
 import Admin from "./pages/Admin/Admin";
 import RequestTutor from "./pages/RequestTotor/RequestTutor";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import Navbar from "./Components/Pages/Navbar/Navbar";
+import Users from "./pages/Users/Users";
+import Students from "./pages/Students/Students";
+import { AddQuiz } from "./Components/Pages/AddQuiz/AddQuiz";
+import Teachers from "./pages/Teachers/Teachers";
 
 
 
@@ -115,7 +121,7 @@ function App() {
 					path: "/search",
 					element: <Search />
 				},
-				
+
 
 			],
 		},
@@ -134,6 +140,29 @@ function App() {
 		{
 			path: "/admin",
 			element: <AdminProtectedRoute><Admin /></AdminProtectedRoute>,
+			children: [
+				{
+					path: "/admin",
+					element: <AdminDashboard />
+				},
+				{
+					path: "/admin/users",
+					element: <Users />
+				}
+				,
+				{
+					path: "/admin/students",
+					element: <Students />
+				},
+				{
+					path: "/admin/quizs",
+					element: <AddQuiz />
+				},
+				{
+					path: "/admin/teachers",
+					element: <Teachers />
+				}
+			]
 		},
 
 
