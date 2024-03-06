@@ -1,43 +1,82 @@
 export const userInputs = [
     {
         id: 1,
-        label: "Username",
+        label: "First Name",
         type: "text",
         placeholder: "john_doe",
     },
     {
         id: 2,
-        label: "Name and surname",
+        label: "Last Name",
         type: "text",
         placeholder: "John Doe",
     },
+   
     {
         id: 3,
-        label: "Email",
-        type: "mail",
-        placeholder: "john_doe@gmail.com",
-    },
-    {
-        id: 4,
         label: "Phone",
-        type: "text",
+        type: "tel",
         placeholder: "+1 234 567 89",
     },
     {
-        id: 5,
-        label: "Password",
-        type: "password",
-    },
-    {
-        id: 6,
+        id: 4,
         label: "Address",
         type: "text",
         placeholder: "Elton St. 216 NewYork",
     },
     {
-        id: 7,
-        label: "Country",
+        id: 5,
+        label: "Standard",
         type: "text",
-        placeholder: "USA",
+        placeholder: "Enter your Standard",
+    },
+    {
+        id: 5,
+        label: "Joining Date",
+        type: "Date",
+        placeholder: "",
+    },
+];
+
+
+
+export const teacherInputs = [
+    {
+        id: 1,
+        label: "First Name",
+        type: "text",
+        placeholder: "john_doe",
+    },
+    {
+        id: 2,
+        label: "Last Name",
+        type: "text",
+        placeholder: "John Doe",
+    },
+    {
+        id: 6,
+        label: "Email",
+        type: "text",
+        placeholder: "Enter your Email",
+    },
+   
+    {
+        id: 3,
+        label: "Phone",
+        type: "tel",
+        placeholder: "+1 234 567 89",
+    },
+    {
+        id: 4,
+        label: "Address",
+        type: "text",
+        placeholder: "Elton St. 216 NewYork",
+    },
+   
+    {
+        id: 5,
+        label: "Joining Date",
+        type: "Date",
+        placeholder: "",
     },
 ];

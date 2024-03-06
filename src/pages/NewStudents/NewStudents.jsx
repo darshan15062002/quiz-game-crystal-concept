@@ -5,55 +5,13 @@ import { useState } from "react";
 
 
 
-const NewStudents = ({ title }) => {
-    const inputs = [
-        {
-            id: 1,
-            label: "Username",
-            type: "text",
-            placeholder: "john_doe",
-        },
-        {
-            id: 2,
-            label: "Name and surname",
-            type: "text",
-            placeholder: "John Doe",
-        },
-        {
-            id: 3,
-            label: "Email",
-            type: "mail",
-            placeholder: "john_doe@gmail.com",
-        },
-        {
-            id: 4,
-            label: "Phone",
-            type: "text",
-            placeholder: "+1 234 567 89",
-        },
-        {
-            id: 5,
-            label: "Password",
-            type: "password",
-        },
-        {
-            id: 6,
-            label: "Address",
-            type: "text",
-            placeholder: "Elton St. 216 NewYork",
-        },
-        {
-            id: 7,
-            label: "Country",
-            type: "text",
-            placeholder: "USA",
-        },
-    ];
+const NewStudents = ({inputs, title }) => {
+   
 
     const [file, setFile] = useState("");
 
     return (
-        <div className="new">
+        <div className="new pt-16">
 
             <div className="newContainer">
 
@@ -61,7 +19,7 @@ const NewStudents = ({ title }) => {
                     <h1>{title}</h1>
                 </div>
                 <div className="bottom">
-                    <div className="left">
+                    {/* <div className="left">
                         <img
                             src={
                                 file
@@ -70,10 +28,10 @@ const NewStudents = ({ title }) => {
                             }
                             alt=""
                         />
-                    </div>
+                    </div> */}
                     <div className="right">
-                        <form>
-                            <div className="formInput">
+                        <form className="flex flex-col sm:flex-row ">
+                            {/* <div className="formInput ">
                                 <label htmlFor="file">
                                     Image: <DriveFolderUploadOutlinedIcon className="icon" />
                                 </label>
@@ -83,10 +41,10 @@ const NewStudents = ({ title }) => {
                                     onChange={(e) => setFile(e.target.files[0])}
                                     style={{ display: "none" }}
                                 />
-                            </div>
+                            </div> */}
 
                             {inputs?.map((input) => (
-                                <div className="formInput" key={input.id}>
+                                <div className="formInput w-full md:w-[40%]" key={input.id}>
                                     <label>{input.label}</label>
                                     <input type={input.type} placeholder={input.placeholder} />
                                 </div>

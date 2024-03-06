@@ -14,12 +14,12 @@ const Teachers = () => {
             headerName: "User",
             width: 230,
             renderCell: (params) => {
-                return (
-                    <div className="cellWithImg">
-                        <img className="cellImg" src={params.row.img} alt="avatar" />
-                        {params.row.username}
-                    </div>
-                );
+                // return (
+                    // <div className="cellWithImg">
+                    //     <img className="cellImg" src={params.row.img} alt="avatar" />
+                    //     {params.row.username}
+                    // </div>
+                // ); 
             },
         },
         {
@@ -162,8 +162,8 @@ const Teachers = () => {
     return (
         <div className="datatable  pt-20">
             <div className="datatableTitle">
-                Add New User
-                <Link to="/users/new" className="link">
+                Add New Teacher
+                <Link to="/admin/teachers/new" className="link">
                     Add New
                 </Link>
             </div>
