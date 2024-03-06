@@ -10,32 +10,32 @@ const Students = () => {
     const userColumns = [
         { field: "id", headerName: "ID", width: 70 },
         {
-            field: "user",
-            headerName: "User",
+            field: "username",
+            headerName: "Name",
             width: 230,
-            renderCell: (params) => {
-                return (
-                    <div className="cellWithImg">
-                        <img className="cellImg" src={params.row.img} alt="avatar" />
-                        {params.row.username}
-                    </div>
-                );
-            },
+            // renderCell: (params) => {
+            //     return (
+            //         <div className="cellWithImg">
+            //             {/* <img className="cellImg" src={params.row.img} alt="avatar" /> */}
+            //             {params.row.username}
+            //         </div>
+            //     );
+            // },
         },
         {
-            field: "email",
-            headerName: "Email",
+            field: "Phone",
+            headerName: "Phone",
             width: 230,
         },
 
         {
-            field: "age",
-            headerName: "Age",
+            field: "Std",
+            headerName: "Std",
             width: 100,
         },
         {
             field: "status",
-            headerName: "Status",
+            headerName: "Fee",
             width: 160,
             renderCell: (params) => {
                 return (
@@ -162,8 +162,8 @@ const Students = () => {
     return (
         <div className="datatable  pt-20">
             <div className="datatableTitle">
-                Add New User
-                <Link to="/users/new" className="link">
+                Add New Students
+                <Link to="/admin/students/new" className="link">
                     Add New
                 </Link>
             </div>

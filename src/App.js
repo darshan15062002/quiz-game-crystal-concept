@@ -22,6 +22,7 @@ import Users from "./pages/Users/Users";
 import Students from "./pages/Students/Students";
 import { AddQuiz } from "./Components/Pages/AddQuiz/AddQuiz";
 import Teachers from "./pages/Teachers/Teachers";
+import NewStudents from "./pages/NewStudents/NewStudents";
 
 
 
@@ -153,6 +154,10 @@ function App() {
 				{
 					path: "/admin/students",
 					element: <Students />
+				},
+				{
+					path: "/admin/students/new",
+					element: <NewStudents />
 				},
 				{
 					path: "/admin/quizs",
