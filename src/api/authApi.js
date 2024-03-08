@@ -17,9 +17,9 @@ export const userLogin = async ({ email, password }) => {
     }
 }
 
-export const userRegister = async ({ name, phone, std, location, password }) => {
+export const userRegister = async ({ name, phone, std, location, password, role = 'user' }) => {
     try {
-        const res = await axios.post(`${server}/user/new`, { name, phone, std, location, password }, {
+        const res = await axios.post(`${server}/user/new`, { name, phone, std, location, password, role }, {
             headers: {
                 'Content-Type': 'application/json'
             },

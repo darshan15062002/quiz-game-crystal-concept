@@ -1,14 +1,41 @@
-import "./NewStudents.scss";
-
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
+import "./NewStudents.scss";
+import { userRegister } from "../../api/authApi";
 
 
 
-const NewStudents = ({inputs, title }) => {
-   
 
-    const [file, setFile] = useState("");
+const NewStudents = ({ inputs, title }) => {
+
+
+
+    const [formData, setFormData] = useState({});
+    const [loading, setLoading] = useState(false)
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            setLoading(true)
+            const res = await userRegister({ ...formData, role: 'student', password: 'student' })
+            if (res?.data?.success) {
+                setLoading(false)
+                alert('Successfully registered')
+            } else {
+                // console.log(res);
+                setLoading(false)
+                alert(res?.response?.data?.message)
+            }
+        } catch (err) {
+            setLoading(false)
+        }
+
+    }
 
     return (
         <div className="new pt-16">
@@ -30,7 +57,7 @@ const NewStudents = ({inputs, title }) => {
                         />
                     </div> */}
                     <div className="right">
-                        <form className="flex flex-col sm:flex-row ">
+                        <form className="flex flex-col sm:flex-row " onSubmit={handleSubmit}>
                             {/* <div className="formInput ">
                                 <label htmlFor="file">
                                     Image: <DriveFolderUploadOutlinedIcon className="icon" />
@@ -46,10 +73,10 @@ const NewStudents = ({inputs, title }) => {
                             {inputs?.map((input) => (
                                 <div className="formInput w-full md:w-[40%]" key={input.id}>
                                     <label>{input.label}</label>
-                                    <input type={input.type} placeholder={input.placeholder} />
+                                    <input name={input.name} type={input.type} placeholder={input.placeholder} onChange={handleChange} />
                                 </div>
                             ))}
-                            <button>Send</button>
+                            <button disabled={loading} >{loading ? "Loading..." : "Send"}</button>
                         </form>
                     </div>
                 </div>
