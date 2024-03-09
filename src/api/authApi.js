@@ -96,6 +96,31 @@ export const getAllUsers = async (page, query, search) => {
     }
 }
 
+export const getAllStudents = async (query = 'student') => {
+    try {
+        let url = `${server}/student/all?role=${query}`;
+
+
+
+        const res = await axios.get(url, { withCredentials: true });
+        return res.data;
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+export const getStudentProfile = async (id) => {
+    try {
+        let url = `${server}/student/single/${id}`;
+
+        const res = await axios.get(url, { withCredentials: true });
+        return res.data;
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+
 export const sendOTP = async (phone) => {
     try {
         const res = await axios.post(`${server}/user/forgetpassword`, { phone }, {

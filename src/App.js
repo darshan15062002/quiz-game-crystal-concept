@@ -24,6 +24,7 @@ import { AddQuiz } from "./Components/Pages/AddQuiz/AddQuiz";
 import Teachers from "./pages/Teachers/Teachers";
 import NewStudents from "./pages/NewStudents/NewStudents";
 import { teacherInputs, userInputs } from "./assets/FormData";
+import Single from "./pages/Single/Single";
 
 
 
@@ -158,7 +159,11 @@ function App() {
 				},
 				{
 					path: "/admin/students/new",
-					element: <NewStudents inputs={userInputs} title={"Add New Student"}/>
+					element: <NewStudents inputs={userInputs} title={"Add New Student"} />
+				},
+				{
+					path: "/admin/students/single/:id",
+					element: <Single />
 				},
 				{
 					path: "/admin/quizs",
@@ -170,7 +175,7 @@ function App() {
 				},
 				{
 					path: "/admin/teachers/new",
-					element: <NewStudents inputs={teacherInputs} title={"Add New Student"}/>
+					element: <NewStudents inputs={teacherInputs} title={"Add New Student"} />
 				},
 			]
 		},
