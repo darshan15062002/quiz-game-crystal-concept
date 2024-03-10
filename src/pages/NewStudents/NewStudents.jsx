@@ -5,7 +5,7 @@ import { userRegister } from "../../api/authApi";
 
 
 
-const NewStudents = ({ inputs, title }) => {
+const NewStudents = ({ inputs, title,role }) => {
 
 
 
@@ -22,7 +22,7 @@ const NewStudents = ({ inputs, title }) => {
         e.preventDefault()
         try {
             setLoading(true)
-            const res = await userRegister({ ...formData, role: 'student', password: 'student' })
+            const res = await userRegister({ ...formData, role: role, password: 'student' })
             if (res?.data?.success) {
                 setLoading(false)
                 alert('Successfully registered')

@@ -159,7 +159,7 @@ function App() {
 				},
 				{
 					path: "/admin/students/new",
-					element: <NewStudents inputs={userInputs} title={"Add New Student"} />
+					element: <NewStudents inputs={userInputs} role={'student'} title={"Add New Student"} />
 				},
 				{
 					path: "/admin/students/single/:id",
@@ -175,8 +175,9 @@ function App() {
 				},
 				{
 					path: "/admin/teachers/new",
-					element: <NewStudents inputs={teacherInputs} title={"Add New Student"} />
+					element: <NewStudents inputs={teacherInputs} role={'teacher'} title={"Add New Teacher"} />
 				},
+				
 			]
 		},
 

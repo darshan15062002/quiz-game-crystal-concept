@@ -13,7 +13,7 @@ export const userInputs = [
         name: 'phone',
         label: "Phone",
         type: "tel",
-        placeholder: "+1 234 567 89",
+        placeholder: "+91 234 567 8921",
     },
     {
         id: 4,
@@ -38,40 +38,32 @@ export const userInputs = [
 export const teacherInputs = [
     {
         id: 1,
-        label: "First Name",
+        name: "name",
+        label: "Name",
         type: "text",
         placeholder: "john_doe",
     },
-    {
-        id: 2,
-        label: "Last Name",
-        type: "text",
-        placeholder: "John Doe",
-    },
-    {
-        id: 6,
-        label: "Email",
-        type: "text",
-        placeholder: "Enter your Email",
-    },
+
 
     {
         id: 3,
+        name: 'phone',
         label: "Phone",
         type: "tel",
-        placeholder: "+1 234 567 89",
+        placeholder: "+91 234 567 8921",
     },
     {
         id: 4,
+        name: 'location',
         label: "Address",
         type: "text",
         placeholder: "Elton St. 216 NewYork",
     },
-
     {
         id: 5,
-        label: "Joining Date",
-        type: "Date",
-        placeholder: "",
+        name: 'std',
+        label: "Standard",
+        type: "text",
+        placeholder: "Enter your Standard",
     },
 ];
