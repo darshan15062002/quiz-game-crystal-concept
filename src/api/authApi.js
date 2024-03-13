@@ -54,6 +54,17 @@ export const updateProfile = async (name, phone, std, location) => {
     }
 }
 
+export const deleteUser = async (id) => {
+    try {
+        const res = await axios.delete(`${server}/student/single/${id}`, { withCredentials: true })
+
+        return res.data
+    } catch (error) {
+        return error.response.data
+    }
+}
+
+
 export const userLogout = async () => {
     try {
         const res = await axios.get(`${server}/user/logout`, {

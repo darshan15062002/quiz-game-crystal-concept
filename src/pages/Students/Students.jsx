@@ -1,15 +1,28 @@
 import React, { useEffect } from 'react'
 import "./Students.scss";
 import { DataGrid } from "@mui/x-data-grid";
-
+import Modal from '../../Components/Pages/Modal/Modal.jsx';
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { getAllStudents } from '../../api/authApi';
+import { deleteUser, getAllStudents } from '../../api/authApi';
 
 const Students = () => {
 
     const [loading, setLoading] = useState(false)
     const [students, setStudents] = useState([])
+
+
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
 
     useEffect(() => {
         setLoading(true)
@@ -63,8 +76,13 @@ const Students = () => {
 
 
 
-    const handleDelete = (id) => {
-
+    const handleDelete = async (id) => {
+        deleteUser(id).then((res) => {
+            if (res.success) {
+                alert(res.message);
+            }
+        })
+        closeModal();
     };
 
     const actionColumn = [
@@ -81,7 +99,7 @@ const Students = () => {
                         </Link>
                         <div
                             className="deleteButton"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row._id)}
                         >
                             Delete
                         </div>
@@ -109,6 +127,9 @@ const Students = () => {
                     checkboxSelection
                 />
             </div>
+            <Modal isOpen={isModalOpen} onClose={closeModal} onConfirm={handleDelete}>
+                <p className="text-lg">Please confire to delete</p>
+            </Modal>
         </div>
     )
 }
