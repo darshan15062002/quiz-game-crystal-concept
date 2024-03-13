@@ -4,13 +4,18 @@ import { DataGrid } from "@mui/x-data-grid";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { getAllStudents } from '../../api/authApi';
+import { deleteUser, getAllStudents } from '../../api/authApi';
 import Swal from 'sweetalert2';
 
 const Students = () => {
 
     const [loading, setLoading] = useState(false)
     const [students, setStudents] = useState([])
+
+
+
+  
+
 
     useEffect(() => {
         setLoading(true)
@@ -64,7 +69,8 @@ const Students = () => {
 
 
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -75,15 +81,19 @@ const Students = () => {
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-
-                
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
+                deleteUser(id).then((res) => {
+                    if (res.success) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                          });
+                    }
+                })
+             
             }
           });
+     
     };
 
     const actionColumn = [
@@ -100,7 +110,7 @@ const Students = () => {
                         </Link>
                         <div
                             className="deleteButton"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row._id)}
                         >
                             Delete
                         </div>
@@ -128,6 +138,7 @@ const Students = () => {
                     checkboxSelection
                 />
             </div>
+         
         </div>
     )
 }

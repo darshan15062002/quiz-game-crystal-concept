@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Chart from "../../Components/Pages/Chart/Chart";
 import { useEffect, useState } from "react";
 import { getStudentProfile } from "../../api/authApi";
+import List from "../../Components/Pages/List/List";
+
 // import List from "../../components/table/Table";
 
 const Single = () => {
@@ -70,7 +72,7 @@ const Single = () => {
 
             <div className="bg-white p-4 shadow-md m-4">
                 <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
-                {/* <List /> */}
+                <List />
             </div>
         </div>
 
