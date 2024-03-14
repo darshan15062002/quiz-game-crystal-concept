@@ -4,7 +4,8 @@ import { DataGrid } from "@mui/x-data-grid";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { getAllStudents } from '../../api/authApi';
+import { deleteUser, getAllStudents } from '../../api/authApi';
+import Swal from 'sweetalert2';
 
 const Students = () => {
 
@@ -24,7 +25,35 @@ const Students = () => {
     }, []);
 
 
-    console.log(students);
+    const handleDelete = async (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteUser(id).then((res) => {
+                    if (res.success) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "User has been deleted.",
+                            icon: "success"
+                        });
+                    }
+                })
+
+            }
+        });
+
+    };
+
+
+
 
     const userColumns = [
         { field: "id", headerName: "ID", width: 70 },
@@ -63,10 +92,6 @@ const Students = () => {
 
 
 
-    const handleDelete = (id) => {
-
-    };
-
     const actionColumn = [
         {
             field: "action",
@@ -81,7 +106,7 @@ const Students = () => {
                         </Link>
                         <div
                             className="deleteButton"
-                            onClick={() => handleDelete(params.row.id)}
+                            onClick={() => handleDelete(params.row._id)}
                         >
                             Delete
                         </div>
