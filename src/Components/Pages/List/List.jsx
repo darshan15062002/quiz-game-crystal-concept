@@ -7,8 +7,35 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React from 'react'
 import './List.scss'
-const List = ({transactions}) => {
-   
+import { deleteTransaction } from "../../../api/studentApi";
+import Swal from "sweetalert2";
+const List = ({transactions,id}) => {
+   const handleDelete=async(id,tid)=>{
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteTransaction(id,tid).then((res)=>{
+            if (res.success) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: res?.message,
+                    icon: "success"
+                  });
+            }
+        })
+     
+    }
+  });
+
+   }
   return (
     <div className="overflow-x-scroll w-screen sm:w-full">
     <TableContainer component={Paper} className="table w-full bg-white">
@@ -30,7 +57,7 @@ const List = ({transactions}) => {
               <TableCell className="tableCell">{transaction.paymentMethod}</TableCell>
               <TableCell className="tableCell">{transaction.timestamp}</TableCell>
               <TableCell className="tableCell">
-                <button onClick={() =>{}}>Delete</button>
+                <button onClick={() =>handleDelete(id,transaction._id)}>Delete</button>
               </TableCell>
             </TableRow>
           ))}

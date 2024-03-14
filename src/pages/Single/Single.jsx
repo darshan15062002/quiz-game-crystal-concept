@@ -87,7 +87,7 @@ console.log(transactions);
                 </Link>
                 </div>
                 <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
-                <List transactions={transactions} />
+                <List transactions={transactions} id={id}/>
             </div>
         </div>
 
