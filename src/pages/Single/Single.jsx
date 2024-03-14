@@ -1,24 +1,34 @@
 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Chart from "../../Components/Pages/Chart/Chart";
 import { useEffect, useState } from "react";
 import { getStudentProfile } from "../../api/authApi";
 import List from "../../Components/Pages/List/List";
-
+import { fetchTransactions } from "../../api/studentApi";
+import "./Single.scss"
 // import List from "../../components/table/Table";
 
 const Single = () => {
     const { id } = useParams()
     const [student, setStudent] = useState({})
+    const [transactions,setTransactions] = useState([])
     console.log(id);
 
-
+console.log(transactions);
     useEffect(() => {
 
         getStudentProfile(id).then((data) => {
             // console.log(data.user, "Student Profile");
             setStudent(data.user)
         })
+
+        fetchTransactions(id)
+        .then((data) => {
+            setTransactions(data?.studentInfo?.feesPaid);
+        })
+        .catch((error) => {
+            console.error("Error fetching transactions:", error);
+        });
     }, [])
     return (
 
@@ -65,14 +75,19 @@ const Single = () => {
                     </div>
                 </div>
 
-                <div className="flex-2">
+                {/* <div className="flex-2">
                     <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
-                </div>
+                </div> */}
             </div>
 
             <div className="bg-white p-4 shadow-md m-4">
+            <div className="datatableTitle">
+            <Link to={`/admin/students/transaction/${id}`} className="link">
+                    Add New
+                </Link>
+                </div>
                 <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
-                <List />
+                <List transactions={transactions} />
             </div>
         </div>
 

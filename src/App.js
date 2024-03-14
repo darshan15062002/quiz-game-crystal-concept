@@ -25,6 +25,7 @@ import Teachers from "./pages/Teachers/Teachers";
 import NewStudents from "./pages/NewStudents/NewStudents";
 import { teacherInputs, userInputs } from "./assets/FormData";
 import Single from "./pages/Single/Single";
+import AddTransactions from "./pages/AddTransactions/AddTransactions";
 
 
 
@@ -164,6 +165,10 @@ function App() {
 				{
 					path: "/admin/students/single/:id",
 					element: <Single />
+				},
+				{
+					path: "/admin/students/transaction/:id",
+					element: <AddTransactions />
 				},
 				{
 					path: "/admin/quizs",
