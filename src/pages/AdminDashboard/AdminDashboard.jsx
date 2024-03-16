@@ -13,13 +13,11 @@ import { getDashboard } from '../../api/dashboardApi';
 const AdminDashboard = () => {
 
 
-    const navigate = useNavigate()
     const [noOfStudents, setNoOfStudents] = useState(0)
     const [noOfUsers, setNoOfUsers] = useState(0)
     const [each, setEach] = useState([])
-    const [users, setUsers] = useState([])
     const [totalRevenue, setTotalRevenue] = useState(0)
-    const [page, setPage] = useState(1)
+
     const [loading, setLoading] = useState(false)
 
 
@@ -28,6 +26,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         setLoading(true)
         getDashboard().then((res) => {
+            console.log(res);
             setNoOfUsers(res.userCount)
             setNoOfStudents(res.studentsCount)
             setEach(res.eachStdCount)
