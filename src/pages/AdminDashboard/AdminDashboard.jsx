@@ -8,13 +8,17 @@ import { Table } from '../../Components/Pages/Table/Table';
 import Widget from '../../Components/Pages/Widgets/Widget';
 import Chart from '../../Components/Pages/Chart/Chart';
 import AdminFeatured from '../../Components/Pages/AdminFeature/AdminFeature';
+import { getDashboard } from '../../api/dashboardApi';
 
 const AdminDashboard = () => {
 
 
     const navigate = useNavigate()
-    const [noOfUsers, setNoOfUsers] = useState()
+    const [noOfStudents, setNoOfStudents] = useState(0)
+    const [noOfUsers, setNoOfUsers] = useState(0)
+    const [each, setEach] = useState([])
     const [users, setUsers] = useState([])
+    const [totalRevenue, setTotalRevenue] = useState(0)
     const [page, setPage] = useState(1)
     const [loading, setLoading] = useState(false)
 
@@ -23,22 +27,25 @@ const AdminDashboard = () => {
 
     useEffect(() => {
         setLoading(true)
-        getAllUsers(page).then((res) => {
-            setLoading(false)
-            setNoOfUsers(res.userCount);
-            setUsers(res.users)
+        getDashboard().then((res) => {
+            setNoOfUsers(res.userCount)
+            setNoOfStudents(res.studentsCount)
+            setEach(res.eachStdCount)
+            setTotalRevenue(res.totalrevenue)
         })
-    }, [page, setPage]);
+    }, []);
+
+
     return (
         <div className='w-full pt-20 h-full px-6 '>
             <div className="flex flex-wrap  gap-4 mb-10">
                 <Widget type="user" amount={noOfUsers} />
-                <Widget type="students" amount={noOfUsers} />
-                <Widget type="earning" amount={noOfUsers} />
-                <Widget type="total" amount={noOfUsers} />
+                <Widget type="students" amount={noOfStudents} />
+                <Widget type="earning" amount={totalRevenue} />
+                <Widget type="total" amount={totalRevenue} />
             </div>
             <div className="flex flex-col sm:flex-row  gap-5 ">
-                <AdminFeatured />
+                <AdminFeatured each={each} noOfStudents={noOfStudents} />
                 <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
             </div>
 
