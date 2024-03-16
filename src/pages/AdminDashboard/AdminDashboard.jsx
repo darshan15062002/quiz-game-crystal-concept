@@ -1,10 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import { getAllUsers } from '../../api/authApi';
-import { AddQuiz } from '../../Components/Pages/AddQuiz/AddQuiz';
-import { Table } from '../../Components/Pages/Table/Table';
 import Widget from '../../Components/Pages/Widgets/Widget';
 import Chart from '../../Components/Pages/Chart/Chart';
 import AdminFeatured from '../../Components/Pages/AdminFeature/AdminFeature';
@@ -31,14 +27,16 @@ const AdminDashboard = () => {
             setNoOfStudents(res.studentsCount)
             setEach(res.eachStdCount)
             setTotalRevenue(res.totalrevenue)
-        })
+            setLoading(false)
+
+        }).catch(err=> setLoading(false))
     }, []);
 
 
     return (
         <div className='w-full pt-20 h-full px-6 '>
             <div className="flex flex-wrap  gap-4 mb-10">
-                <Widget type="user" amount={noOfUsers} />
+             <Widget type="user" amount={noOfUsers} />
                 <Widget type="students" amount={noOfStudents} />
                 <Widget type="earning" amount={totalRevenue} />
                 <Widget type="total" amount={totalRevenue} />
@@ -55,3 +53,6 @@ const AdminDashboard = () => {
 }
 
 export default AdminDashboard
+
+
+
