@@ -7,6 +7,7 @@ import { ImCross } from "react-icons/im";
 import { loadUser, userLogin } from "../../api/authApi";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -17,23 +18,28 @@ const Login = () => {
 		e.preventDefault();
 		userLogin({ email, password }).then((res) => {
 			if (res.success) {
-				alert('login successful')
-				setCurrentUser({ isAuthenticated: false, loading: true })
-				loadUser().then((data) => {
-
-					if (data.success) {
-						setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
-					}
-
-				}).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }))
-
-
-				navigate("/")
+				Swal.fire({
+					icon: 'success',
+					title: 'Login Successful!',
+					text: 'You have successfully logged in.',
+				}).then(() => {
+					setCurrentUser({ isAuthenticated: false, loading: true });
+					loadUser().then((data) => {
+						if (data.success) {
+							setCurrentUser({ user: data.user, isAuthenticated: true, loading: false });
+						}
+					}).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }));
+					navigate("/");
+				});
 			} else {
-				alert("Wrong username or password")
+				Swal.fire({
+					icon: 'error',
+					title: 'Login Failed',
+					text: 'Wrong username or password. Please try again.',
+				});
 			}
-		})
-	}
+		});
+	};
 
 	return (
 		<div className="flex flex-row items-center justify-center pb-32 pl-32 min-h-screen  pt-16 signup_login_main">

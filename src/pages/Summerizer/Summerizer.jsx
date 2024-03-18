@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getSummary } from '../../api/summeryApi';
 import ideabg5 from '../../assets/ideabg5.png'
+import Swal from 'sweetalert2';
 const Summarizer = () => {
     const [text, setText] = useState('');
     const [summary, setSummary] = useState('');
@@ -8,31 +9,33 @@ const Summarizer = () => {
     const [loading, setLoading] = useState(false);
 
     const handleGenerate = async (e) => {
-
         e.preventDefault();
-        // Assuming getSummary() is an asynchronous function
+
         setLoading(true);
         if (!text) {
             setLoading(false);
-            alert("Please enter text")
-        }
-
-        text && await getSummary(text)
-
-
-
-            .then((response) => {
-
-                setSummary(response);
-
-                setLoading(false);
-            })
-            .catch((error) => {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Empty Text',
+                text: 'Please enter some text to generate the summary.',
+            });
+        } else {
+            try {
+                await getSummary(text).then((response) => {
+                    setSummary(response);
+                    setLoading(false);
+                });
+            } catch (error) {
                 console.error('Error generating summary:', error);
                 setLoading(false);
-            });
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An error occurred while generating the summary. Please try again later.',
+                });
+            }
+        }
     };
-
     return (
         <div className="sm:px-16 text-black pt-28 px-8 flex lg:gap-10 gap-5 justify-between items-center flex-col">
             <div className="flex-col-reverse flex justify-between w-full gap-10 items-center">

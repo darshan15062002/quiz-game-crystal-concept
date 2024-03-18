@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { createQuiz, deleteQuiz, getGeneratedQuiz, handleGetAllQuiz, updateQuiz } from '../../../api/quizApi'
 import { useNavigate } from 'react-router-dom'
 import { AiFillDelete } from 'react-icons/ai'
+import Swal from 'sweetalert2'
 
 export const AddQuiz = () => {
     const [quizs, setQuizs] = useState([])
@@ -30,10 +31,32 @@ export const AddQuiz = () => {
 
 
     const handleDeleteQuiz = async (id) => {
-        deleteQuiz(id).then((res) => {
-            alert(res.message);
-            handleAllQuiz()
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteQuiz(id).then((res) => {
+                    if (res.success) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: res.message,
+                            icon: "success"
+                        });
+
+                        handleAllQuiz()
+                    }
+                })
+
+            }
         });
+
     }
 
 
@@ -46,26 +69,34 @@ export const AddQuiz = () => {
                 questions,
                 std: std,
             }).then((res) => {
-                alert("quiz updated successfully")
-                handleAllQuiz()
-            })
-
-        }
-        else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Quiz Updated!',
+                    text: 'Quiz has been updated successfully.',
+                }).then(() => {
+                    handleAllQuiz();
+                    setUpdateId()
+                    setQuestions([{ text: '', answers: [], correctAnswer: '' }])
+                });
+            });
+        } else {
             createQuiz({
                 title: title,
                 questions,
                 std,
             }).then((data) => {
-                setTitle("")
-                setStd()
-                setQuestions([{ text: '', answers: [], correctAnswer: '' }])
-                alert(data.data.message)
-                handleAllQuiz()
-            })
-
+                setTitle("");
+                setStd("");
+                setQuestions([{ text: '', answers: [], correctAnswer: '' }]);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Quiz Created!',
+                    text: data.data.message,
+                }).then(() => {
+                    handleAllQuiz();
+                });
+            });
         }
-
     }
 
     const handleQuestionChange = (e, index) => {
@@ -125,19 +156,22 @@ export const AddQuiz = () => {
         await updateQuiz(id, {
             visibility: x
         }).then((res) => {
-            handleAllQuiz()
+            handleAllQuiz();
             if (x) {
-                alert("Now Quiz is visible on website")
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Quiz Visibility Changed!',
+                    text: 'Now Quiz is visible on the website.',
+                });
+            } else {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Quiz Visibility Changed!',
+                    text: 'Now Quiz is not visible on the website.',
+                });
             }
-            else {
-                alert("Now Quiz is not visible on website")
-            }
-
-        })
-
-
-
-    }
+        });
+    };
     const handleCopy = async (id) => {
         const shareableLink = `https://crystal-concept-a928f.web.app/quiz/${id}`;
 

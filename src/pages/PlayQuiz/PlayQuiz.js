@@ -7,6 +7,7 @@ import { QuizCard } from '../../Components/Pages/QuizCard/QuizCard'
 import { Quiz } from '../../Components/Pages/Quiz/Quiz'
 import { getMySingleSubmitedQuiz, submitQuiz } from '../../api/submissionApi'
 import QuizModal from '../../Components/Pages/QuizModal/QuizModal'
+import Swal from 'sweetalert2'
 
 const PlayQuiz = () => {
 
@@ -37,22 +38,23 @@ const PlayQuiz = () => {
 
 
     const handlePlay = async (id) => {
-        setCurrentQuizId(id)
-        const res = await getMySingleSubmitedQuiz(id)
-        console.log(res);
+        setCurrentQuizId(id);
+        const res = await getMySingleSubmitedQuiz(id);
         if (!res) {
             getSingleQuiz(id).then((res) => {
-                setTitle(res?.data?.quiz?.title)
-                setQuestions(res?.data?.quiz?.questions)
+                setTitle(res?.data?.quiz?.title);
+                setQuestions(res?.data?.quiz?.questions);
             });
 
-            setOpen(true)
+            setOpen(true);
+        } else {
+            Swal.fire({
+                icon: 'info',
+                title: 'Quiz Already Submitted',
+                text: 'You have already submitted this quiz.',
+            });
         }
-        else {
-            alert('quiz already submitted')
-        }
-
-    }
+    };
 
 
 
@@ -65,7 +67,6 @@ const PlayQuiz = () => {
 
     const handleNext = async () => {
         if (count === questions.length - 1) {
-
             let computedPoints = 0;
             questions.forEach((question, index) => {
                 if (question.correctAnswer === String(selectedOptions[index])) {
@@ -77,27 +78,34 @@ const PlayQuiz = () => {
             setWrongAnswers(questions.length - computedPoints);
             setLoading(true);
             await submitQuiz(currentQuizId, title, selectedOptions, computedPoints).then((res) => {
+                setLoading(false);
                 if (res?.data?.success) {
-                    alert('Quiz submitted successfully')
-                    setResultShow(true)
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Quiz Submitted!',
+                        text: 'Quiz submitted successfully.',
+                    }).then(() => {
+                        setResultShow(true);
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Submission Failed',
+                        text: 'Something went wrong. Please try again.',
+                    }).then(() => {
+                        setResultShow(false);
+                        setWrongAnswers(0);
+                        setPoint(0);
+                        setOpen(false);
+                        setSelectedOptions([]);
+                        setShowAns(false);
+                    });
                 }
-                else {
-                    setResultShow(false)
-                    setWrongAnswers(0)
-                    setPoint(0)
-                    setOpen(false)
-                    setSelectedOptions([])
-                    setShowAns(false)
-                    alert('something went wrong')
+            });
 
-                }
-            })
-
-
-            setCount(0)
+            setCount(0);
         } else {
             setCount((prevCount) => prevCount + 1);
-
         }
     };
 

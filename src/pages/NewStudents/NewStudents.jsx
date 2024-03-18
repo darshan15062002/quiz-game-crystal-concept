@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./NewStudents.scss";
 import { userRegister } from "../../api/authApi";
+import Swal from "sweetalert2";
 
 
 
 
-const NewStudents = ({ inputs, title,role }) => {
 
+const NewStudents = ({ inputs, title, role }) => {
 
 
     const [formData, setFormData] = useState({});
@@ -19,23 +20,38 @@ const NewStudents = ({ inputs, title,role }) => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            setLoading(true)
-            const res = await userRegister({ ...formData, role: role, password: 'student' })
+            setLoading(true);
+            const res = await userRegister({ ...formData, role: role, password: 'student' });
             if (res?.data?.success) {
-                setLoading(false)
-                alert('Successfully registered')
+                setLoading(false);
+                setFormData({});
+                document.getElementById("student-form").reset();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: 'Successfully registered',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             } else {
-                // console.log(res);
-                setLoading(false)
-                alert(res?.response?.data?.message)
+                setLoading(false);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: res?.response?.data?.message || 'An error occurred during registration. Please try again.',
+                });
             }
         } catch (err) {
-            setLoading(false)
+            setLoading(false);
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration Failed',
+                text: 'An error occurred during registration. Please try again.',
+            });
         }
-
-    }
+    };
 
     return (
         <div className="new pt-16">
@@ -57,7 +73,7 @@ const NewStudents = ({ inputs, title,role }) => {
                         />
                     </div> */}
                     <div className="right">
-                        <form className="flex flex-col sm:flex-row " onSubmit={handleSubmit}>
+                        <form id="student-form" className="flex flex-col sm:flex-row " onSubmit={handleSubmit}>
                             {/* <div className="formInput ">
                                 <label htmlFor="file">
                                     Image: <DriveFolderUploadOutlinedIcon className="icon" />

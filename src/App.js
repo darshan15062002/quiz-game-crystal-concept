@@ -68,7 +68,6 @@ function App() {
 				setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
 			} else {
 				setCurrentUser({ isAuthenticated: false, loading: false })
-				// alert(data.message)
 			}
 
 		}).catch((error) => {
@@ -182,7 +181,7 @@ function App() {
 					path: "/admin/teachers/new",
 					element: <NewStudents inputs={teacherInputs} role={'teacher'} title={"Add New Teacher"} />
 				},
-				
+
 			]
 		},
 

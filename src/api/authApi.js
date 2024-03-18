@@ -53,6 +53,25 @@ export const updateProfile = async (name, phone, std, location) => {
         return error.response.data
     }
 }
+export const updateProfileByAdmin = async (name, phone, std, location, id) => {
+    try {
+        const res = await axios.put(`${server}/user/updateprofile/${id}`, {
+            name: name,
+            phone: phone,
+            std: std,
+            location: location
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            withCredentials: true
+        })
+
+        return res.data
+    } catch (error) {
+        return error.response.data
+    }
+}
 
 export const deleteUser = async (id) => {
     try {

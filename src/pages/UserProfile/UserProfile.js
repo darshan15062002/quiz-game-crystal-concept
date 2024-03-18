@@ -5,6 +5,7 @@ import { loadUser, updateProfile, userLogout } from '../../api/authApi';
 import { getMyAllSubmitedQuiz } from '../../api/submissionApi';
 import QuizModal from '../../Components/Pages/QuizModal/QuizModal';
 import { getSingleQuiz } from '../../api/quizApi';
+import Swal from 'sweetalert2';
 
 
 const UserProfile = () => {
@@ -29,26 +30,32 @@ const UserProfile = () => {
     const handleLogout = () => {
         userLogout().then((data) => {
             if (data?.success) {
-                alert(data?.message)
-                navigate("/")
-
-                setCurrentUser({ isAuthenticated: false, loading: true })
-                loadUser().then((data) => {
-
-                    if (data.success) {
-                        setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
-                    }
-                    else {
-                        setCurrentUser({ isAuthenticated: false, loading: false })
-
-                    }
-
-                }).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }))
-
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Logout Successful!',
+                    text: data?.message,
+                }).then(() => {
+                    navigate("/");
+                    setCurrentUser({ isAuthenticated: false, loading: true });
+                    loadUser()
+                        .then((data) => {
+                            if (data.success) {
+                                setCurrentUser({ user: data.user, isAuthenticated: true, loading: false });
+                            } else {
+                                setCurrentUser({ isAuthenticated: false, loading: false });
+                            }
+                        })
+                        .catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }));
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Logout Failed',
+                    text: 'Failed to logout. Please try again.',
+                });
             }
-        })
-
-    }
+        });
+    };
     const debounce = (func, delay) => {
         let timeoutId;
         return (...args) => {
@@ -72,19 +79,37 @@ const UserProfile = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        updateProfile(formValues.name, formValues.phone, formValues.std, formValues.location).then((res) => {
-            alert(res.message);
-            loadUser().then((data) => {
-                if (data?.success) {
-                    setCurrentUser({ user: data?.user, isAuthenticated: true })
-                }
-                else {
-                    setCurrentUser({ isAuthenticated: false })
-                }
-                setFormModified(false)
+        updateProfile(formValues.name, formValues.phone, formValues.std, formValues.location)
+            .then((res) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Profile Updated!',
+                    text: res.message,
+                }).then(() => {
+                    loadUser()
+                        .then((data) => {
+                            if (data?.success) {
+                                setCurrentUser({ user: data.user, isAuthenticated: true });
+                            } else {
+                                setCurrentUser({ isAuthenticated: false });
+                            }
+                            setFormModified(false);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                            setCurrentUser({ isAuthenticated: false });
+                            setFormModified(false);
+                        });
+                });
             })
-        }).catch((err) => { console.log(err); })
-
+            .catch((err) => {
+                console.error(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Failed',
+                    text: 'An error occurred while updating the profile. Please try again later.',
+                });
+            });
     };
 
     const handleCancel = (e) => {
@@ -104,7 +129,6 @@ const UserProfile = () => {
         setShowAns(true);
         setCurrentQuiz(myQuizSubmission.find(q => q._id === id));
     };
-
     useEffect(() => {
         if (showAns && currentQuiz) {
             const unsub = (id) => {
@@ -114,17 +138,19 @@ const UserProfile = () => {
                             setTitle(res?.data?.quiz?.title);
                             setQuestions(res?.data?.quiz?.questions);
                         } else {
-
-                            setQuestions([])
-                            setCurrentQuiz({})
-                            setCount(0)
-                            setShowAns(false)
-                            alert("response is no longer present");
+                            setQuestions([]);
+                            setCurrentQuiz({});
+                            setCount(0);
+                            setShowAns(false);
+                            Swal.fire({
+                                icon: 'info',
+                                title: 'Quiz Unavailable',
+                                text: 'The quiz is no longer available.',
+                            });
                         }
-
                     })
                     .catch((err) => {
-
+                        console.error('Error fetching quiz:', err);
                     });
             };
             unsub(currentQuiz?.quizId);

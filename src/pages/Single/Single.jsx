@@ -2,26 +2,27 @@
 import { Link, useParams } from "react-router-dom";
 import Chart from "../../Components/Pages/Chart/Chart";
 import { useEffect, useState } from "react";
-import { getStudentProfile, updateProfile } from "../../api/authApi";
+import { getStudentProfile, updateProfile, updateProfileByAdmin } from "../../api/authApi";
 import List from "../../Components/Pages/List/List";
 import { fetchTransactions } from "../../api/studentApi";
 import "./Single.scss"
+import Swal from "sweetalert2";
 // import List from "../../components/table/Table";
 
 const Single = () => {
     const { id } = useParams()
     const [student, setStudent] = useState({})
     const [transactions, setTransactions] = useState([])
-    const [edit ,setEdit] = useState(false)
+    const [edit, setEdit] = useState(false)
     const [formModified, setFormModified] = useState(false);
     const [formValues, setFormValues] = useState({
         name: student.name,
         phone: student.phone,
         location: student.location,
-        std: student.std ,
+        std: student.std,
     });
 
-    console.log(student );
+    console.log(student);
 
 
 
@@ -52,14 +53,24 @@ const Single = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        updateProfile(formValues.name, formValues.phone, formValues.std, formValues.location).then((res) => {
-            alert(res.message);
-          
-                setFormModified(false)
-                setEdit(false)
-
-        }).catch((err) => { console.log(err); })
-
+        updateProfileByAdmin(formValues.name, formValues.phone, formValues.std, formValues.location, id)
+            .then((res) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Profile Updated!',
+                    text: res.message,
+                });
+                setFormModified(false);
+                setEdit(false);
+            })
+            .catch((err) => {
+                console.error(err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Update Failed',
+                    text: 'An error occurred while updating the profile. Please try again later.',
+                });
+            });
     };
 
     const handleCancel = (e) => {
@@ -89,11 +100,13 @@ const Single = () => {
         getStudentProfile(id).then((data) => {
             // console.log(data.user, "Student Profile");
             setStudent(data.user)
-            setFormValues({ name: data.user?.name,
+            setFormValues({
+                name: data.user?.name,
                 phone: data.user?.phone,
                 location: data.user?.location || "",
-                std: data.user?.std || "",})
-           
+                std: data.user?.std || "",
+            })
+
         })
 
         fetchTransactions(id)
@@ -114,9 +127,9 @@ const Single = () => {
             <div className="flex flex-col mt-16 gap-4 p-4">
                 <div className="flex-1 bg-white p-4 shadow-md relative">
                     <div className="absolute top-0 right-0 p-2">
-                        <button onClick={()=>setEdit(true)} className="text-blue-500 bg-blue-100 px-2 py-1 text-sm rounded-tr-md cursor-pointer">
+                        {!edit && <button onClick={() => setEdit(true)} className="text-blue-500 bg-blue-100 px-2 py-1 text-sm rounded-tr-md cursor-pointer">
                             Edit
-                        </button>
+                        </button>}
                     </div>
 
                     {edit ?

@@ -8,6 +8,7 @@ import "./Signup.css";
 import { loadUser, userRegister } from "../../api/authApi";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 const Signup = () => {
 
 	const navigate = useNavigate();
@@ -23,34 +24,45 @@ const Signup = () => {
 
 	const { setCurrentUser } = useContext(AuthContext)
 	const handleSubmit = async (e) => {
+		e.preventDefault();
 
-		e.preventDefault()
-
-		if (password !== compassword) { alert("Both password must be same") }
-		else if (checked === false) { alert("please check terms and privacy policy") }
-		else {
-
-			const res = await userRegister({ name, phone, std, location, password })
+		if (password !== compassword) {
+			Swal.fire({
+				icon: 'error',
+				title: 'Passwords Mismatch',
+				text: 'Both passwords must be the same.',
+			});
+		} else if (!checked) {
+			Swal.fire({
+				icon: 'warning',
+				title: 'Terms and Privacy Policy',
+				text: 'Please check the terms and privacy policy.',
+			});
+		} else {
+			const res = await userRegister({ name, phone, std, location, password });
 			if (res?.data?.success) {
-				alert('Successfully registered')
-				setCurrentUser({ isAuthenticated: false, loading: true })
-				loadUser().then((data) => {
-
-					if (data.success) {
-						setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
-					}
-
-				}).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }))
-
-				navigate("/")
+				Swal.fire({
+					icon: 'success',
+					title: 'Registration Successful!',
+					text: 'You have successfully registered.',
+				}).then(() => {
+					setCurrentUser({ isAuthenticated: false, loading: true });
+					loadUser().then((data) => {
+						if (data.success) {
+							setCurrentUser({ user: data.user, isAuthenticated: true, loading: false });
+						}
+					}).catch((error) => setCurrentUser({ isAuthenticated: false, loading: false }));
+					navigate("/");
+				});
 			} else {
-				console.log(res);
-				// alert(res?.response?.data?.message)
+				Swal.fire({
+					icon: 'error',
+					title: 'Registration Failed',
+					text: res?.response?.data?.message || 'An error occurred during registration. Please try again.',
+				});
 			}
-
 		}
-
-	}
+	};
 
 	return (
 		<div className="flex flex-row items-center justify-center pb-32 pl-32 min-h-screen  pt-16 signup_login_main">

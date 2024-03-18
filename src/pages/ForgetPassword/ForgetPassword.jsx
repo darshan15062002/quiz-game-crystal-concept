@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
-import { sendForgotPasswordOTP, resetPassword, sendOTP } from "../../api/authApi";
+import { resetPassword, sendOTP } from "../../api/authApi";
 import loginImg from "../../assets/kindpng_814925.png";
+import Swal from "sweetalert2";
 const ForgetPassword = () => {
     const navigate = useNavigate();
 
@@ -18,34 +19,63 @@ const ForgetPassword = () => {
             const response = await sendOTP(emailOrMobile);
             if (response.success) {
                 setSection("otpVerificationForm");
-                alert("OTP sent successfully. Check your email or mobile for the OTP.");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'OTP Sent!',
+                    text: 'OTP sent successfully. Check your email or mobile for the OTP.',
+                });
             } else {
-                alert(response.message || "Failed to send OTP. Please try again.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to Send OTP',
+                    text: response.message || 'Failed to send OTP. Please try again.',
+                });
             }
         } catch (error) {
             console.error("Error sending OTP:", error);
-            alert("Failed to send OTP. Please try again.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed to Send OTP',
+                text: 'Failed to send OTP. Please try again.',
+            });
         }
     };
-
     const handleSubmitOTPVerificationForm = async (e) => {
-
         e.preventDefault();
-        if (newPassword !== confirmPassword) alert("both password must be same")
+        if (newPassword !== confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Password Mismatch',
+                text: 'Both passwords must be the same.',
+            });
+            return;
+        }
         try {
             const response = await resetPassword(otp, newPassword);
             if (response.success) {
-                alert("Password reset successful. You can now login with your new password.");
-                navigate("/login");
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Password Reset Successful!',
+                    text: 'Password reset successful. You can now login with your new password.',
+                }).then(() => {
+                    navigate("/login");
+                });
             } else {
-                alert(response.message || "Failed to reset password. Please try again.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Failed to Reset Password',
+                    text: response.message || 'Failed to reset password. Please try again.',
+                });
             }
         } catch (error) {
             console.error("Error resetting password:", error);
-            alert("Failed to reset password. Please try again.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed to Reset Password',
+                text: 'Failed to reset password. Please try again.',
+            });
         }
     };
-
     return (
         <div className="flex px-20 flex-row items-center justify-center pb-32 pl-32 min-h-screen  pt-16 signup_login_main">
             <div>
