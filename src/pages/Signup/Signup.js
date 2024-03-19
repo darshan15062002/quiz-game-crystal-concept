@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import loginImg from "../../assets/kindpng_814925.png";
 // import footerImg from "../../../assets/footer.png";
 import { Link, useNavigate } from "react-router-dom";
-import { ImCross } from "react-icons/im";
+import { ImCross, ImEye } from "react-icons/im";
 import "./Signup.css";
 
 import { loadUser, userRegister } from "../../api/authApi";
@@ -19,6 +19,7 @@ const Signup = () => {
 	const [password, setPassword] = useState("")
 	const [compassword, setComPassword] = useState("")
 	const [location, setLocation] = useState("")
+	const [passwordvisible, setPasswordVisible] = useState(false)
 	const [checked, setChecked] = useState(false)
 	const [std, setStd] = useState()
 
@@ -65,12 +66,12 @@ const Signup = () => {
 	};
 
 	return (
-		<div className="flex flex-row items-center justify-center pb-32 pl-32 min-h-screen  pt-16 signup_login_main">
+		<div className="flex flex-row items-center justify-center pb-32 pl-32 min-h-screen  pt-6 signup_login_main">
 
 			<Link to="/" className="cross">
 				<ImCross className="absolute top-8 lg:flex right-8 text-orange-600"></ImCross>
 			</Link>
-			<div className="md:w-1/2  w-full px-20">
+			<div className="md:w-1/2  w-full md:px-20 px-5">
 				<form onSubmit={handleSubmit}>
 					<div className="mb-5">
 						<h1 className="text-2xl lg:text-3xl font-medium ">
@@ -126,19 +127,21 @@ const Signup = () => {
 							value={location}
 						/>
 					</div>
-					<div className="form-control">
+					<div className="form-control relative">
 						<input
-							type="password"
+							type={`${passwordvisible ? "text" : "password"}`}
 							placeholder="password"
 							name="Password"
+
 							className="border-b-2 p-3 outline-none"
 							onChange={(e) => setPassword(e.target.value)}
 							value={password}
 						/>
+						<ImEye onClick={() => setPasswordVisible((prev) => !prev)} className=" absolute top-5 right-0 text-[#EB676A]" />
 					</div>
 					<div className="form-control">
 						<input
-							type="password"
+							type={`${passwordvisible ? "text" : "password"}`}
 							placeholder="Confirm password"
 							name="Com_Password"
 							className="border-b-2 p-3 outline-none"

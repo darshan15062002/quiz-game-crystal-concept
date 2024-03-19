@@ -233,10 +233,10 @@ export const AddQuiz = () => {
 
     return (
 
-        <div className='grid rounded-lg shadow-lg mx-4 mt-20   bg-white  grid-cols-1 lg:grid-cols-2 gap-4 border-2 sm:p-6 sm:m-6 p-1'>
+        <div className='grid rounded-lg shadow-lg mx-4 mt-20 w-full  bg-white  grid-cols-1  gap-4 border-2 sm:p-6 sm:m-6 p-1'>
 
 
-            <form onSubmit={handleCreateQuiz} className='flex md:border-r-4 md:border-b-0 border-b-4  p-6 flex-col gap-5 items-start justify-center '>
+            <form onSubmit={handleCreateQuiz} className='flex md:border-r-4 md:border-b-0 border-b-4 md:px-20 px-5  p-6 flex-col gap-5 items-start justify-center '>
                 <div className="lg:px-24 px-6  ">
                     <h2 className='text-3xl font-semibold mb-5 text-gray-700'>Create Quiz</h2>
                 </div>
@@ -261,9 +261,9 @@ export const AddQuiz = () => {
                     />
                 </div>
 
-                <div className=" overflow-y-scroll   scroll-smooth h-80 scrollbar" >
+                <div className=" overflow-y-scroll w-full   scroll-smooth h-96 " >
                     {questions?.map((question, index) => (
-                        <div key={index} className='' >
+                        <div key={index} className='gap-y-10' >
                             <div className="flex gap-3 items-center my-2 justify-between px-5">
                                 <p className='text-black font-semibold'>{index + 1}{")"}</p>
                                 <AiFillDelete size={20} color='black' onClick={() => handleRemove(index)} />
@@ -309,7 +309,7 @@ export const AddQuiz = () => {
             </form>
 
 
-            <div className='text-gray-500 sm:h-80    p-6 '>
+            <div className='text-gray-500 md:px-20 px-5   p-6 '>
                 <div className="flex justify-center items-center flex-col gap-y-3">
                     <input
                         type="number"
@@ -324,7 +324,7 @@ export const AddQuiz = () => {
                         className="w-full p-3  bg-slate-50 input input-bordered border-black  mb-2 text-black "
                     />
                     <textarea
-                        className='block p-2.5  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300'
+                        className=' p-2.5  w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300'
                         id="pdf_text"
                         value={text}
                         onChange={(e) => setText(e.target.value)}

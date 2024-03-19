@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import loginImg from "../../assets/kindpng_814925.png";
 import { Link, useNavigate } from "react-router-dom";
+import { ImEye } from "react-icons/im";
 import "./Login.css";
 import { ImCross } from "react-icons/im";
 
@@ -14,6 +15,7 @@ const Login = () => {
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
 	const { setCurrentUser } = useContext(AuthContext)
+	const [passwordvisible, setPasswordVisible] = useState(false)
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		userLogin({ email, password }).then((res) => {
@@ -46,6 +48,7 @@ const Login = () => {
 			<div>
 				<Link to="/" className="cross">
 					<ImCross className="absolute top-8 right-8 text-[#EB676A]"></ImCross>
+
 				</Link>
 				{/* <div className="alert_box">{alertMsg}</div> */}
 				<form onSubmit={handleSubmit}>
@@ -67,15 +70,17 @@ const Login = () => {
 							value={email}
 						/>
 					</div>
-					<div className="form-control">
+					<div className="form-control relative">
 						<input
-							type="password"
+							type={`${passwordvisible ? "text" : "password"}`}
 							placeholder="password"
 							name="Password"
+
 							className="border-b-2 p-3 outline-none"
 							onChange={(e) => setPassword(e.target.value)}
 							value={password}
 						/>
+						<ImEye onClick={() => setPasswordVisible((prev) => !prev)} className=" absolute top-5 right-0 text-[#EB676A]" />
 					</div>
 					<div className="flex items-center justify-between">
 						<div className="flex items-center mt-4">
