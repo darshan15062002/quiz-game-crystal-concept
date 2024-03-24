@@ -206,7 +206,7 @@ const SuccessModal = ({ closeModal }) => (
             <Link to="/" className="cross">
                 <ImCross className=" absolute right-6 top-4 text-[#eb676a]"></ImCross>
             </Link>
-            <h3 className="text-xl font-bold mb-4">Success!</h3>
+            <h3 className="text-xl text-green-400 font-bold mb-4">Success!</h3>
             <p>Your request has been submitted successfully.</p>
             <button onClick={closeModal} className="mt-4 bg-eb676a text-white px-4 py-2 rounded">Close</button>
         </div>

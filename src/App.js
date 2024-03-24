@@ -26,6 +26,7 @@ import NewStudents from "./pages/NewStudents/NewStudents";
 import { teacherInputs, userInputs } from "./assets/FormData";
 import Single from "./pages/Single/Single";
 import AddTransactions from "./pages/AddTransactions/AddTransactions";
+import JoinAsTutor from "./pages/JoinAsTutor/JoinAsTutor";
 
 
 
@@ -98,6 +99,10 @@ function App() {
 				{
 					path: "/requesttutor",
 					element: <RequestTutor />
+				},
+				{
+					path: "/joinastutor",
+					element: <JoinAsTutor />
 				},
 				{
 					path: "/profile",

@@ -47,11 +47,14 @@ const Navbar = () => {
         </div>) : (<>
 
           <li>
-            <Link className='text-black  ' to="/login">LOGIN / SIGNUP</Link>
+            <Link className='text-black  ' to="/requesttutor">REQUEST A TUTOR</Link>
           </li>
-          <a href="/requesttutor" class="relative items-center justify-center flex  px-5 py-2 overflow-hidden font-medium transition-all bg-[#EB676A] rounded-full hover:bg-white group">
+          <li>
+            <Link className='text-black  ' to="/joinastutor">JOIN AS TUTOR</Link>
+          </li>
+          <a href="/login" class="relative items-center justify-center flex  px-5 py-2 overflow-hidden font-medium transition-all bg-[#EB676A] rounded-full hover:bg-white group">
             <span class="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
-            <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#EB676A]">REQUEST A TUTOR</span>
+            <span class="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#EB676A]">LOGIN / SIGNUP</span>
           </a>
 
 
