@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AddTransactions = () => {
-    const {id} = useParams()
+    const { id } = useParams()
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         month: "",
@@ -24,22 +24,22 @@ const AddTransactions = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true)
-       await addStudentinfo(id,formData).then((data)=>{
-        console.log(data);
-       
-Swal.fire({
-  position: "top-end",
-  icon: "success",
-  title: data?.message,
-  showConfirmButton: false,
-  timer: 1500
-});
-        setLoading(false)
-navigate(`/admin/students/single/${id}`)
-       }).catch((err)=>{
-        setLoading(false)
-       })
-       
+        await addStudentinfo(id, formData).then((data) => {
+            console.log(data);
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: data?.message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setLoading(false)
+            navigate(`/admin/students/single/${id}`)
+        }).catch((err) => {
+            setLoading(false)
+        })
+
     };
 
     return (
@@ -100,7 +100,7 @@ navigate(`/admin/students/single/${id}`)
                             <option value="Credit Card">Credit Card</option>
                             <option value="Debit Card">Debit Card</option>
                             <option value="Bank Transfer">Bank Transfer</option>
-                            <option value="Other">Other</option>
+                            <option value="UPI">UPI</option>
                         </select>
                     </div>
                     <button

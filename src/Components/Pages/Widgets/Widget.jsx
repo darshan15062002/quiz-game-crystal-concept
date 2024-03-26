@@ -79,11 +79,11 @@ const Widget = ({ type, amount, diff = 20 }) => {
     }
 
     return (
-        <div className="widget">
-            <div className="left">
-                <span className="title">{data.title}</span>
-                <span className="counter">
-                    {data.isMoney && "$"} {amount}
+        <div className="widget text-xs sm:text-xl">
+            <div className="left  text-md sm:text-xl">
+                <span className="title ">{data.title}</span>
+                <span className="counter ">
+                    {data.isMoney && "RS"} {amount}
                 </span>
                 <span className="link">{data.link}</span>
             </div>

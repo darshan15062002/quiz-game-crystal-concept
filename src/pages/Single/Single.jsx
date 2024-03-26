@@ -1,13 +1,14 @@
 
 import { Link, useParams } from "react-router-dom";
-import Chart from "../../Components/Pages/Chart/Chart";
+
 import { useEffect, useState } from "react";
-import { getStudentProfile, updateProfile, updateProfileByAdmin } from "../../api/authApi";
+import { getStudentProfile, updateProfileByAdmin } from "../../api/authApi";
 import List from "../../Components/Pages/List/List";
 import { fetchTransactions } from "../../api/studentApi";
 import "./Single.scss"
 import Swal from "sweetalert2";
-// import List from "../../components/table/Table";
+
+
 
 const Single = () => {
     const { id } = useParams()
@@ -121,7 +122,7 @@ const Single = () => {
 
 
 
-        <div className="flex-grow bg-gray-100 p-4">
+        <div className=" bg-gray-100 p-4  w-screen sm:w-full">
 
 
             <div className="flex flex-col mt-16 gap-4 p-4">
@@ -193,11 +194,7 @@ const Single = () => {
                         </form>)
                         :
                         <div className="flex pl-5 gap-4 items-center">
-                            {/* <img
-                            src="https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                            alt=""
-                            className="w-20 h-20 rounded-full"
-                        /> */}
+
 
                             <div className="flex flex-col">
                                 <h1 className="text-xl font-bold">{student.name}</h1>
@@ -222,9 +219,6 @@ const Single = () => {
                         </div>}
                 </div>
 
-                {/* <div className="flex-2">
-                    <Chart aspect={3 / 1} title="User Spending ( Last 6 Months)" />
-                </div> */}
             </div>
 
             <div className="bg-white p-4 shadow-md m-4">
@@ -234,7 +228,8 @@ const Single = () => {
                     </Link>
                 </div>
                 <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
-                <List transactions={transactions} id={id} />
+
+                <List transactions={transactions?.slice().reverse()} id={id} />
             </div>
         </div>
 

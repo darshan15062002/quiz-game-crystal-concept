@@ -14,17 +14,21 @@ const Login = () => {
 	const navigate = useNavigate()
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
+	const [loading, setLoading] = useState(false)
 	const { setCurrentUser } = useContext(AuthContext)
 	const [passwordvisible, setPasswordVisible] = useState(false)
 	const handleSubmit = async (e) => {
+		setLoading(true)
 		e.preventDefault();
 		userLogin({ email, password }).then((res) => {
 			if (res.success) {
+				setLoading(false)
 				Swal.fire({
 					icon: 'success',
 					title: 'Login Successful!',
 					text: 'You have successfully logged in.',
 				}).then(() => {
+
 					setCurrentUser({ isAuthenticated: false, loading: true });
 					loadUser().then((data) => {
 						if (data.success) {
@@ -34,6 +38,7 @@ const Login = () => {
 					navigate("/");
 				});
 			} else {
+				setLoading(false)
 				Swal.fire({
 					icon: 'error',
 					title: 'Login Failed',
@@ -98,6 +103,7 @@ const Login = () => {
 					</div>
 					<div className="form-control mt-6">
 						<button
+							disabled={loading}
 							className="btn bg-[#EB676A] text-white button_t"
 							type="submit"
 						>

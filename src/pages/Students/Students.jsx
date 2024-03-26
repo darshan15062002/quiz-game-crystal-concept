@@ -14,7 +14,7 @@ const Students = () => {
 
 
 
-  
+
 
 
     useEffect(() => {
@@ -79,7 +79,7 @@ const Students = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 deleteUser(id).then((res) => {
                     if (res.success) {
@@ -87,13 +87,13 @@ const Students = () => {
                             title: "Deleted!",
                             text: "Your file has been deleted.",
                             icon: "success"
-                          });
+                        });
                     }
                 })
-             
+
             }
-          });
-     
+        });
+
     };
 
     const actionColumn = [
@@ -138,7 +138,7 @@ const Students = () => {
                     checkboxSelection
                 />
             </div>
-         
+
         </div>
     )
 }
