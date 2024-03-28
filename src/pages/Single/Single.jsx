@@ -8,6 +8,9 @@ import { fetchTransactions } from "../../api/studentApi";
 import "./Single.scss"
 import Swal from "sweetalert2";
 
+import MyCalendar from "../../Components/Pages/Calendar/Calendar";
+import ExamChart from "../../Components/Pages/ExamChart/ExamChart";
+
 
 
 const Single = () => {
@@ -117,12 +120,12 @@ const Single = () => {
             .catch((error) => {
                 console.error("Error fetching transactions:", error);
             });
-    }, [])
+    }, [id])
     return (
 
 
 
-        <div className=" bg-gray-100 p-4  w-screen sm:w-full">
+        <div className=" bg-gray-200  w-screen sm:w-full">
 
 
             <div className="flex flex-col mt-16 gap-4 p-4">
@@ -220,16 +223,23 @@ const Single = () => {
                 </div>
 
             </div>
+            <div className='flex md:flex-row flex-col gap-y-3 md:gap-x-3  p-4 shadow-md '>
+                <MyCalendar />
+                <ExamChart />
+            </div>
 
-            <div className="bg-white p-4 shadow-md m-4">
-                <div className="datatableTitle">
-                    <Link to={`/admin/students/transaction/${id}`} className="link">
-                        Add New
-                    </Link>
+
+            <div className=" p-4 ">
+                <div className="bg-white p-4 shadow-md rounded-md">
+                    <div className="datatableTitle">
+                        <Link to={`/admin/students/transaction/${id}`} className="link">
+                            Add New
+                        </Link>
+                    </div>
+                    <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
+
+                    <List transactions={transactions?.slice().reverse()} id={id} />
                 </div>
-                <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
-
-                <List transactions={transactions?.slice().reverse()} id={id} />
             </div>
         </div>
 

@@ -1,0 +1,12 @@
+.react-calendar__tile.present-day {
+    background-color: green;
+    color: white;
+   
+    border-radius: 100%;
+  }
+
+  .react-calendar{
+    border: none;
+    background-color: white;
+
+  }
