@@ -6,6 +6,8 @@ import { getMyAllSubmitedQuiz } from '../../api/submissionApi';
 import QuizModal from '../../Components/Pages/QuizModal/QuizModal';
 import { getSingleQuiz } from '../../api/quizApi';
 import Swal from 'sweetalert2';
+import MyCalendar from '../../Components/Pages/Calendar/Calendar';
+import ExamChart from '../../Components/Pages/ExamChart/ExamChart';
 
 
 const UserProfile = () => {
@@ -294,6 +296,11 @@ const UserProfile = () => {
 
 
                 </div>
+            </div>
+
+            <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3 sm:p-6 sm:m-6 p-2 m-4  '>
+                <MyCalendar />
+                <ExamChart />
             </div>
             <div className="border-2 px-6 m-6 text-gray-400">
                 <button onClick={handleLogout} className="bg-black p-2 font-serif ">Logout</button>

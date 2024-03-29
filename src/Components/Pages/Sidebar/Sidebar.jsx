@@ -12,6 +12,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { Book, Person2Rounded, Person2Sharp, Person2TwoTone } from '@mui/icons-material';
 const Sidebar = ({ isOpen }) => {
   return (
     <div className={` ${isOpen ? "fixed w-1/2 z-10 h-screen pt-16" : "hidden "} sm:block sm:w-1/5 border-r-2 border-slate-300 sm:min-h-full bg-white`}>
@@ -39,31 +40,31 @@ const Sidebar = ({ isOpen }) => {
           </Link>
           <Link to="/admin/students" style={{ textDecoration: "none" }}>
             <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
-              <StoreIcon className="text-xl text-[#EB676A]" />
+              <Person2Rounded className="text-xl text-[#EB676A]" />
               <span className='text-xs font-normal text-[#888] ml-1'>Students</span>
             </li>
           </Link>
           <Link to="/admin/teachers" style={{ textDecoration: "none" }}>
             <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
-              <CreditCardIcon className="text-xl text-[#EB676A]" />
+              <Person2TwoTone className="text-xl text-[#EB676A]" />
               <span className='text-xs font-normal text-[#888] ml-1'>Teachers</span>
             </li>
           </Link>
 
           <Link to="/admin/quizs" style={{ textDecoration: "none" }}>
             <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
-              <LocalShippingIcon className="text-xl text-[#EB676A]" />
+              <Book className="text-xl text-[#EB676A]" />
               <span className='text-xs font-normal text-[#888] ml-1'>Quizs</span>
             </li >
           </Link>
           <p className="text-xs font-bold text-[#999] mt-4 mb-1">USEFUL</p>
           <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
             <InsertChartIcon className="text-xl text-[#EB676A]" />
-            <span className='text-xs font-normal text-[#888] ml-1'>Stats</span>
+            <span className='text-xs font-normal text-[#888] ml-1'>Attendance</span>
           </li>
           <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
             <NotificationsNoneIcon className="text-xl text-[#EB676A]" />
-            <span className='text-xs font-normal text-[#888] ml-1'>Notifications</span>
+            <span className='text-xs font-normal text-[#888] ml-1'>Marks</span>
           </li>
           <p className="text-xs font-bold text-[#999] mt-4 mb-1">SERVICE</p>
           <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>

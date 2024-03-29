@@ -115,7 +115,9 @@ const Single = () => {
 
         fetchTransactions(id)
             .then((data) => {
-                setTransactions(data?.studentInfo?.feesPaid);
+                // Sort transactions by date
+                const sortedTransactions = data?.studentInfo?.feesPaid.sort((a, b) => new Date(a.date) - new Date(b.date));
+                setTransactions(sortedTransactions);
             })
             .catch((error) => {
                 console.error("Error fetching transactions:", error);
@@ -125,11 +127,11 @@ const Single = () => {
 
 
 
-        <div className=" bg-gray-200  w-screen sm:w-full">
+        <div className=" bg-gray-200  w-screen p-4 sm:w-full">
 
 
-            <div className="flex flex-col mt-16 gap-4 p-4">
-                <div className="flex-1 bg-white p-4 shadow-md relative">
+            <div className="flex flex-col gap-5 md:mt-5 mt-16  ">
+                <div className="flex-1 bg-white p-3 rounded-md  shadow-md relative">
                     <div className="absolute top-0 right-0 p-2">
                         {!edit && <button onClick={() => setEdit(true)} className="text-blue-500 bg-blue-100 px-2 py-1 text-sm rounded-tr-md cursor-pointer">
                             Edit
@@ -223,13 +225,13 @@ const Single = () => {
                 </div>
 
             </div>
-            <div className='flex md:flex-row flex-col gap-y-3 md:gap-x-3  p-4 shadow-md '>
+            <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3  '>
                 <MyCalendar />
                 <ExamChart />
             </div>
 
 
-            <div className=" p-4 ">
+            <div className="mt-5  ">
                 <div className="bg-white p-4 shadow-md rounded-md">
                     <div className="datatableTitle">
                         <Link to={`/admin/students/transaction/${id}`} className="link">

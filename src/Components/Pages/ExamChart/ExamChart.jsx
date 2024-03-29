@@ -1,3 +1,4 @@
+import { ArrowBack, ArrowForward, ArrowLeft, ArrowRight } from "@mui/icons-material";
 import React, { useState } from "react";
 import {
     LineChart,
@@ -70,7 +71,7 @@ export default function ExamChart() {
 
     return (
         <ResponsiveContainer className={"flex bg-white justify-center items-center flex-col gap-y-3 shadow-xl rounded-md px-6"} aspect={2 / 1}>
-            <h2 className="'text-gray-500 font-bold text-xl">Exam Marks Chart</h2>
+            <h2 className="text-gray-500 font-bold text-xl">Exam Marks </h2>
             <LineChart data={subjectMarks} width={"100%"} height={500} className="">
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="date" />
@@ -85,9 +86,9 @@ export default function ExamChart() {
                     />
                 ))}
             </LineChart>
-            <div>
-                <button onClick={handleBackward} disabled={currentIndex === 0}>Backward</button>
-                <button onClick={handleForward} disabled={currentIndex === formattedData.length - 1}>Forward</button>
+            <div className="flex justify-center items-center  mb-4">
+                <ArrowLeft onClick={handleBackward} disabled={currentIndex === 0} />
+                <ArrowRight onClick={handleForward} disabled={currentIndex === formattedData.length - 1} />
             </div>
 
 

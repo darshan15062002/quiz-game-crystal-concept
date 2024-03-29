@@ -42,7 +42,7 @@ const List = ({ transactions, id }) => {
         <Table aria-label="simple table" className="w-full">
           <TableHead className="bg-white">
             <TableRow>
-              <TableCell className="bg-white  tableCell">Month</TableCell>
+              <TableCell className="bg-white  tableCell">Date</TableCell>
               <TableCell className="bg-white tableCell">Amount</TableCell>
               <TableCell className="bg-white tableCell">Payment Method</TableCell>
               <TableCell className="bg-white tableCell">Date</TableCell>
@@ -52,7 +52,7 @@ const List = ({ transactions, id }) => {
           <TableBody>
             {transactions?.map((transaction, index) => (
               <TableRow key={index}>
-                <TableCell className="tableCell">{transaction.month}</TableCell>
+                <TableCell className="tableCell">{transaction.date.split("T")[0]}</TableCell>
                 <TableCell className="tableCell">{transaction.amount}</TableCell>
                 <TableCell className="tableCell">{transaction.paymentMethod}</TableCell>
                 <TableCell className="tableCell">{transaction.timestamp}</TableCell>

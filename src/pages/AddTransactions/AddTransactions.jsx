@@ -8,7 +8,7 @@ const AddTransactions = () => {
     const { id } = useParams()
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        month: "",
+        date: "",
         amount: "",
         paymentMethod: "",
     });
@@ -23,6 +23,7 @@ const AddTransactions = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log(formData, "FS");
         setLoading(true)
         await addStudentinfo(id, formData).then((data) => {
             console.log(data);
@@ -48,29 +49,18 @@ const AddTransactions = () => {
                 <h1 className="text-2xl font-bold mb-4 text-center">Transaction Form</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="month" className="block mb-2">Month:</label>
-                        <select
-                            id="month"
-                            name="month"
-                            value={formData.month}
+                        <label htmlFor="date" className="block mb-2">Date:</label>
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                            value={formData.date}
                             onChange={handleChange}
                             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                             required
-                        >
-                            <option value="">Select Month</option>
-                            <option value="January">January</option>
-                            <option value="February">February</option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="July">July</option>
-                            <option value="August">August</option>
-                            <option value="September">September</option>
-                            <option value="October">October</option>
-                            <option value="November">November</option>
-                            <option value="December">December</option>
-                        </select>
+                        />
+
+
                     </div>
                     <div className="mb-4">
                         <label htmlFor="amount" className="block mb-2">Amount:</label>
