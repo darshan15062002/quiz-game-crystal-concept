@@ -2,22 +2,16 @@ import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './Calendar.css'
-function MyCalendar() {
+function MyCalendar({ attendance }) {
 
-    const presentDates = [
-        new Date(2024, 0, 5), // January 5, 2024
-        new Date(2024, 1, 10), // February 10, 2024
-        new Date(2024, 2, 15), // March 15, 2024
-        new Date(2024, 3, 20), // April 20, 2024
-        // Add more dummy dates as needed
-    ];
 
     // Function to determine if a date is present in the presentDates array
     const isDatePresent = (date) => {
-        return presentDates.some(presentDate => {
-            return date.getDate() === presentDate.getDate() &&
-                date.getMonth() === presentDate.getMonth() &&
-                date.getFullYear() === presentDate.getFullYear();
+        return attendance?.some(presentDate => {
+            let newDate = new Date(presentDate)
+            return date.getDate() === newDate.getDate() &&
+                date.getMonth() === newDate.getMonth() &&
+                date.getFullYear() === newDate.getFullYear();
         });
     };
 

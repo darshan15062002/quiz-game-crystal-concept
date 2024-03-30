@@ -25,8 +25,9 @@ const Single = () => {
         location: student.location,
         std: student.std,
     });
+    const [attendance, setAttendance] = useState([])
 
-    console.log(student);
+
 
 
 
@@ -113,7 +114,7 @@ const Single = () => {
     useEffect(() => {
 
         getStudentProfile(id).then((data) => {
-            // console.log(data.user, "Student Profile");
+
             setStudent(data.user)
             setFormValues({
                 name: data.user?.name,
@@ -127,6 +128,8 @@ const Single = () => {
         fetchTransactions(id)
             .then((data) => {
                 // Sort transactions by date
+                setAttendance(data?.studentInfo?.attendance)
+
                 const sortedTransactions = data?.studentInfo?.feesPaid.sort((a, b) => new Date(a.date) - new Date(b.date));
                 setTransactions(sortedTransactions);
             })
@@ -237,7 +240,7 @@ const Single = () => {
 
             </div>
             <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3  '>
-                <MyCalendar />
+                <MyCalendar attendance={attendance} />
                 <ExamChart />
             </div>
 

@@ -8,6 +8,7 @@ import { getSingleQuiz } from '../../api/quizApi';
 import Swal from 'sweetalert2';
 import MyCalendar from '../../Components/Pages/Calendar/Calendar';
 import ExamChart from '../../Components/Pages/ExamChart/ExamChart';
+import { fetchTransactions } from '../../api/studentApi';
 
 
 const UserProfile = () => {
@@ -26,7 +27,9 @@ const UserProfile = () => {
         location: currentUser?.user?.location || "",
         std: currentUser?.user?.std || "",
     });
+    const [attendance, setAttendance] = useState([])
 
+    console.log(attendance, "setAttendance");
 
 
     const handleLogout = () => {
@@ -192,6 +195,19 @@ const UserProfile = () => {
         };
 
         unsub();
+
+        fetchTransactions(currentUser?.user?._id)
+            .then((data) => {
+                // Sort transactions by date
+                setAttendance(data?.studentInfo?.attendance)
+
+                // const sortedTransactions = data?.studentInfo?.feesPaid.sort((a, b) => new Date(a.date) - new Date(b.date));
+                // setTransactions(sortedTransactions, "dsfsd");
+            })
+            .catch((error) => {
+                console.error("Error fetching transactions:", error);
+            });
+
     }, []);
 
 
@@ -299,7 +315,7 @@ const UserProfile = () => {
             </div>
 
             <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3 sm:p-6 sm:m-6 p-2 m-4  '>
-                <MyCalendar />
+                {attendance && <MyCalendar attendance={attendance} />}
                 <ExamChart />
             </div>
             <div className="border-2 px-6 m-6 text-gray-400">

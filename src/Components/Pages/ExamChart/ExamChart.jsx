@@ -41,10 +41,10 @@ function convertData(dummyData) {
         if (!acc[date][subject]) {
             acc[date][subject] = { marks, outOf };
         }
-        console.log(acc, "DAS");
+
         return acc;
     }, {});
-    console.log(formattedData, "formattedData");
+
     return Object.values(formattedData);
 }
 
