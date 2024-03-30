@@ -59,13 +59,24 @@ const Single = () => {
         e.preventDefault();
         updateProfileByAdmin(formValues.name, formValues.phone, formValues.std, formValues.location, id)
             .then((res) => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Profile Updated!',
-                    text: res.message,
-                });
+                if (res.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Profile Updated!',
+                        text: res.message,
+                    });
+
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: res.message,
+                        text: 'An error occurred while updating the profile. Please try again later.',
+                    });
+                }
                 setFormModified(false);
                 setEdit(false);
+
             })
             .catch((err) => {
                 console.error(err);

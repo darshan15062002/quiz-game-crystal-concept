@@ -119,7 +119,7 @@ const Students = () => {
     return (
         <div className="datatable  pt-20">
             <div className="datatableTitle">
-                Add New Students
+                Add New Teachers
                 <Link to="/admin/teachers/new" className="link">
                     Add New
                 </Link>

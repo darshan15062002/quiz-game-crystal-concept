@@ -27,6 +27,7 @@ import { teacherInputs, userInputs } from "./assets/FormData";
 import Single from "./pages/Single/Single";
 import AddTransactions from "./pages/AddTransactions/AddTransactions";
 import JoinAsTutor from "./pages/JoinAsTutor/JoinAsTutor";
+import Attendance from "./pages/Attendance/Attendance";
 
 
 
@@ -181,6 +182,10 @@ function App() {
 				{
 					path: "/admin/teachers",
 					element: <Teachers />
+				},
+				{
+					path: "/admin/attendance",
+					element: <Attendance />
 				},
 				{
 					path: "/admin/teachers/new",

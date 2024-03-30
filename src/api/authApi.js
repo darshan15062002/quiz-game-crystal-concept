@@ -55,7 +55,7 @@ export const updateProfile = async (name, phone, std, location) => {
 }
 export const updateProfileByAdmin = async (name, phone, std, location, id) => {
     try {
-        const res = await axios.put(`${server}/user/updateprofile/${id}`, {
+        const res = await axios.put(`${server}/user/updateprofilebyadmin/${id}`, {
             name: name,
             phone: phone,
             std: std,
