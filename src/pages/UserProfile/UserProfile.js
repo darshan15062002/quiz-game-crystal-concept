@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { loadUser, updateProfile, userLogout } from '../../api/authApi';
 import { getMyAllSubmitedQuiz } from '../../api/submissionApi';
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import MyCalendar from '../../Components/Pages/Calendar/Calendar';
 import ExamChart from '../../Components/Pages/ExamChart/ExamChart';
 import { fetchTransactions } from '../../api/studentApi';
+import List from '../../Components/Pages/List/List';
 
 
 const UserProfile = () => {
@@ -21,6 +22,7 @@ const UserProfile = () => {
     const { currentUser, setCurrentUser } = useContext(AuthContext)
     const [myQuizSubmission, setMyQuizSubmission] = useState([])
     const [formModified, setFormModified] = useState(false);
+    const [transactions, setTransactions] = useState([])
     const [formValues, setFormValues] = useState({
         name: currentUser?.user?.name,
         phone: currentUser?.user?.phone,
@@ -201,8 +203,8 @@ const UserProfile = () => {
                 // Sort transactions by date
                 setAttendance(data?.studentInfo?.attendance)
 
-                // const sortedTransactions = data?.studentInfo?.feesPaid.sort((a, b) => new Date(a.date) - new Date(b.date));
-                // setTransactions(sortedTransactions, "dsfsd");
+                const sortedTransactions = data?.studentInfo?.feesPaid.sort((a, b) => new Date(a.date) - new Date(b.date));
+                setTransactions(sortedTransactions, "dsfsd");
             })
             .catch((error) => {
                 console.error("Error fetching transactions:", error);
@@ -316,9 +318,17 @@ const UserProfile = () => {
 
             <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3 sm:p-6 sm:m-6 p-2 m-4  '>
                 {attendance && <MyCalendar attendance={attendance} />}
-                <ExamChart />
+                {/* <ExamChart /> */}
             </div>
-            <div className="border-2 px-6 m-6 text-gray-400">
+
+            <div className="mt-5 sm:p-6 sm:m-6 p-2 m-4 ">
+                <div className="bg-white p-4 shadow-md rounded-md">
+                    <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
+
+                    <List transactions={transactions?.slice().reverse()}  />
+                </div>
+            </div>
+            <div className="border-2 sm:p-6 sm:m-6 p-2 m-4 text-gray-400">
                 <button onClick={handleLogout} className="bg-black p-2 font-serif ">Logout</button>
             </div>
 
