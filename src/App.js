@@ -28,6 +28,7 @@ import Single from "./pages/Single/Single";
 import AddTransactions from "./pages/AddTransactions/AddTransactions";
 import JoinAsTutor from "./pages/JoinAsTutor/JoinAsTutor";
 import Attendance from "./pages/Attendance/Attendance";
+import Marks from "./pages/Marks/Marks";
 
 
 
@@ -66,8 +67,8 @@ function App() {
 
 		loadUser().then((data) => {
 
-			if (data.success) {
-				setCurrentUser({ user: data.user, isAuthenticated: true, loading: false })
+			if (data?.success) {
+				setCurrentUser({ user: data?.user, isAuthenticated: true, loading: false })
 			} else {
 				setCurrentUser({ isAuthenticated: false, loading: false })
 			}
@@ -174,6 +175,10 @@ function App() {
 				{
 					path: "/admin/students/transaction/:id",
 					element: <AddTransactions />
+				},
+				{
+					path: "/admin/students/marks/:id",
+					element: <Marks />
 				},
 				{
 					path: "/admin/quizs",

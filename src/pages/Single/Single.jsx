@@ -241,7 +241,7 @@ const Single = () => {
             </div>
             <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3  '>
                 <MyCalendar attendance={attendance} />
-                <ExamChart />
+                <ExamChart id={id} />
             </div>
 
 

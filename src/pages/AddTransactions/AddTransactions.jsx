@@ -23,10 +23,10 @@ const AddTransactions = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData, "FS");
+
         setLoading(true)
         await addStudentinfo(id, formData).then((data) => {
-            console.log(data);
+
 
             Swal.fire({
                 position: "top-end",
