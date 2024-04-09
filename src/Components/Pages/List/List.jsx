@@ -46,7 +46,7 @@ const List = ({ transactions, id }) => {
               <TableCell className="bg-white tableCell">Amount</TableCell>
               <TableCell className="bg-white tableCell">Payment Method</TableCell>
               <TableCell className="bg-white tableCell">Date</TableCell>
-              <TableCell className="bg-white tableCell">Actions</TableCell>
+             {id && <TableCell className="bg-white tableCell">Actions</TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -56,9 +56,9 @@ const List = ({ transactions, id }) => {
                 <TableCell className="tableCell">{transaction.amount}</TableCell>
                 <TableCell className="tableCell">{transaction.paymentMethod}</TableCell>
                 <TableCell className="tableCell">{transaction.timestamp}</TableCell>
-                <TableCell className="tableCell">
-                  <button onClick={() => handleDelete(id, transaction._id)}>Delete</button>
-                </TableCell>
+              {id && <TableCell className="tableCell">
+                <button onClick={() => handleDelete(id, transaction._id)}>Delete</button>
+              </TableCell>}
               </TableRow>
             ))}
           </TableBody>
