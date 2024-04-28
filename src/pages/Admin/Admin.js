@@ -25,7 +25,7 @@ const Admin = () => {
 
 
     return (
-        <div className='bg-slate-200 min-h-screen flex'>
+        <div className=' min-h-screen flex'>
             <div className={`mobile-toggle sm:invisible visible z-20 ${isOpen ? "fixed" : "absolute"} top-6 left-6`}>
                 <Hamburger toggled={isOpen} toggle={handleToggle} />
             </div>

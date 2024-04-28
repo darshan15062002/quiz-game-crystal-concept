@@ -241,22 +241,23 @@ const Single = () => {
             </div>
             <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3  '>
                 <MyCalendar attendance={attendance} />
-                <ExamChart id={id} />
-            </div>
-
-
-            <div className="mt-5  ">
-                <div className="bg-white p-4 shadow-md rounded-md">
-                    <div className="datatableTitle">
-                        <Link to={`/admin/students/transaction/${id}`} className="link">
-                            Add New
-                        </Link>
+                {/* <ExamChart id={id} /> */}
+                <div className="flex-1 ">
+                    <div className="bg-white p-4 shadow-xl  rounded-xl h-96">
+                        <div className="datatableTitle">
+                            <Link to={`/admin/students/transaction/${id}`} className="link">
+                                Add New
+                            </Link>
+                        </div>
+                        <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
+                        <div className="overflow-y-scroll max-h-64 no-scrollbar">
+                            <List transactions={transactions?.slice().reverse()} id={id} /></div>
                     </div>
-                    <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
-
-                    <List transactions={transactions?.slice().reverse()} id={id} />
                 </div>
             </div>
+
+
+
         </div>
 
     );

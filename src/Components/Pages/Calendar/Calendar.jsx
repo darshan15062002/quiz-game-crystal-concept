@@ -22,7 +22,7 @@ function MyCalendar({ attendance }) {
     };
 
     return (
-        <div className='bg-white shadow-xl  p-2 rounded-md flex flex-col gap-y-3 justify-center items-center' >
+        <div className='bg-white shadow-xl  p-2 rounded-xl flex flex-col gap-y-3 justify-center items-center' >
             <h2 className='text-gray-500 font-bold text-xl'>Attendance</h2>
             <Calendar
                 className=""

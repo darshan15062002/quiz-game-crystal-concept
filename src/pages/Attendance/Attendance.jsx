@@ -21,7 +21,7 @@ const Attendance = ({ query }) => {
             }));
             setStudents(studentsWithSequentialId);
         });
-    }, []);
+    }, [query]);
 
     const userColumns = [
         { field: 'id', headerName: 'ID', width: 100 },

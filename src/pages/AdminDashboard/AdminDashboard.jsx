@@ -35,12 +35,12 @@ const AdminDashboard = () => {
 
 
     return (
-        <div className='w-full pt-20 h-full px-6 '>
+        <div className='w-full pt-20 md:pt-10 h-full px-6 '>
             <div className="flex flex-wrap  gap-4 mb-10">
                 <Widget type="user" amount={noOfUsers} />
                 <Widget type="students" amount={noOfStudents} />
                 <Widget type="earning" amount={resp?.totalrevenue} />
-                <Widget type="total" amount={resp?.totalrevenue - resp?.totalspend} />
+                <Widget type="total" amount={resp?.totalrevenue - resp?.totalspend || 0} />
             </div>
             <div className="flex flex-col sm:flex-row  gap-5 ">
                 <AdminFeatured each={each} noOfStudents={noOfStudents} />
