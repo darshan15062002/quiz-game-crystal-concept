@@ -6,14 +6,14 @@ import { getAllStudents } from '../../api/authApi';
 import { addStudentinfo } from '../../api/studentApi';
 import { Box } from '@mui/material';
 
-const Attendance = () => {
+const Attendance = ({ query }) => {
     const [loading, setLoading] = useState(false);
     const [students, setStudents] = useState([]);
     const [attendanceStatus, setAttendanceStatus] = useState({});
 
     useEffect(() => {
         setLoading(true);
-        getAllStudents().then((res) => {
+        getAllStudents(query).then((res) => {
             setLoading(false);
             const studentsWithSequentialId = res.student.map((student, index) => ({
                 ...student,

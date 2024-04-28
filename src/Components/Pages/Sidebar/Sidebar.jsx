@@ -61,13 +61,15 @@ const Sidebar = ({ isOpen }) => {
           <Link to="/admin/attendance" style={{ textDecoration: "none" }}>
             <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
               <InsertChartIcon className="text-xl text-[#EB676A]" />
-              <span className='text-xs font-normal text-[#888] ml-1'>Attendance</span>
+              <span className='text-xs font-normal text-[#888] ml-1'>Student Attendance</span>
             </li>
           </Link>
-          <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
-            <NotificationsNoneIcon className="text-xl text-[#EB676A]" />
-            <span className='text-xs font-normal text-[#888] ml-1'>Marks</span>
-          </li>
+          <Link to="/admin/teacherattendance" style={{ textDecoration: "none" }}>
+            <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
+              <InsertChartIcon className="text-xl text-[#EB676A]" />
+              <span className='text-xs font-normal text-[#888] ml-1'>Teacher Attendance</span>
+            </li>
+          </Link>
           <p className="text-xs font-bold text-[#999] mt-4 mb-1">SERVICE</p>
           <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
             <SettingsSystemDaydreamOutlinedIcon className="text-xl text-[#EB676A]" />

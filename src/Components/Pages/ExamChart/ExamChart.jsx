@@ -2,8 +2,6 @@ import { ArrowBack, ArrowForward, ArrowLeft, ArrowRight } from "@mui/icons-mater
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-    LineChart,
-    Line,
     XAxis,
     YAxis,
     CartesianGrid,
@@ -73,13 +71,13 @@ export default function ExamChart({ id }) {
     const subjectMarks = formattedData.slice(startIndex, currentIndex + 1);
     const colors = ['#82ca9d', '#8884d8', '#ffc658', '#ff7300', '#00C49F', '#FFD700', '#FF5733', '#C70039'];
     return (
-        <ResponsiveContainer className={"flex relative bg-white justify-center pt-3 items-center flex-col gap-y-6 shadow-xl rounded-md px-6"} aspect={5 / 4}>
+        <ResponsiveContainer className={"flex relative bg-white justify-center pt-3 items-center flex-col gap-y-6 shadow-xl rounded-md px-6"} aspect={2 / 1}>
             <h2 className="text-gray-500  font-bold text-xl">Exam Marks </h2>
             <Link to={`/admin/students/marks/${id}`} className=" absolute border right-5 top-2 px-2 py-1 border-green-600 rounded-md text-green-600">
                 Add New
             </Link>
             <BarChart data={subjectMarks} className="">
-                <CartesianGrid strokeDasharray="3 3" />
+                <CartesianGrid strokeDasharray={3} />
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip content={<CustomTooltip />} />
