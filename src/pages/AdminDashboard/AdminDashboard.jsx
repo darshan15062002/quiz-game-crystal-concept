@@ -8,7 +8,7 @@ import { getDashboard } from '../../api/dashboardApi';
 
 const AdminDashboard = () => {
 
-
+    const [resp, setRes] = useState()
     const [noOfStudents, setNoOfStudents] = useState(0)
     const [noOfUsers, setNoOfUsers] = useState(0)
     const [each, setEach] = useState([])
@@ -22,24 +22,25 @@ const AdminDashboard = () => {
     useEffect(() => {
         setLoading(true)
         getDashboard().then((res) => {
+            setRes(res)
             console.log(res);
             setNoOfUsers(res.userCount)
             setNoOfStudents(res.studentsCount)
             setEach(res.eachStdCount)
-            setTotalRevenue(res.totalrevenue)
+
             setLoading(false)
 
-        }).catch(err=> setLoading(false))
+        }).catch(err => setLoading(false))
     }, []);
 
 
     return (
-        <div className='w-full pt-20 h-full px-6 '>
+        <div className='w-full pt-20 md:pt-10 h-full px-6 '>
             <div className="flex flex-wrap  gap-4 mb-10">
-             <Widget type="user" amount={noOfUsers} />
+                <Widget type="user" amount={noOfUsers} />
                 <Widget type="students" amount={noOfStudents} />
-                <Widget type="earning" amount={totalRevenue} />
-                <Widget type="total" amount={totalRevenue} />
+                <Widget type="earning" amount={resp?.totalrevenue} />
+                <Widget type="total" amount={resp?.totalrevenue - resp?.totalspend || 0} />
             </div>
             <div className="flex flex-col sm:flex-row  gap-5 ">
                 <AdminFeatured each={each} noOfStudents={noOfStudents} />

@@ -1,14 +1,15 @@
 import { ArrowBack, ArrowForward, ArrowLeft, ArrowRight } from "@mui/icons-material";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
-    LineChart,
-    Line,
     XAxis,
     YAxis,
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    BarChart,
+    Line
 } from "recharts";
 
 const dummyExamData = [
@@ -48,7 +49,7 @@ function convertData(dummyData) {
     return Object.values(formattedData);
 }
 
-export default function ExamChart() {
+export default function ExamChart({id}) {
     const formattedData = convertData(dummyExamData);
     const [currentIndex, setCurrentIndex] = useState(formattedData.length - 1);
 
@@ -70,10 +71,13 @@ export default function ExamChart() {
     const subjectMarks = formattedData.slice(startIndex, currentIndex + 1);
 
     return (
-        <ResponsiveContainer className={"flex bg-white justify-center items-center flex-col gap-y-3 shadow-xl rounded-md px-6"} aspect={2 / 1}>
-            <h2 className="text-gray-500 font-bold text-xl">Exam Marks </h2>
-            <LineChart data={subjectMarks} width={"100%"} height={500} className="">
-                <CartesianGrid strokeDasharray="3 3" />
+        <ResponsiveContainer className={"flex relative bg-white justify-center pt-3 items-center flex-col gap-y-6 shadow-xl rounded-md px-6"} aspect={2 / 1}>
+            <h2 className="text-gray-500  font-bold text-xl">Exam Marks </h2>
+            <Link to={`/admin/students/marks/${id}`} className=" absolute border right-5 top-2 px-2 py-1 border-green-600 rounded-md text-green-600">
+                Add New
+            </Link>
+            <BarChart data={subjectMarks} className="">
+                <CartesianGrid strokeDasharray={3} />
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
@@ -85,7 +89,7 @@ export default function ExamChart() {
                         stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`} // Random color
                     />
                 ))}
-            </LineChart>
+            </BarChart>
             <div className="flex justify-center items-center  mb-4">
                 <ArrowLeft onClick={handleBackward} disabled={currentIndex === 0} />
                 <ArrowRight onClick={handleForward} disabled={currentIndex === formattedData.length - 1} />

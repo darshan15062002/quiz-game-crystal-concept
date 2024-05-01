@@ -220,53 +220,47 @@ const UserProfile = () => {
 
                 <h2 className='text-3xl font-semibold mb-5 text-gray-700'>User Profile</h2>
             </div>
-            <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 sm:p-6 sm:m-6 p-2 m-4'>
-                <form className='flex flex-col md:flex lg:flex-row items-start justify-center border-2 p-6'>
-
-                    <div>
-                        <input type="text" placeholder='Name'
-                            onChange={(e) => handleFieldChange('name', e.target.value)}
-                            value={formValues.name}
-                            className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
-
-                        <input
-                            type="tel" maxlength="10" required
-
-                            placeholder="Phone No"
-                            name="phone"
-                            className='w-full p-3 input input-bordered shadow-md mb-2 text-black'
-                            onChange={(e) => handleFieldChange('phone', e.target.value)}
-                            value={formValues.phone}
-                            autoComplete="off"
-                        />
-
-                        <input
-                            type="Number"
-                            placeholder="standard"
-                            maxlength="2"
-                            name="standard"
-                            className="w-full p-3 input input-bordered shadow-md mb-2 text-black"
-                            onChange={(e) => handleFieldChange('std', e.target.value)}
-                            value={formValues.std}
-                        />
+            <div className='flex  mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3 sm:p-6 sm:m-6 p-2 m-4 '>
+                <form className='flex w-full flex-col items-start justify-center  bg-white  shadow-xl  rounded-xl p-6'>
 
 
-                        <input
-                            type="text"
-                            placeholder="city"
-                            name="location"
-                            className="w-full p-3 input input-bordered shadow-md mb-2 text-black"
-                            onChange={(e) => handleFieldChange('location', e.target.value)}
-                            value={formValues.location}
-                        />
+                    <input type="text" placeholder='Name'
+                        onChange={(e) => handleFieldChange('name', e.target.value)}
+                        value={formValues.name}
+                        className='w-full p-3 input input-bordered shadow-md mb-2 text-black ' />
+
+                    <input
+                        type="tel" maxlength="10" required
+
+                        placeholder="Phone No"
+                        name="phone"
+                        className='w-full p-3 input input-bordered shadow-md mb-2 text-black'
+                        onChange={(e) => handleFieldChange('phone', e.target.value)}
+                        value={formValues.phone}
+                        autoComplete="off"
+                    />
+
+                    <input
+                        type="Number"
+                        placeholder="standard"
+                        maxlength="2"
+                        name="standard"
+                        className="w-full p-3 input input-bordered shadow-md mb-2 text-black"
+                        onChange={(e) => handleFieldChange('std', e.target.value)}
+                        value={formValues.std}
+                    />
 
 
+                    <input
+                        type="text"
+                        placeholder="city"
+                        name="location"
+                        className="w-full p-3 input input-bordered shadow-md mb-2 text-black"
+                        onChange={(e) => handleFieldChange('location', e.target.value)}
+                        value={formValues.location}
+                    />
 
 
-
-
-
-                    </div>
 
                     {formModified && (
                         <div className="flex justify-center items-center w-full mt-2 gap-4">
@@ -278,56 +272,64 @@ const UserProfile = () => {
                         </div>
                     )}
 
+
+
+
+
+
+
                 </form>
 
+                {currentUser?.user?.role === 'student' &&
+                    <div className='text-black h-[50vh] w-full  md:p-6 px-2 py-3 overflow-y-scroll bg-white p-4 shadow-xl  rounded-xl'>
+                        <h4 className='text-sm uppercase text-center scroll-m-3 mb-3 '>Submissions</h4>
 
-                <div className='text-black h-[50vh] border-2 md:p-6 px-2 py-3 overflow-y-scroll'>
-                    <h4 className='text-sm uppercase text-center scroll-m-3 mb-3 '>Submissions</h4>
 
 
+                        {
+                            myQuizSubmission?.map((quiz) => (
+                                <div className="border-2 flex text-sm justify-between items-center  px-4 py-3 gap-x-3 text-gray-700">
+                                    <span className='w-1/2'>{quiz?.quizTitle}</span>
+                                    <div className="flex   justify-center items-center gap-4">
 
-                    {
-                        myQuizSubmission?.map((quiz) => (
-                            <div className="border-2 flex text-sm justify-between items-center  px-4 py-3 gap-x-3 text-gray-700">
-                                <span className='w-1/2'>{quiz?.quizTitle}</span>
-                                <div className="flex   justify-center items-center gap-4">
+                                        <p>{quiz?.timestamp?.slice(0, -14)}</p>
+                                        <h2>{quiz?.points}/{quiz?.answers?.length}</h2>
+                                        <button onClick={() => handleShowQuiz(quiz?._id)} className=" inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                            <span className=" px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                view
+                                            </span>
+                                        </button>
 
-                                    <p>{quiz?.timestamp?.slice(0, -14)}</p>
-                                    <h2>{quiz?.points}/{quiz?.answers?.length}</h2>
-                                    <button onClick={() => handleShowQuiz(quiz?._id)} className=" inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                                        <span className=" px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                            view
-                                        </span>
-                                    </button>
+                                        {showAns && currentQuiz && questions && <QuizModal title={currentQuiz.quizTitle} questions={questions} setShowAns={setShowAns} setResultShow={handleClose} count={count} selectedOptions={currentQuiz?.answers} handleNext={handleNext} handlePrev={handlePrev} />}
 
-                                    {showAns && currentQuiz && questions && <QuizModal title={currentQuiz.quizTitle} questions={questions} setShowAns={setShowAns} setResultShow={handleClose} count={count} selectedOptions={currentQuiz?.answers} handleNext={handleNext} handlePrev={handlePrev} />}
+                                    </div>
+
 
                                 </div>
-
-
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
 
 
 
 
 
-                </div>
+                    </div>}
             </div>
 
             <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3 sm:p-6 sm:m-6 p-2 m-4  '>
-                {attendance && <MyCalendar attendance={attendance} />}
+                {<MyCalendar attendance={attendance} />}
                 {/* <ExamChart /> */}
-            </div>
-
-            <div className="mt-5 sm:p-6 sm:m-6 p-2 m-4 ">
-                <div className="bg-white p-4 shadow-md rounded-md">
-                    <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
-
-                    <List transactions={transactions?.slice().reverse()} />
+                <div className=" w-full  ">
+                    <div className="bg-white p-4 shadow-xl h-96 rounded-xl">
+                        <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
+                        <div className="overflow-y-scroll max-h-64 no-scrollbar">
+                            <List transactions={transactions?.slice().reverse()} />
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
             <div className="border-2 sm:p-6 sm:m-6 p-2 m-4 text-gray-400">
                 <button onClick={handleLogout} className="bg-black p-2 font-serif ">Logout</button>
             </div>

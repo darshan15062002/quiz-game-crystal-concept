@@ -15,7 +15,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { Book, Person2Rounded, Person2Sharp, Person2TwoTone } from '@mui/icons-material';
 const Sidebar = ({ isOpen }) => {
   return (
-    <div className={` ${isOpen ? "fixed w-1/2 z-10 h-screen pt-16" : "hidden "} sm:block sm:w-1/5 border-r-2 border-slate-300 sm:min-h-full bg-white`}>
+    <div className={` ${isOpen ? "fixed w-1/2 z-10 h-screen pt-16" : "hidden "} sm:block sm:w-1/5  shadow-xl  sm:min-h-full bg-white`}>
       <div className="h-[50px] flex justify-center items-center">
         <Link to="/" style={{ textDecoration: "none" }} >
           <span className="text-xl font-bold text-[#EB676A]">Crystal Concept</span>
@@ -61,13 +61,15 @@ const Sidebar = ({ isOpen }) => {
           <Link to="/admin/attendance" style={{ textDecoration: "none" }}>
             <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
               <InsertChartIcon className="text-xl text-[#EB676A]" />
-              <span className='text-xs font-normal text-[#888] ml-1'>Attendance</span>
+              <span className='text-xs font-normal text-[#888] ml-1'>Student Attendance</span>
             </li>
           </Link>
-          <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
-            <NotificationsNoneIcon className="text-xl text-[#EB676A]" />
-            <span className='text-xs font-normal text-[#888] ml-1'>Marks</span>
-          </li>
+          <Link to="/admin/teacherattendance" style={{ textDecoration: "none" }}>
+            <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
+              <InsertChartIcon className="text-xl text-[#EB676A]" />
+              <span className='text-xs font-normal text-[#888] ml-1'>Teacher Attendance</span>
+            </li>
+          </Link>
           <p className="text-xs font-bold text-[#999] mt-4 mb-1">SERVICE</p>
           <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
             <SettingsSystemDaydreamOutlinedIcon className="text-xl text-[#EB676A]" />

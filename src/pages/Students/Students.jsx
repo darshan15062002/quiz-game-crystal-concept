@@ -30,14 +30,14 @@ const Students = () => {
     }, []);
 
 
-    console.log(students);
+
 
     const userColumns = [
         { field: "id", headerName: "ID", width: 70 },
         {
             field: "name",
             headerName: "Name",
-            width: 230,
+            width: 200,
             // renderCell: (params) => {
             //     return (
             //         <div className="cellWithImg">
@@ -50,7 +50,7 @@ const Students = () => {
         {
             field: "phone",
             headerName: "Phone",
-            width: 230,
+            width: 150,
         },
 
         {
@@ -100,7 +100,7 @@ const Students = () => {
         {
             field: "action",
             headerName: "Action",
-            width: 200,
+            width: 150,
             renderCell: (params) => {
                 console.log(params.row._id);
                 return (
@@ -128,9 +128,9 @@ const Students = () => {
                     Add New
                 </Link>
             </div>
-            <div className="overflow-scroll md:overflow-hidden  ">
+            <div className=" w-full overflow-scroll md:overflow-hidden  ">
                 <DataGrid
-                    className="bg-white w-full"
+                    className="bg-white"
                     rows={students}
                     columns={userColumns.concat(actionColumn)}
                     pageSize={9}

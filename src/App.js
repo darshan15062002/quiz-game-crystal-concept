@@ -193,6 +193,10 @@ function App() {
 					element: <Attendance />
 				},
 				{
+					path: "/admin/teacherattendance",
+					element: <Attendance query={"teacher"} />
+				},
+				{
 					path: "/admin/teachers/new",
 					element: <NewStudents inputs={teacherInputs} role={'teacher'} title={"Add New Teacher"} />
 				},
