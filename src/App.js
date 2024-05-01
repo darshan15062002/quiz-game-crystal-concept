@@ -6,14 +6,14 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 
 import PlayQuiz from "./pages/PlayQuiz/PlayQuiz";
 import Main from "./Layout/Main";
-import { useContext, useEffect } from "react";
+import { lazy, Suspense, useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { loadUser } from "./api/authApi";
 import Nopage from "./pages/NoPage/Nopage";
 import Summarizer from "./pages/Summerizer/Summerizer";
 import { Search } from "./pages/Search/Search";
 import { Quizs } from "./pages/Quizs/Quizs";
-import Admin from "./pages/Admin/Admin";
+
 import RequestTutor from "./pages/RequestTotor/RequestTutor";
 import ForgetPassword from "./pages/ForgetPassword/ForgetPassword";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
@@ -30,7 +30,7 @@ import JoinAsTutor from "./pages/JoinAsTutor/JoinAsTutor";
 import Attendance from "./pages/Attendance/Attendance";
 import Marks from "./pages/Marks/Marks";
 
-
+const Admin = lazy(() => import('./pages/Admin/Admin'));
 
 
 
@@ -149,7 +149,7 @@ function App() {
 		},
 		{
 			path: "/admin",
-			element: <AdminProtectedRoute><Admin /></AdminProtectedRoute>,
+			element: <Suspense><AdminProtectedRoute><Admin /></AdminProtectedRoute></Suspense>,
 			children: [
 				{
 					path: "/admin",
