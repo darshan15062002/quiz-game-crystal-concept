@@ -9,7 +9,7 @@ import {
     Legend,
     ResponsiveContainer,
     BarChart,
-    Bar
+    Line
 } from "recharts";
 
 const dummyExamData = [
@@ -42,17 +42,17 @@ function convertData(dummyData) {
         if (!acc[date][subject]) {
             acc[date][subject] = { marks, outOf };
         }
-
+        console.log(acc, "DAS");
         return acc;
     }, {});
-
+    console.log(formattedData, "formattedData");
     return Object.values(formattedData);
 }
 
-export default function ExamChart({ id }) {
+export default function ExamChart({id}) {
     const formattedData = convertData(dummyExamData);
     const [currentIndex, setCurrentIndex] = useState(formattedData.length - 1);
-    console.log(formattedData);
+
     const handleBackward = () => {
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);
@@ -69,7 +69,7 @@ export default function ExamChart({ id }) {
     const presentTest = formattedData[currentIndex];
     const startIndex = currentIndex >= 4 ? currentIndex - 4 : 0;
     const subjectMarks = formattedData.slice(startIndex, currentIndex + 1);
-    const colors = ['#82ca9d', '#8884d8', '#ffc658', '#ff7300', '#00C49F', '#FFD700', '#FF5733', '#C70039'];
+
     return (
         <ResponsiveContainer className={"flex relative bg-white justify-center pt-3 items-center flex-col gap-y-6 shadow-xl rounded-md px-6"} aspect={2 / 1}>
             <h2 className="text-gray-500  font-bold text-xl">Exam Marks </h2>
@@ -80,13 +80,13 @@ export default function ExamChart({ id }) {
                 <CartesianGrid strokeDasharray={3} />
                 <XAxis dataKey="date" />
                 <YAxis />
-                <Tooltip content={<CustomTooltip />} />
+                <Tooltip />
                 <Legend />
-                {/* Render a bar for each subject */}
+                {/* Render a line for each subject */}
                 {Object.keys(presentTest).map((subject, index) => (
                     subject !== 'date' &&
-                    <Bar key={index} dataKey={`${subject}.marks`} name={subject}
-                        fill={colors[index % colors.length]}
+                    <Line key={index} type="monotone" dataKey={`${subject}.marks`} name={subject}
+                        stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`} // Random color
                     />
                 ))}
             </BarChart>
@@ -98,22 +98,4 @@ export default function ExamChart({ id }) {
 
         </ResponsiveContainer >
     );
-}
-
-function CustomTooltip({ active, payload }) {
-    if (active && payload && payload.length) {
-        return (
-            <div className="bg-white p-2 text-xs rounded-md flex flex-col justify-center items-start gap-y-1  shadow-md">
-                <p className="">{`Date: ${payload[0].payload.date}`}</p>
-
-                {payload.map((entry, index) => (
-                    <p key={index} className="">
-                        {`${entry.dataKey.split('.')[0]}: ${entry.value} out of ${entry.payload[`${entry.dataKey.split('.')[0]}`].outOf}`}
-                    </p>
-                ))}
-            </div>
-        );
-    }
-
-    return null;
 }
