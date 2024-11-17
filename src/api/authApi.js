@@ -9,7 +9,7 @@ export const userLogin = async ({ email, password }) => {
             },
             "withCredentials": true
         })
-
+        console.log(res.data, "darshan");
         return res.data
     } catch (error) {
         return error
@@ -160,6 +160,8 @@ export const sendOTP = async (phone) => {
         })
         return res.data
     } catch (error) {
+        console.log(error.response);
+
         return error.response.data
     }
 }

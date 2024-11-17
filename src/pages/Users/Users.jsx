@@ -3,6 +3,8 @@ import { AddQuiz } from '../../Components/Pages/AddQuiz/AddQuiz'
 import { useNavigate } from 'react-router-dom'
 import { getAllUsers } from '../../api/authApi'
 import { Table } from '../../Components/Pages/Table/Table'
+import Widget from '../../Components/Pages/Widgets/Widget'
+import { getDashboard } from '../../api/dashboardApi'
 
 
 const Users = () => {
@@ -19,7 +21,7 @@ const Users = () => {
         setLoading(true)
         getAllUsers(searchPage, query === 'location' ? "city" : query, search).then((res) => {
             setLoading(false)
-            setNoOfUsers(res.userCount);
+
             setUsers(res.users)
         }).catch((err) => {
             setLoading(false)
@@ -29,14 +31,26 @@ const Users = () => {
 
     useEffect(() => {
         setLoading(true)
-        getAllUsers(page).then((res) => {
+        try {
+            getAllUsers(searchPage, query === 'location' ? "city" : query, search).then((res) => { setUsers(res.users) })
+            getDashboard().then((res) => { setNoOfUsers(res.userCount) })
+
+        } catch (error) {
             setLoading(false)
-            setNoOfUsers(res.userCount);
-            setUsers(res.users)
-        })
-    }, [page, setPage]);
+        } finally {
+            setLoading(false)
+        }
+
+
+
+    }, []);
+
+
     return (
         <div className='w-screen  px-4 pt-20 '>
+            <div className="flex flex-wrap  gap-4 mb-10">
+                <Widget type="user" amount={noOfUsers} />
+            </div>
             <form className='  mb-10  flex justify-center items-center   '>
                 <div className=" relative group/item ">
                     <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex gap-3  z-10  items-center py-4 rounded-l-md px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border  rounded-s-lg  " type="button">{query}

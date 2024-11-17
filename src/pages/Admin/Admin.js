@@ -5,7 +5,7 @@ import { Outlet, } from 'react-router-dom';
 
 import Sidebar from '../../Components/Pages/Sidebar/Sidebar';
 import Hamburger from 'hamburger-react';
-
+import { AddQuiz } from '../../Components/Pages/AddQuiz/AddQuiz';
 
 
 const Admin = () => {
@@ -31,6 +31,7 @@ const Admin = () => {
             </div>
             <Sidebar isOpen={isOpen} />
             <Outlet />
+
 
         </div >
 

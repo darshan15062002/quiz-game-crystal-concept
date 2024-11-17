@@ -16,6 +16,7 @@
     "daisyui": "^2.46.0",
     "firebase": "^9.22.2",
     "hamburger-react": "^2.5.0",
+    "lucide-react": "^0.460.0",
     "react": "^18.2.0",
     "react-ace": "^10.1.0",
     "react-calendar": "^4.8.0",

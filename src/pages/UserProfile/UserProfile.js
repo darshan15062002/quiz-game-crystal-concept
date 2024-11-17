@@ -280,46 +280,46 @@ const UserProfile = () => {
 
                 </form>
 
-                {currentUser?.user?.role === 'student' &&
-                    <div className='text-black h-[50vh] w-1/2  md:p-6 px-2 py-3 overflow-y-scroll bg-white p-4 shadow-xl  rounded-xl'>
-                        <h4 className='text-sm uppercase text-center scroll-m-3 mb-3 '>Submissions</h4>
+
+                <div className='text-black h-[50vh] w-full  md:p-6 px-2 py-3 overflow-y-scroll bg-white p-4 shadow-xl  rounded-xl'>
+                    <h4 className='text-sm uppercase text-center scroll-m-3 mb-3 '>Submissions</h4>
 
 
 
-                        {
-                            myQuizSubmission?.map((quiz) => (
-                                <div className="border-2 flex text-sm justify-between items-center  px-4 py-3 gap-x-3 text-gray-700">
-                                    <span className='w-1/2'>{quiz?.quizTitle}</span>
-                                    <div className="flex   justify-center items-center gap-4">
+                    {
+                        myQuizSubmission?.map((quiz) => (
+                            <div className="border-2 flex text-sm justify-between items-center  px-4 py-3 gap-x-3 text-gray-700">
+                                <span className='w-1/2'>{quiz?.quizTitle}</span>
+                                <div className="flex   justify-center items-center gap-4">
 
-                                        <p>{quiz?.timestamp?.slice(0, -14)}</p>
-                                        <h2>{quiz?.points}/{quiz?.answers?.length}</h2>
-                                        <button onClick={() => handleShowQuiz(quiz?._id)} className=" inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-                                            <span className=" px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-                                                view
-                                            </span>
-                                        </button>
+                                    <p>{quiz?.timestamp?.slice(0, -14)}</p>
+                                    <h2>{quiz?.points}/{quiz?.answers?.length}</h2>
+                                    <button onClick={() => handleShowQuiz(quiz?._id)} className=" inline-flex items-center justify-center p-0.5   overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+                                        <span className=" px-3 py-2 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                            view
+                                        </span>
+                                    </button>
 
-                                        {showAns && currentQuiz && questions && <QuizModal title={currentQuiz.quizTitle} questions={questions} setShowAns={setShowAns} setResultShow={handleClose} count={count} selectedOptions={currentQuiz?.answers} handleNext={handleNext} handlePrev={handlePrev} />}
-
-                                    </div>
-
+                                    {showAns && currentQuiz && questions && <QuizModal title={currentQuiz.quizTitle} questions={questions} setShowAns={setShowAns} setResultShow={handleClose} count={count} selectedOptions={currentQuiz?.answers} handleNext={handleNext} handlePrev={handlePrev} />}
 
                                 </div>
-                            ))
-                        }
+
+
+                            </div>
+                        ))
+                    }
 
 
 
 
 
-                    </div>}
+                </div>
             </div>
 
-            <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3 sm:p-6 sm:m-6 p-2 m-4  '>
-                {<MyCalendar attendance={attendance} />}
-                {/* <ExamChart /> */}
-                <div className=" w-full  ">
+            {/* <div className='flex mt-5 md:flex-row flex-col gap-y-5 md:gap-x-3 sm:p-6 sm:m-6 p-2 m-4  '>
+                {<MyCalendar attendance={attendance} />} */}
+            {/* <ExamChart /> */}
+            {/* <div className=" w-full  ">
                     <div className="bg-white p-4 shadow-xl h-96 rounded-xl">
                         <h1 className="text-xl font-bold mb-4">Last Transactions</h1>
                         <div className="overflow-y-scroll max-h-64 no-scrollbar">
@@ -327,10 +327,10 @@ const UserProfile = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
 
-            <div className="border-2 sm:p-6 sm:m-6 p-2 m-4 text-gray-400">
+            <div className=" sm:p-6 sm:m-6 p-2 m-4 text-gray-400">
                 <button onClick={handleLogout} className="bg-black p-2 font-serif ">Logout</button>
             </div>
 

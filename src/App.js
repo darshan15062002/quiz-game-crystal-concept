@@ -153,12 +153,13 @@ function App() {
 			children: [
 				{
 					path: "/admin",
-					element: <AdminDashboard />
-				},
-				{
-					path: "/admin/users",
 					element: <Users />
-				}
+				},
+				// {
+				// 	path: "/admin",
+				// 	element: <AdminDashboard />
+				// },
+
 				,
 				{
 					path: "/admin/students",

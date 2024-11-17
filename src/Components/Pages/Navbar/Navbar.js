@@ -68,8 +68,8 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar h-16 w-screen  shadow-md text-sm   bg-slate-100/60  fixed  z-20 top-0 start-0 border-b border-gray-200 ">
-      <div className="flex sm:mx-24 mx-5  w-full h-full justify-between items-center ">
+    <div className="navbar h-16 w-screen  shadow-md text-sm   bg-white fixed  z-20 top-0 start-0 border-b border-gray-200 ">
+      <div className="flex sm:mx-24 mx-5  w-full h-full justify-between items-center  ">
 
         <Link to='/' className=' font-serif  mt-4 sm:text-2xl text-xl mb-5   font-extrabold' style={{ fontFamily: 'Poppins', color: '#262D4D' }}>   Crystal <span className='text-[#EB676A]'>Concept</span></Link>
 
