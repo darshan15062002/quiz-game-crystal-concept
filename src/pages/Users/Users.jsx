@@ -16,34 +16,35 @@ const Users = () => {
     const [search, setSearch] = useState('')
     const [query, setQuery] = useState('name')
     const [searchPage, setSearchPage] = useState(1)
-    const handleSearch = (e) => {
-        e.preventDefault()
+    console.log(searchPage,"search page");
+    
+    const fetchUsers = async (currentPage, searchQuery = '', searchValue = '') => {
         setLoading(true)
-        getAllUsers(searchPage, query === 'location' ? "city" : query, search).then((res) => {
-            setLoading(false)
-
+        try {
+            const res = await getAllUsers(
+                currentPage, 
+                searchQuery === 'location' ? "city" : searchQuery, 
+                searchValue
+            )
             setUsers(res.users)
-        }).catch((err) => {
+            // setTotalPages(res.totalPages || 1)
             setLoading(false)
-        })
-
+        } catch (error) {
+            setLoading(false)
+        }
     }
 
     useEffect(() => {
-        setLoading(true)
-        try {
-            getAllUsers(searchPage, query === 'location' ? "city" : query, search).then((res) => { setUsers(res.users) })
-            getDashboard().then((res) => { setNoOfUsers(res.userCount) })
+        fetchUsers(page, query, search)
+        getDashboard().then((res) => { setNoOfUsers(res.userCount) })
+    }, [page, search, query])
 
-        } catch (error) {
-            setLoading(false)
-        } finally {
-            setLoading(false)
-        }
+    const handleSearch = (e) => {
+        e.preventDefault()
+        fetchUsers(1, query, search)
+    }
 
-
-
-    }, []);
+console.log(page,"darshan");
 
 
     return (
@@ -97,7 +98,7 @@ const Users = () => {
                         <span class="sr-only">Loading...</span>
                     </div>
                 </div>
-            ) : <Table users={users} />}
+            ) : <Table users={users} page={page} />}
 
 
             <div className="flex w-full justify-end gap-3 mt-2 mr-3">
