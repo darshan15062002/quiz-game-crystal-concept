@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
 import { Book, } from '@mui/icons-material';
+import { FaBlog } from 'react-icons/fa';
 const Sidebar = ({ isOpen }) => {
   return (
     <div className={` ${isOpen ? "fixed w-1/2 z-10 h-screen pt-16" : "hidden "} sm:block sm:w-1/5  shadow-xl  sm:min-h-full bg-white`}>
@@ -30,6 +31,12 @@ const Sidebar = ({ isOpen }) => {
             <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
               <Book className="text-xl text-[#EB676A]" />
               <span className='text-xs font-normal text-[#888] ml-1'>Quizs</span>
+            </li >
+          </Link>
+          <Link to="/admin/createblog" style={{ textDecoration: "none" }}>
+            <li className='flex items-center p-1 cursor-pointer hover:bg-[#ece8ff]'>
+              <FaBlog className="text-xl text-[#EB676A]" />
+              <span className='text-xs font-normal text-[#888] ml-1'>blogs</span>
             </li >
           </Link>
 

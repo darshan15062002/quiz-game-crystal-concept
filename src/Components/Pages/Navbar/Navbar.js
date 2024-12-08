@@ -30,6 +30,9 @@ const Navbar = () => {
             <Link className='text-black' to="/playquiz">PLAY QUIZ</Link>
           </li>
           <li>
+            <Link className='text-black' to="/BlogList">BLOGS</Link>
+          </li>
+          <li>
             <Link className='text-black' to="/search">SEARCH</Link>
           </li>
 

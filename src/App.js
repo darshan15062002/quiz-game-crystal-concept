@@ -29,6 +29,9 @@ import AddTransactions from "./pages/AddTransactions/AddTransactions";
 import JoinAsTutor from "./pages/JoinAsTutor/JoinAsTutor";
 import Attendance from "./pages/Attendance/Attendance";
 import Marks from "./pages/Marks/Marks";
+import BlogPostForm from "./pages/AdminBlogPost/BlogPostForm";
+import BlogList from "./pages/BlogList/BlogList";
+import BlogDetail from "./pages/BlogDetails/BlogDetails";
 
 const Admin = lazy(() => import('./pages/Admin/Admin'));
 
@@ -117,6 +120,19 @@ function App() {
 					</ProtectedRoute>
 				},
 				{
+					path: "/BlogList",
+					element:
+						<BlogList />
+
+				},
+
+				{
+					path: "/BlogDetail/:id",
+					element:
+						<BlogDetail />
+
+				},
+				{
 					path: "/quiz/:id",
 					element:
 						<Quizs />
@@ -147,6 +163,7 @@ function App() {
 			path: "/forgetpassword",
 			element: <ForgetPassword />,
 		},
+
 		{
 			path: "/admin",
 			element: <Suspense><AdminProtectedRoute><Admin /></AdminProtectedRoute></Suspense>,
@@ -160,7 +177,14 @@ function App() {
 				// 	element: <AdminDashboard />
 				// },
 
-				,
+
+				{
+					path: "/admin/createblog/:blogId?",
+					element: <BlogPostForm />
+				},
+
+
+
 				{
 					path: "/admin/students",
 					element: <Students />
