@@ -31,8 +31,12 @@ const Signup = () => {
       return "Phone number must be a valid 10-digit number.";
     }
 
-    if (!std || !["10", "12", "Graduation"].includes(std)) {
-      return "Standard must be '10', '12', or 'Graduation'.";
+  
+
+    if (!std) {
+       return "Standard is required";
+    } else if (parseInt(std) < 1 || parseInt(std) > 12) {
+       return"Standard must be between 1 and 12";
     }
 
     if (!location.trim()) {
@@ -145,8 +149,8 @@ const Signup = () => {
           </div>
           <div className="form-control">
             <input
-              type="text"
-              placeholder="standard (10/12/Graduation)"
+             type="number"
+              placeholder="enter your standard "
               name="standard"
               className="border-b-2 p-3 outline-none"
               onChange={(e) => setStd(e.target.value)}
