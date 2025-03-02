@@ -8,10 +8,13 @@ import "swiper/css/navigation";
 const FacultySection = ({ teachers }) => {
     return (
         <div className="py-12 flex flex-col justify-center items-center bg-gray-100">
-            {/* Title */}
-            <h1 className="text-start lg:text-4xl border-[#212b60] border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans">
-                              Our Faculty
-                          </h1>
+        
+                                    
+                <div className="text-center mb-12">
+                <h1 className="text-4xl font-extrabold text-[#212b60] border-b-4 inline-block pb-2 border-[#EB676A]">
+                Our Faculty
+                </h1>
+                </div>
                           <div className="sm:px-28 px-8 py-5 grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
                               {teachers.map((teacher, index) => (
                                   <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden">
@@ -25,6 +28,8 @@ const FacultySection = ({ teachers }) => {
                                   
                               ))}
                           </div>
+
+                          
           
         </div>
     );

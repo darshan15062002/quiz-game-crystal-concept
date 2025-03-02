@@ -19,6 +19,9 @@ import classroom1 from "../../assets/class/IMG_1.JPG";
 import classroom2 from "../../assets/class/IMG_1.JPG";
 import { FacilitiesShowcase } from '../../Components/Carousel/Carousel';
 import FacultySection from '../../Components/Carousel/FacultySection';
+import HeroSection from '../../Components/HeroSection';
+import FeaturesSection from '../../Components/FeatureSection';
+import JoinUsSection from '../../Components/JoinUsSection';
 
 const Home = () => {
     const featureData = [
@@ -61,14 +64,14 @@ const Home = () => {
             title: "Class 11-12 Science",
             description: "Specialized teaching for 11th and 12th grade science students."
         },
-        {
-            title: "JEE Preparation",
-            description: "Intensive coaching for JEE Main and Advanced with concept-based learning."
-        },
-        {
-            title: "NEET Preparation",
-            description: "Comprehensive NEET preparation with biology, physics, and chemistry experts."
-        }
+        // {
+        //     title: "JEE Preparation",
+        //     description: "Intensive coaching for JEE Main and Advanced with concept-based learning."
+        // },
+        // {
+        //     title: "NEET Preparation",
+        //     description: "Comprehensive NEET preparation with biology, physics, and chemistry experts."
+        // }
     ];
 
     const teachers = [
@@ -80,7 +83,7 @@ const Home = () => {
     return (
         <>
             <div className="pt-16 flex flex-col gap-6 justify-between items-center">
-                {/* Original Hero Section - Kept as is */}
+        
                 <div className="sm:px-28 px-8 relative h-[60vh] md:h-full flex md:justify-between justify-center items-center sm:flex-row flex-col-reverse"
                     style={{ backgroundImage: `url(${ideabg6})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
                     <div className="flex z-10 mb-5 p-4 rounded-md justify-center w-full sm:w-1/2 items-start flex-col gap-y-2 ">
@@ -95,7 +98,7 @@ const Home = () => {
                                 <span className="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
                                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#EB676A]">Learn more</span>
                             </a>
-                            {/* Added Apply Now Button that redirects to WhatsApp */}
+                           
                             <a href="https://wa.me/your_number" target="_blank" rel="noopener noreferrer" className="relative items-center justify-start inline-block px-5 py-2 overflow-hidden font-medium transition-all bg-[#25D366] rounded-full hover:bg-white group">
                                 <span className="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
                                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#25D366] flex items-center"><FaWhatsapp className="mr-2" /> Apply Now</span>
@@ -105,9 +108,14 @@ const Home = () => {
                     <img src={hero} className='sm:h-[90vh] h-full hidden sm:block absolute md:relative ' alt="hero" />
                 </div>
 
-                <h1 className="text-start lg:text-4xl border-[#212b60] border-b-4 sm:font-extrabold text-3xl font-bold text-black font-sans mb-8">
-    Our Courses
-</h1>
+                <HeroSection/>
+
+
+<div className="text-center mb-12">
+                <h1 className="text-4xl font-extrabold text-[#212b60] border-b-4 inline-block pb-2 border-[#EB676A]">
+                Our Courses
+                </h1>
+                </div>
 
 <div className="sm:px-28 px-8 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
     {courses.map((course, index) => {
@@ -151,64 +159,15 @@ const Home = () => {
                 <FacultySection teachers={teachers}/>
 
  
-                <h1 className="text-start lg:text-4xl border-[#212b60] border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans">
-                    Join Us
-                </h1>
-                <div className='sm:px-28 px-8 py-5 flex mb-10 w-full flex-wrap gap-y-5 justify-between items-center'>
-                    <a className="h-24 w-32 sm:w-52 rounded-lg bg-[#F9C2DD] shadow-lg p-2" href='https://www.youtube.com/channel/UC3_NJf886Au6pj59s2I1Bvg'>
-                        <BsYoutube color='#F662AA' size={35} />
-                        <h1 className='text-gray-700 text-sm font-bold'>Youtube</h1>
-                        <span className='text-xs'>Join Youtube</span>
-                    </a>
-                    <a className="h-24 w-32 sm:w-52 rounded-lg bg-[#A9EDEF] shadow-lg p-2" href='https://t.me/crystalconcept_shubhamchatrawat'>
-                        <FaPaperPlane color='#56CEF1' size={35} />
-                        <h1 className='text-gray-700 text-sm font-bold'>Telegram</h1>
-                        <span className='text-xs'>Join Telegram</span>
-                    </a>
-                    <a className="h-24 w-32 sm:w-52 rounded-lg bg-[#DED7FC] shadow-lg p-2" href='https://www.youtube.com/@crystalconceptshubham/playlists'>
-                        <GiNewspaper color='#9581FC' size={35} />
-                        <h1 className='text-gray-700 text-xs font-bold'>Exam preparation</h1>
-                        <span className='text-xs'>Join</span>
-                    </a>
-                    <a className="h-24 w-32 sm:w-52 rounded-lg bg-[#f5c48c] shadow-lg p-2" href='https://www.youtube.com/@crystalconceptshubham/playlists'>
-                        <FaNewspaper color='#F4A64A' size={35} />
-                        <h1 className='text-gray-700 text-xs font-bold'>Exam preparation</h1>
-                        <span className='text-xs'>Join </span>
-                    </a>
-                    {/* Added Instagram link */}
-                    <a className="h-24 w-32 sm:w-52 rounded-lg bg-[#C13584] shadow-lg p-2" href='https://instagram.com/crystalconcept'>
-                        <FaInstagram color='#FFFFFF' size={35} />
-                        <h1 className='text-gray-100 text-sm font-bold'>Instagram</h1>
-                        <span className='text-gray-100 text-xs'>Follow Us</span>
-                    </a>
-                    {/* Added WhatsApp link */}
-                    <a 
-    className="h-24 w-32 sm:w-52 rounded-lg bg-[#25D366] shadow-lg p-2 flex flex-col items-center justify-center gap-2" 
-    href="https://wa.me/918830979037" 
-    target="_blank" 
-    rel="noopener noreferrer"
->
-    <FaWhatsapp color="#FFFFFF" size={35} />
-    <h1 className="text-gray-100 text-sm font-bold">WhatsApp</h1>
-    <span className="text-gray-100 text-xs">Chat With Us</span>
-</a>
-                </div>
+             
 
-                {/* Original Features Section - Kept as is */}
-                <h1 className="text-start lg:text-4xl border-[#212b60] border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans">
-                    Features
-                </h1>
-                <section className="sm:px-28 px-8 py-5 h-full flex-col gap-y-20 flex w-full justify-between items-center">
-                    {
-                        featureData?.map((data) => (
-                            <Feature ideabg={data.ideabg} title={data.title} reversed={data.reversed} linkto={data.linkto} description={data.description} buttonText={data.buttonText} />
-                        ))
-                    }
-                </section>
+<JoinUsSection/>
+
+                <FeaturesSection featureData={featureData}/>
 
              <FacilitiesShowcase title="Our Facilities"/>
           
-             <FacilitiesShowcase title="Price Distribution" />
+             {/* <FacilitiesShowcase title="Price Distribution" /> */}
      
 
 

@@ -48,7 +48,7 @@ import imagep32  from "../../assets/class/price/IMG_1183.JPG"
 
 
 
-export const FacilitiesShowcase = ({title}) => {
+export const FacilitiesShowcase = ({title,data}) => {
   // Sample facility images - replace with your actual imports
   const facilityImages = [
     { src: image1, alt: "Modern Classroom", title: "Modern Classrooms", description: "Well-equipped classrooms with digital learning tools for enhanced learning experience." },
@@ -105,6 +105,8 @@ const priceDistributionImage =[
     { src: imagep32, alt: "Study Hall", title: "Quiet Study Hall", description: "Peaceful environment for focused studies and group discussions." },
    
 ]
+
+const [carouselData,setCarouselData] = useState(data? data : title==="Our Facilities"? facilityImages:priceDistributionImage)
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
@@ -164,9 +166,14 @@ const priceDistributionImage =[
 
   return (
     <div className="py-10 w-full p-10 flex flex-col justify-center items-center bg-gray-50">
-      <h1 className="text-start lg:text-4xl border-[#212b60] border-b-2 sm:font-extrabold text-3xl font-bold text-black font-sans mb-8">
-       {title}
-      </h1>
+
+      <div className="text-center mb-12">
+                <h1 className="text-4xl font-extrabold text-[#212b60] border-b-4 inline-block pb-2 border-[#EB676A]">
+                {title}
+                </h1>
+            
+            </div>
+
       
       <div className="relative overflow-hidden">
         {/* Slider Controls */}
@@ -195,10 +202,10 @@ const priceDistributionImage =[
         
         {/* Slider Track */}
         <div 
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex transition-transform duration-500  ease-in-out"
           style={{ transform: `translateX(-${currentIndex * (100 / visibleCards)}%)` }}
         >
-          {title==="Our Facilities"? facilityImages?.map((image, index) => (
+          {carouselData?.map((image, index) => (
             <div 
               key={index}
               className={`w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-3 transition-opacity duration-500 ${
@@ -228,39 +235,7 @@ const priceDistributionImage =[
                 </div> */}
               </div>
             </div>
-          )): priceDistributionImage?.map((image, index) => (
-            <div 
-              key={index}
-              className={`w-full md:w-1/2 lg:w-1/3 flex-shrink-0 p-3 transition-opacity duration-500 ${
-                index >= currentIndex && index < currentIndex + visibleCards
-                  ? "opacity-100" 
-                  : "opacity-0"
-              }`}
-              style={{ transform: `scale(${index === currentIndex + Math.floor(visibleCards / 2) ? 1.05 : 1})` }}
-            >
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full transform hover:-translate-y-2">
-                <div className="relative overflow-hidden group">
-                  {/* Replace with your actual image component and path */}
-                  <img 
-                    src={image.src} 
-                    alt={image.alt} 
-                    
-                    className="w-full   h-64 object-cover transition-transform duration-700 group-hover:scale-110" 
-                  />
-                  {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-4 text-white">
-                      <h3 className="text-xl font-bold">{image.title}</h3>
-                    </div>
-                  </div> */}
-                </div>
-                {/* <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#212b60] mb-2">{image.title}</h3>
-                  <p className="text-gray-600">{image.description}</p>
-                </div> */}
-              </div>
-            </div>
-          ))
-          }
+          ))}
         </div>
       </div>
       
