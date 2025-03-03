@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createQuiz, deleteQuiz, getGeneratedQuiz, handleGetAllQuiz, updateQuiz } from '../../../api/quizApi';
 import { AiFillDelete, AiFillEdit, AiOutlineArrowLeft, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import Swal from 'sweetalert2';
-import { X } from 'lucide-react';
+import { Copy, X } from 'lucide-react';
 
 export const AddQuiz = () => {
     const [quizs, setQuizs] = useState([]);
@@ -181,15 +181,35 @@ export const AddQuiz = () => {
             setLoading(false);
         }
     };
+    const handleCopy = async (id) => {
+        const shareableLink = `https://crystal-concept-a928f.web.app/quiz/${id}`;
 
 
-  // Filter quizzes based on active tab and search query
-  const filteredQuizzes = quizs.filter((quiz) => {
-    const matchesSearch = quiz.title.toLowerCase().includes(searchQuery.toLowerCase());
-    return activeTab === "hidden"
-      ? !quiz.visibility && matchesSearch
-      : quiz.visibility && matchesSearch;
-  });
+        if (navigator.clipboard) {
+            await navigator.clipboard.writeText(shareableLink);
+            console.log('Link copied to clipboard:', shareableLink);
+        } else {
+            // Fallback for browsers that don't support Clipboard API
+            const tempInput = document.createElement('input');
+            tempInput.value = shareableLink;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            console.log('Link copied to clipboard (fallback):', shareableLink);
+        }
+
+    };
+
+
+
+    // Filter quizzes based on active tab and search query
+    const filteredQuizzes = quizs.filter((quiz) => {
+        const matchesSearch = quiz.title.toLowerCase().includes(searchQuery.toLowerCase());
+        return activeTab === "hidden"
+            ? !quiz.visibility && matchesSearch
+            : quiz.visibility && matchesSearch;
+    });
 
     if (showForm) {
         return (
@@ -313,112 +333,121 @@ export const AddQuiz = () => {
 
     return (
         <div className="mt-10 flex-1 justify-center bg-gray-50 p-4">
-        <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg">
-          <div className="p-6 border-b flex justify-between items-center">
-            <h1 className="font-semibold text-sm sm:text-2xl text-gray-900">Quiz Management</h1>
-            <button
-              onClick={() => setShowForm(true)}
-              className="sm:px-6 sm:py-3 px-2 py-1 text-sm sm:text-md bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-            >
-              Create New Quiz
-            </button>
-          </div>
-  
-          {/* Tabs */}
-          <div className="flex border-b border-gray-200">
-            <button
-              onClick={() => setActiveTab("hidden")}
-              className={`px-4 py-2 ${activeTab === "hidden"
-                  ? "border-b-2 border-blue-600 text-blue-600 font-semibold"
-                  : "text-gray-600 hover:text-blue-600"
-                }`}
-            >
-              Hidden Quizzes
-            </button>
-            <button
-              onClick={() => setActiveTab("visible")}
-              className={`px-4 py-2 ${activeTab === "visible"
-                  ? "border-b-2 border-blue-600 text-blue-600 font-semibold"
-                  : "text-gray-600 hover:text-blue-600"
-                }`}
-            >
-              Visible Quizzes
-            </button>
-          </div>
-  
-          {/* Search Bar */}
-          <div className="sm:p-6 p-3">
-            <input
-              type="text"
-              placeholder="Search by title"
-              className="w-full p-2 border border-gray-300 rounded-md outline-none"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
-  
-          {/* Quiz List */}
-          <div className="sm:p-6 p-3">
-            {filteredQuizzes.length === 0 ? (
-              <p className="text-gray-500">No quizzes found for the selected tab.</p>
-            ) : (
-              <div className="grid grid-cols-1 gap-4">
-                {filteredQuizzes.map((quiz, index) => (
-                  <div
-                    key={quiz._id}
-                    className="sm:p-6 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 transition-colors"
-                  >
-                    <div className="flex justify-between flex-col items-start">
-                      <div className="w-full flex-row">
-                        <h2 className="sm:text-xl text-sm font-semibold text-gray-900 mb-2">{quiz.title}</h2>
-                        <div className="flex items-center gap-4">
-                          <button
-                            onClick={() => handleVisibility(quiz._id, !quiz.visibility)}
-                            className={`sm:p-2 p-1 rounded-lg transition-colors ${quiz.visibility
-                                ? "bg-green-100 text-green-800 hover:bg-green-200"
-                                : "bg-gray-100 text-gray-800 hover:bg-gray-200"
-                              }`}
-                            title={quiz.visibility ? "Quiz is visible" : "Quiz is hidden"}
-                          >
-                            {quiz.visibility ? (
-                              <AiOutlineEye className="sm:h-6 h-4" size={24} />
-                            ) : (
-                              <AiOutlineEyeInvisible size={24} />
-                            )}
-                          </button>
-                          <button
-                            onClick={() => handleUpdate(quiz)}
-                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                            title="Edit quiz"
-                          >
-                            <AiFillEdit size={24} />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteQuiz(quiz._id)}
-                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                            title="Delete quiz"
-                          >
-                            <AiFillDelete size={24} />
-                          </button>
+            <div className="max-w-7xl mx-auto bg-white rounded-xl shadow-lg">
+                <div className="p-6 border-b flex justify-between items-center">
+                    <h1 className="font-semibold text-sm sm:text-2xl text-gray-900">Quiz Management</h1>
+                    <button
+                        onClick={() => setShowForm(true)}
+                        className="sm:px-6 sm:py-3 px-2 py-1 text-sm sm:text-md bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    >
+                        Create New Quiz
+                    </button>
+                </div>
+
+                {/* Tabs */}
+                <div className="flex border-b border-gray-200">
+                    <button
+                        onClick={() => setActiveTab("hidden")}
+                        className={`px-4 py-2 ${activeTab === "hidden"
+                            ? "border-b-2 border-blue-600 text-blue-600 font-semibold"
+                            : "text-gray-600 hover:text-blue-600"
+                            }`}
+                    >
+                        Hidden Quizzes
+                    </button>
+                    <button
+                        onClick={() => setActiveTab("visible")}
+                        className={`px-4 py-2 ${activeTab === "visible"
+                            ? "border-b-2 border-blue-600 text-blue-600 font-semibold"
+                            : "text-gray-600 hover:text-blue-600"
+                            }`}
+                    >
+                        Visible Quizzes
+                    </button>
+                </div>
+
+                {/* Search Bar */}
+                <div className="sm:p-6 p-3">
+                    <input
+                        type="text"
+                        placeholder="Search by title"
+                        className="w-full p-2 border border-gray-300 rounded-md outline-none"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
+
+                {/* Quiz List */}
+                <div className="sm:p-6 p-3">
+                    {filteredQuizzes.length === 0 ? (
+                        <p className="text-gray-500">No quizzes found for the selected tab.</p>
+                    ) : (
+                        <div className="grid grid-cols-1 gap-4">
+                            {filteredQuizzes.map((quiz, index) => (
+                                <div
+                                    key={quiz._id}
+                                    className="sm:p-6 p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-blue-500 transition-colors"
+                                >
+                                    <div className="flex justify-between flex-col items-start">
+                                        <div className="w-full flex-row">
+                                            <h2 className="sm:text-xl text-sm font-semibold text-gray-900 mb-2">{quiz.title}</h2>
+                                            <div className="flex items-center gap-4">
+                                                <button
+                                                    onClick={() => handleVisibility(quiz._id, !quiz.visibility)}
+                                                    className={`sm:p-2 p-1 rounded-lg transition-colors ${quiz.visibility
+                                                        ? "bg-green-100 text-green-800 hover:bg-green-200"
+                                                        : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+                                                        }`}
+                                                    title={quiz.visibility ? "Quiz is visible" : "Quiz is hidden"}
+                                                >
+                                                    {quiz.visibility ? (
+                                                        <AiOutlineEye className="sm:h-6 h-4" size={24} />
+                                                    ) : (
+                                                        <AiOutlineEyeInvisible size={24} />
+                                                    )}
+                                                </button>
+                                                <button
+                                                    onClick={() => handleUpdate(quiz)}
+                                                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                                    title="Edit quiz"
+                                                >
+                                                    <AiFillEdit size={24} />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteQuiz(quiz._id)}
+                                                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                                                    title="Delete quiz"
+                                                >
+
+                                                    <AiFillDelete size={24} />
+                                                </button>
+                                                <button
+                                                    onClick={() => handleCopy(quiz._id)}
+                                                    className="p-2 text-gray-600 hover:bg-red-50 rounded-lg transition-colors"
+                                                    title="Copy"
+                                                >
+
+                                                    <Copy size={24} />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex items-center gap-4">
+                                            <span className="px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded-full sm:text-sm">
+                                                Standard: {quiz.std}
+                                            </span>
+                                            <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full sm:text-sm text-xs">
+                                                Submissions: {submissions[index]}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
-                      </div>
-  
-                      <div className="flex items-center gap-4">
-                        <span className="px-3 py-1 text-xs bg-gray-200 text-gray-700 rounded-full sm:text-sm">
-                          Standard: {quiz.std}
-                        </span>
-                        <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full sm:text-sm text-xs">
-                          Submissions: {submissions[index]}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+                    )}
+                </div>
+            </div>
         </div>
-      </div>
     );
 };
 
