@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
+    "@material-tailwind/react": "^2.1.10",
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
     "@mui/x-data-grid": "^6.19.6",
@@ -30,6 +31,7 @@
     "recharts": "^2.12.2",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.10.6",
+    "swiper": "^11.2.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
