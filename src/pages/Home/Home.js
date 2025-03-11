@@ -83,7 +83,7 @@ const Home = () => {
     return (
         <>
             <div className="pt-16 flex flex-col gap-6 justify-between items-center">
-        
+
                 <div className="sm:px-28 px-8 relative h-[60vh] md:h-full flex md:justify-between justify-center items-center sm:flex-row flex-col-reverse"
                     style={{ backgroundImage: `url(${ideabg6})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
                     <div className="flex z-10 mb-5 p-4 rounded-md justify-center w-full sm:w-1/2 items-start flex-col gap-y-2 ">
@@ -98,7 +98,7 @@ const Home = () => {
                                 <span className="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
                                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#EB676A]">Learn more</span>
                             </a>
-                           
+
                             <a href="https://wa.me/your_number" target="_blank" rel="noopener noreferrer" className="relative items-center justify-start inline-block px-5 py-2 overflow-hidden font-medium transition-all bg-[#25D366] rounded-full hover:bg-white group">
                                 <span className="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-full"></span>
                                 <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-[#25D366] flex items-center"><FaWhatsapp className="mr-2" /> Apply Now</span>
@@ -108,67 +108,67 @@ const Home = () => {
                     <img src={hero} className='sm:h-[90vh] h-full hidden sm:block absolute md:relative ' alt="hero" />
                 </div>
 
-                <HeroSection/>
+                <HeroSection />
 
 
-<div className="text-center mb-12">
-                <h1 className="text-4xl font-extrabold text-[#212b60] border-b-4 inline-block pb-2 border-[#EB676A]">
-                Our Courses
-                </h1>
+                <div className="text-center mb-12">
+                    <h1 className="text-4xl font-extrabold text-[#212b60] border-b-4 inline-block pb-2 border-[#EB676A]">
+                        Our Courses
+                    </h1>
                 </div>
 
-<div className="sm:px-28 px-8 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-    {courses.map((course, index) => {
-        const whatsappMessage = encodeURIComponent(
-            `Hello, I'm interested in joining the "${course.title}" course. Can you please provide more details?`
-        );
-        const whatsappNumber = "918830979037"; // Replace with your WhatsApp number
-        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+                <div className="sm:px-28 px-8 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
+                    {courses.map((course, index) => {
+                        const whatsappMessage = encodeURIComponent(
+                            `Hello, I'm interested in joining the "${course.title}" course. Can you please provide more details?`
+                        );
+                        const whatsappNumber = "918830979037"; // Replace with your WhatsApp number
+                        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
-        return (
-            <div 
-                key={index} 
-                className="bg-gradient-to-br from-[#212b60] to-[#EB676A] shadow-xl rounded-lg p-6 hover:scale-105 transition-transform duration-300 text-white"
-            >
-                <h3 className="text-2xl font-bold mb-3">{course.title}</h3>
-                <p className="text-sm mb-5">{course.description}</p>
-                <div className="flex justify-between items-center">
-                    <a 
-                        href={whatsappLink} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="bg-[#25D366] text-white px-5 py-2 rounded-full flex items-center gap-2 font-medium hover:bg-opacity-90 transition"
-                    >
-                        <FaWhatsapp size={20} />
-                        Join Now
-                    </a>
-                    <a 
-                        href="#" 
-                        className="text-white underline text-sm hover:text-gray-300 transition"
-                    >
-                        Learn more →
-                    </a>
+                        return (
+                            <div
+                                key={index}
+                                className="bg-gradient-to-br from-[#212b60] to-[#EB676A] shadow-xl rounded-lg p-6 hover:scale-105 transition-transform duration-300 text-white"
+                            >
+                                <h3 className="text-2xl font-bold mb-3">{course.title}</h3>
+                                <p className="text-sm mb-5">{course.description}</p>
+                                <div className="flex justify-between items-center">
+                                    <a
+                                        href={whatsappLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="bg-[#25D366] text-white px-5 py-2 rounded-full flex items-center gap-2 font-medium hover:bg-opacity-90 transition"
+                                    >
+                                        <FaWhatsapp size={20} />
+                                        Join Now
+                                    </a>
+                                    <a
+                                        href="#"
+                                        className="text-white underline text-sm hover:text-gray-300 transition"
+                                    >
+                                        Learn more →
+                                    </a>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
-            </div>
-        );
-    })}
-</div>
 
-              
 
-                <FacultySection teachers={teachers}/>
 
- 
-             
+                {/* <FacultySection teachers={teachers}/> */}
 
-<JoinUsSection/>
 
-                <FeaturesSection featureData={featureData}/>
 
-             <FacilitiesShowcase title="Our Facilities"/>
-          
-             {/* <FacilitiesShowcase title="Price Distribution" /> */}
-     
+
+                <JoinUsSection />
+
+                <FeaturesSection featureData={featureData} />
+
+                <FacilitiesShowcase title="Our Facilities" />
+
+                {/* <FacilitiesShowcase title="Price Distribution" /> */}
+
 
 
                 {/* Contact Us Section - New Section */}
@@ -178,19 +178,20 @@ const Home = () => {
                 <div className="sm:px-28 px-8 py-5 flex flex-col md:flex-row gap-6 w-full">
                     <div className="md:w-1/2">
                         <form className="bg-white shadow-lg rounded-lg p-6"
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            const name = document.getElementById('name').value;
-                            const email = document.getElementById('email').value;
-                            const phone = document.getElementById('phone').value;
-                            const message = document.getElementById('message').value;
-                    
-                            const whatsappMessage = `Hello, my name is ${name}.%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
-                            const phoneNumber = "918830979037"; // Add your WhatsApp number here (with country code)
-                            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
-                    
-                            window.open(whatsappUrl, '_blank')}}
-                            >
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                const name = document.getElementById('name').value;
+                                const email = document.getElementById('email').value;
+                                const phone = document.getElementById('phone').value;
+                                const message = document.getElementById('message').value;
+
+                                const whatsappMessage = `Hello, my name is ${name}.%0AEmail: ${email}%0APhone: ${phone}%0AMessage: ${message}`;
+                                const phoneNumber = "918830979037"; // Add your WhatsApp number here (with country code)
+                                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+
+                                window.open(whatsappUrl, '_blank')
+                            }}
+                        >
                             <div className="mb-4">
                                 <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Your Name</label>
                                 <input type="text" id="name" className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#EB676A]" />
@@ -224,19 +225,19 @@ const Home = () => {
                             <div className="mb-6">
                                 <h3 className="text-lg font-bold text-[#212b60] mb-3">Find Us On Map</h3>
                                 <div className="w-full h-64 bg-gray-200 flex items-center justify-center rounded">
-                                <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1876.9474751746013!2d72.74940319229458!3d19.802050878549508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71f574e1a301d%3A0xbcba4a723177377c!2sCrystal%20Concept%20Classes!5e0!3m2!1sen!2sin!4v1740901721818!5m2!1sen!2sin" 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Crystal Concept Classes Location"
-            allowFullScreen
-        />
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1876.9474751746013!2d72.74940319229458!3d19.802050878549508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be71f574e1a301d%3A0xbcba4a723177377c!2sCrystal%20Concept%20Classes!5e0!3m2!1sen!2sin!4v1740901721818!5m2!1sen!2sin"
+                                        width="100%"
+                                        height="100%"
+                                        style={{ border: 0 }}
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                        title="Crystal Concept Classes Location"
+                                        allowFullScreen
+                                    />
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                 </div>
